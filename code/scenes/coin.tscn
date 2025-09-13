@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=3 uid="uid://b5de1pr2gbvj0"]
 
-[ext_resource type="Script" uid="uid://diapu51ndx8yx" path="res://scenes/coin.gd" id="1_i64fm"]
+[ext_resource type="Script" uid="uid://diapu51ndx8yx" path="res://scripts/coin.gd" id="1_i64fm"]
 [ext_resource type="Texture2D" uid="uid://sxk62bqfek7f" path="res://assets/sprites/coin.png" id="1_rwqht"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i64fm"]
@@ -92,6 +92,8 @@ animations = [{
 radius = 5.0
 
 [node name="Coin" type="Area2D"]
+position = Vector2(-2, 2)
+collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_i64fm")
 
