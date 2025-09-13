@@ -1,11 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://bcy552wrfnjmi"]
+[gd_scene load_steps=4 format=3 uid="uid://bcy552wrfnjmi"]
 
 [ext_resource type="PackedScene" uid="uid://warwyg02m4dv" path="res://scenes/player.tscn" id="1_uwrxv"]
+[ext_resource type="PackedScene" uid="uid://bkh0g70fqsf0y" path="res://scenes/tile_map.tscn" id="2_yqjtg"]
+[ext_resource type="PackedScene" uid="uid://bnokq5fvaxkrt" path="res://scenes/platform.tscn" id="3_lnu2h"]
 
-[node name="Game" type="Node"]
+[node name="Game" type="Node2D"]
+
+[node name="TileMap" parent="." instance=ExtResource("2_yqjtg")]
 
 [node name="Player" parent="." instance=ExtResource("1_uwrxv")]
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(0, -6)
 zoom = Vector2(4, 4)
+position_smoothing_enabled = true
+
+[node name="Platform" parent="." instance=ExtResource("3_lnu2h")]
+position = Vector2(74, -66)

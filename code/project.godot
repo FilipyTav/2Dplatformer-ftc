@@ -15,6 +15,11 @@ run/main_scene="uid://bcy552wrfnjmi"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[layer_names]
+
+2d_render/layer_1="Ground"
+2d_physics/layer_1="Ground"
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
