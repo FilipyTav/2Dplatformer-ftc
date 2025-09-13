@@ -1,10 +1,50 @@
-[gd_scene load_steps=4 format=3 uid="uid://bcy552wrfnjmi"]
+[gd_scene load_steps=8 format=3 uid="uid://bcy552wrfnjmi"]
 
 [ext_resource type="PackedScene" uid="uid://warwyg02m4dv" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="PackedScene" uid="uid://bkh0g70fqsf0y" path="res://scenes/tile_map.tscn" id="2_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://bnokq5fvaxkrt" path="res://scenes/platform.tscn" id="3_lnu2h"]
+[ext_resource type="PackedScene" uid="uid://b5de1pr2gbvj0" path="res://scenes/coin.tscn" id="4_lbhrr"]
+
+[sub_resource type="Animation" id="Animation_lnu2h"]
+resource_name = "Move"
+length = 1.5
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.46667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-205, 39), Vector2(-327, 39)]
+}
+
+[sub_resource type="Animation" id="Animation_lbhrr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-212, 39)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lbhrr"]
+_data = {
+&"Move": SubResource("Animation_lnu2h"),
+&"RESET": SubResource("Animation_lbhrr")
+}
 
 [node name="Game" type="Node2D"]
+position = Vector2(0, 145)
 
 [node name="TileMap" parent="." instance=ExtResource("2_yqjtg")]
 
@@ -13,7 +53,33 @@
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(0, -6)
 zoom = Vector2(4, 4)
+limit_bottom = 190
 position_smoothing_enabled = true
 
-[node name="Platform" parent="." instance=ExtResource("3_lnu2h")]
+[node name="Platforms" type="Node2D" parent="."]
 position = Vector2(74, -66)
+
+[node name="Platform" parent="Platforms" instance=ExtResource("3_lnu2h")]
+
+[node name="Platform2" parent="Platforms" instance=ExtResource("3_lnu2h")]
+position = Vector2(-212, 39)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Platforms/Platform2"]
+libraries = {
+&"": SubResource("AnimationLibrary_lbhrr")
+}
+autoplay = "Move"
+
+[node name="Coins" type="Node2D" parent="."]
+
+[node name="Coin" parent="Coins" instance=ExtResource("4_lbhrr")]
+position = Vector2(72, -25)
+
+[node name="Coin2" parent="Coins" instance=ExtResource("4_lbhrr")]
+position = Vector2(167, -138)
+
+[node name="Coin3" parent="Coins" instance=ExtResource("4_lbhrr")]
+position = Vector2(168, -104)
+
+[node name="Coin4" parent="Coins" instance=ExtResource("4_lbhrr")]
+position = Vector2(-186, -27)
