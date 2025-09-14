@@ -28,6 +28,8 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
+	manage_visuals(int(velocity.x))
+
 	if (is_on_floor() and jumping):
 		jumping = false
 
@@ -60,8 +62,8 @@ func get_input(delta: float) -> void:
 		jumping = true
 		velocity.y += jump_speed
 
-	### Visuals
 
+func manage_visuals(direction: int):
 	# Flip sprite
 	if (direction > 0):
 		animated_sprite.flip_h = false
