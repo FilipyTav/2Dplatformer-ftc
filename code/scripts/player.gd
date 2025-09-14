@@ -1,24 +1,35 @@
 extends CharacterBody2D
 
-@onready var animated_sprite = $AnimatedSprite2D
+@export_range(0.0, 1.0) var friction = 0.25
+@export_range(0.0 , 1.0) var acceleration = 0.25
+@export var speed = 200
+@export var jump_speed = -300
 
-const SPEED:float = 200.0
-const JUMP_VEL:float = -300.0
+@onready var animated_sprite = $AnimatedSprite2D
 
 # To sync with rigid nodes
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _physics_process(delta: float) -> void:
+	### Movement
+
 	# Gravity
 	if not is_on_floor():
 		velocity.y += gravity * delta
 
 	# Handle jump
 	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y += JUMP_VEL
+		velocity.y += jump_speed
 
 	# Get input direction - -1, 0, 1
 	var direction = Input.get_axis("move_left", "move_right")
+
+	if (direction != 0):
+		velocity.x = lerp(velocity.x, direction * speed, acceleration)
+	else:
+		velocity.x = lerp(velocity.x, 0.0, friction)
+
+	### Visuals
 
 	# Flip sprite
 	if (direction > 0):
@@ -34,11 +45,5 @@ func _physics_process(delta: float) -> void:
 			animated_sprite.play("run")
 	else:
 		animated_sprite.play("jump")
-
-	# Apply movement
-	if direction:
-		velocity.x = direction * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
 
 	move_and_slide()
