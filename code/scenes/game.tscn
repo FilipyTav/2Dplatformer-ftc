@@ -1,8 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://bcy552wrfnjmi"]
+[gd_scene load_steps=13 format=3 uid="uid://bcy552wrfnjmi"]
 
+[ext_resource type="Script" uid="uid://bxwbupnamiaqy" path="res://scripts/game_manager.gd" id="1_gee14"]
 [ext_resource type="PackedScene" uid="uid://warwyg02m4dv" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="PackedScene" uid="uid://bkh0g70fqsf0y" path="res://scenes/tile_map.tscn" id="2_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://bnokq5fvaxkrt" path="res://scenes/platform.tscn" id="3_lnu2h"]
+[ext_resource type="FontFile" uid="uid://dq5mvqstrqkxb" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="4_gee14"]
 [ext_resource type="PackedScene" uid="uid://b5de1pr2gbvj0" path="res://scenes/coin.tscn" id="4_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://ddaap0e14cb4v" path="res://scenes/slime.tscn" id="4_p57ef"]
 [ext_resource type="PackedScene" uid="uid://4ibsoyfl87oa" path="res://scenes/killzone.tscn" id="5_iywne"]
@@ -50,6 +52,25 @@ distance = -167.0
 
 [node name="Game" type="Node2D"]
 
+[node name="GameManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("1_gee14")
+
+[node name="Labels" type="Node2D" parent="."]
+position = Vector2(248, 1)
+
+[node name="ScoreLabel" type="Label" parent="Labels"]
+z_index = 999
+offset_left = -15.0
+offset_top = 2.0
+offset_right = 149.0
+offset_bottom = 25.0
+theme_override_fonts/font = ExtResource("4_gee14")
+theme_override_font_sizes/font_size = 8
+text = "Points: 0"
+horizontal_alignment = 1
+autowrap_mode = 2
+
 [node name="Map" type="Node2D" parent="."]
 position = Vector2(0, 128)
 
@@ -79,19 +100,21 @@ libraries = {
 }
 autoplay = "Move"
 
-[node name="Coins" type="Node2D" parent="Map"]
-position = Vector2(0, -25)
+[node name="Items" type="Node2D" parent="."]
+position = Vector2(0, 103)
 
-[node name="Coin" parent="Map/Coins" instance=ExtResource("4_lbhrr")]
+[node name="Coins" type="Node2D" parent="Items"]
+
+[node name="Coin" parent="Items/Coins" instance=ExtResource("4_lbhrr")]
 position = Vector2(72, -25)
 
-[node name="Coin2" parent="Map/Coins" instance=ExtResource("4_lbhrr")]
+[node name="Coin2" parent="Items/Coins" instance=ExtResource("4_lbhrr")]
 position = Vector2(167, -138)
 
-[node name="Coin3" parent="Map/Coins" instance=ExtResource("4_lbhrr")]
+[node name="Coin3" parent="Items/Coins" instance=ExtResource("4_lbhrr")]
 position = Vector2(168, -104)
 
-[node name="Coin4" parent="Map/Coins" instance=ExtResource("4_lbhrr")]
+[node name="Coin4" parent="Items/Coins" instance=ExtResource("4_lbhrr")]
 position = Vector2(-186, -36)
 
 [node name="Enemies" type="Node2D" parent="."]
@@ -114,3 +137,5 @@ position_smoothing_enabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Void"]
 shape = SubResource("WorldBoundaryShape2D_p57ef")
+
+[node name="Audio" type="Node" parent="."]

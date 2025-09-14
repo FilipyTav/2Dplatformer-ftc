@@ -15,6 +15,18 @@ run/main_scene="uid://bcy552wrfnjmi"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Music="*res://scenes/music.tscn"
+
+[file_customization]
+
+folder_colors={
+"res://assets/": "pink",
+"res://scenes/": "red",
+"res://scripts/": "yellow"
+}
+
 [input]
 
 jump={
