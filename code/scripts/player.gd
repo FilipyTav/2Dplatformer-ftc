@@ -7,17 +7,23 @@ extends CharacterBody2D
 
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var coyote_timer = $CoyoteTimer
+@onready var dash_timer = $DashTimer
 
 var coyote_frames: int = 6  # How many in-air frames to allow jumping
 var coyote: bool = false  # Track whether it's coyote time or not
 var last_floor: bool = false  # Last frame's on-floor state
 var jumping: bool = false
 
+# Multiply by speed
+@export var dash_speed: float = 15
+var can_dash: bool = true
+
 # To sync with rigid nodes
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _ready() -> void:
 	coyote_timer.wait_time = coyote_frames / 60.0
+	dash_timer.wait_time = 1
 
 func _physics_process(delta: float) -> void:
 	# Gravity
@@ -49,8 +55,16 @@ func get_input(delta: float) -> void:
 	# Get input direction - -1, 0, 1
 	var direction = Input.get_axis("move_left", "move_right")
 
+	# Dash
+	if Input.is_action_just_pressed("dash") and direction and can_dash:
+		can_dash = false
+		dash_speed = 15
+		dash_timer.start()
+	else:
+		dash_speed = 1
+
 	if (direction):
-		velocity.x = lerp(velocity.x, direction * speed, acceleration)
+		velocity.x = lerp(velocity.x, direction * speed * dash_speed, acceleration)
 	else:
 		velocity.x = lerp(velocity.x, 0.0, friction)
 
@@ -61,6 +75,8 @@ func get_input(delta: float) -> void:
 	if Input.is_action_just_pressed("jump") and (is_on_floor() or coyote):
 		jumping = true
 		velocity.y += jump_speed
+
+	# Grappling Hook
 
 
 func manage_visuals(direction: int):
@@ -76,3 +92,7 @@ func manage_visuals(direction: int):
 			animated_sprite.play("idle")
 		else:
 			animated_sprite.play("run")
+
+
+func _on_dash_timer_timeout() -> void:
+	can_dash = true
