@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 @export_range(0.0, 1.0) var friction = 0.25
 @export_range(0.0 , 1.0) var acceleration = 0.25
-@export var speed = 200
+@export var speed = 180
 @export var jump_speed = -300
 
 @onready var animated_sprite = $AnimatedSprite2D
@@ -18,7 +18,7 @@ var jumping: bool = false
 @export var dash_speed: float = 15
 var is_dashing: bool = false
 
-var last_dir: float = 0
+var last_dir: float = 1
 
 # To sync with rigid nodes
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -29,6 +29,12 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	# Gravity
+	# Ignore
+	# if is_dashing:
+	# 	# Lock vertical position by keeping velocity.y = 0
+	# 	velocity.y = 0
+	# 	velocity.x = lerp(velocity.x, last_dir * speed * dash_speed, acceleration)
+	# el
 	if not is_on_floor():
 		velocity.y += gravity * delta
 

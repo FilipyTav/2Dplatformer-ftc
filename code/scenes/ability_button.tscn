@@ -1,0 +1,48 @@
+[gd_scene load_steps=4 format=3 uid="uid://eudw52axa0vg"]
+
+[ext_resource type="Texture2D" uid="uid://ditjahhe2safo" path="res://assets/icons/dash.svg" id="1_m8pe2"]
+[ext_resource type="Script" uid="uid://cmd84jo56jxxw" path="res://scripts/dash_button.gd" id="2_o3q7t"]
+[ext_resource type="FontFile" uid="uid://bd8b3740cfscc" path="res://assets/fonts/PixelOperator8.ttf" id="3_di55w"]
+
+[node name="AbilityButton" type="TextureButton"]
+offset_right = 512.0
+offset_bottom = 512.0
+scale = Vector2(0.1, 0.1)
+texture_normal = ExtResource("1_m8pe2")
+script = ExtResource("2_o3q7t")
+
+[node name="Sweep" type="TextureProgressBar" parent="."]
+modulate = Color(0.145098, 0.145098, 0.145098, 0.87451)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+fill_mode = 5
+
+[node name="Timer" type="Timer" parent="Sweep"]
+one_shot = true
+
+[node name="Counter" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+
+[node name="Value" type="Label" parent="Counter"]
+layout_mode = 2
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("3_di55w")
+text = "0.3"
+horizontal_alignment = 1
+clip_text = true
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]
+[connection signal="timeout" from="Sweep/Timer" to="." method="_on_timer_timeout"]
