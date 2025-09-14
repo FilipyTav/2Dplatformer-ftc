@@ -34,6 +34,8 @@ func _ready() -> void:
 	dash_cooldown.wait_time = dash_cd
 
 	$UI/DashButton.cooldown = dash_cd
+	# It gets in the way in the editor
+	$UI.visible = true
 
 func _physics_process(delta: float) -> void:
 	# Gravity
