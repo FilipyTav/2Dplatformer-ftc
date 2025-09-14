@@ -5,9 +5,10 @@ extends CharacterBody2D
 @export var speed = 180
 @export var jump_speed = -300
 
-@onready var animated_sprite = $AnimatedSprite2D
-@onready var coyote_timer = $CoyoteTimer
-@onready var dash_timer = $DashTimer
+@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var coyote_timer: Timer = $CoyoteTimer
+@onready var dash_timer: Timer = $DashTimer
+@onready var dash_cooldown: Timer = $DashCooldown
 
 var coyote_frames: int = 6  # How many in-air frames to allow jumping
 var coyote: bool = false  # Track whether it's coyote time or not
@@ -16,7 +17,11 @@ var jumping: bool = false
 
 # Multiply by speed
 @export var dash_speed: float = 15
+var dash_duration: float = .4
 var is_dashing: bool = false
+
+var dash_cd: float = .6
+var can_dash: bool = true
 
 var last_dir: float = 1
 
@@ -25,7 +30,10 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _ready() -> void:
 	coyote_timer.wait_time = coyote_frames / 60.0
-	dash_timer.wait_time = .4
+	dash_timer.wait_time = dash_duration
+	dash_cooldown.wait_time = dash_cd
+
+	$UI/DashButton.cooldown = dash_cd
 
 func _physics_process(delta: float) -> void:
 	# Gravity
@@ -64,12 +72,20 @@ func get_input(delta: float) -> void:
 	var direction = Input.get_axis("move_left", "move_right")
 
 	# Dash
-	if Input.is_action_just_pressed("dash") and !is_dashing:
+	###
+	if Input.is_action_just_pressed("dash") and !is_dashing and can_dash:
 		is_dashing = true
-		dash_speed = 15
 		dash_timer.start()
+
+		can_dash = false
+		dash_cooldown.start()
+
+		dash_speed = 15
+
+		$UI/DashButton.activate()
 	else:
 		dash_speed = 1
+	###
 
 	if is_dashing:
 		velocity.x = lerp(velocity.x, last_dir * speed * dash_speed, acceleration)
@@ -110,3 +126,6 @@ func manage_visuals(direction: int):
 
 func _on_dash_timer_timeout() -> void:
 	is_dashing = false
+
+func _on_dash_cooldown_timeout() -> void:
+	can_dash = true

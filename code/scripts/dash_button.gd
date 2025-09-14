@@ -10,9 +10,7 @@ class_name AbilityButton
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	position = Vector2(0, 0)
-
-	print(position)
+	disabled = true
 	time_label.hide()
 	sweep.value = 0
 	sweep.texture_progress = texture_normal
@@ -27,14 +25,16 @@ func _process(delta: float) -> void:
 	sweep.value = int((timer.time_left / cooldown) * 100)
 
 func _on_pressed() -> void:
-	disabled = true
 	set_process(true)
 	timer.start()
 	time_label.show()
 
 func _on_timer_timeout() -> void:
-	print("Ability ready")
 	sweep.value = 0
-	disabled = false
 	time_label.hide()
 	set_process(false)
+
+func activate() -> void:
+	set_process(true)
+	timer.start()
+	time_label.show()

@@ -193,21 +193,18 @@ shape = SubResource("CircleShape2D_3vyb7")
 one_shot = true
 
 [node name="DashTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="DashCooldown" type="Timer" parent="."]
+one_shot = true
 
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="DashButton" parent="UI" instance=ExtResource("3_qhqgy")]
 z_index = 999
-offset_left = -85.0
-offset_top = -55.0
-offset_right = 427.0
-offset_bottom = 457.0
-
-[node name="Label" type="Label" parent="UI"]
-offset_right = 40.0
-offset_bottom = 23.0
-text = "appear, please
-"
+scale = Vector2(0.2, 0.2)
+cooldown = 0.6
 
 [connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
+[connection signal="timeout" from="DashCooldown" to="." method="_on_dash_cooldown_timeout"]
