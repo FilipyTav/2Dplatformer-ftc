@@ -71,6 +71,7 @@ autoplay = "Move"
 
 [node name="Platform3" parent="Map/Platforms" instance=ExtResource("3_lnu2h")]
 position = Vector2(508, -105)
+sprite_index = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Map/Platforms/Platform3"]
 libraries = {
