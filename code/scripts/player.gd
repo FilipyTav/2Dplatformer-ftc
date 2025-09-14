@@ -16,14 +16,16 @@ var jumping: bool = false
 
 # Multiply by speed
 @export var dash_speed: float = 15
-var can_dash: bool = true
+var is_dashing: bool = false
+
+var last_dir: float = 0
 
 # To sync with rigid nodes
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _ready() -> void:
 	coyote_timer.wait_time = coyote_frames / 60.0
-	dash_timer.wait_time = 1
+	dash_timer.wait_time = .4
 
 func _physics_process(delta: float) -> void:
 	# Gravity
@@ -56,25 +58,27 @@ func get_input(delta: float) -> void:
 	var direction = Input.get_axis("move_left", "move_right")
 
 	# Dash
-	if Input.is_action_just_pressed("dash") and direction and can_dash:
-		can_dash = false
+	if Input.is_action_just_pressed("dash") and !is_dashing:
+		is_dashing = true
 		dash_speed = 15
 		dash_timer.start()
 	else:
 		dash_speed = 1
 
-	if (direction):
-		velocity.x = lerp(velocity.x, direction * speed * dash_speed, acceleration)
+	if is_dashing:
+		velocity.x = lerp(velocity.x, last_dir * speed * dash_speed, acceleration)
+	elif direction:
+		last_dir = direction
+		velocity.x = lerp(velocity.x, direction * speed, acceleration)
 	else:
 		velocity.x = lerp(velocity.x, 0.0, friction)
-
-	# Handle jump
-	if (jumping):
-		animated_sprite.play("jump")
 
 	if Input.is_action_just_pressed("jump") and (is_on_floor() or coyote):
 		jumping = true
 		velocity.y += jump_speed
+
+	if Input.is_action_just_pressed("print"):
+		print(last_dir)
 
 	# Grappling Hook
 
@@ -86,6 +90,10 @@ func manage_visuals(direction: int):
 	elif (direction < 0):
 		animated_sprite.flip_h = true
 
+	# Jump
+	if (jumping):
+		animated_sprite.play("jump")
+
 	# Play animation
 	if (is_on_floor()):
 		if (!direction):
@@ -95,4 +103,4 @@ func manage_visuals(direction: int):
 
 
 func _on_dash_timer_timeout() -> void:
-	can_dash = true
+	is_dashing = false
