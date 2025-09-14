@@ -67,26 +67,12 @@ func _on_coyote_timer_timeout() -> void:
 
 func get_input(delta: float) -> void:
 	### Movements
+	handle_dash()
 
 	# Get input direction - -1, 0, 1
 	var direction = Input.get_axis("move_left", "move_right")
 
-	# Dash
-	###
-	if Input.is_action_just_pressed("dash") and !is_dashing and can_dash:
-		is_dashing = true
-		dash_timer.start()
-
-		can_dash = false
-		dash_cooldown.start()
-
-		dash_speed = 15
-
-		$UI/DashButton.activate()
-	else:
-		dash_speed = 1
-	###
-
+	# Moviment on x axis
 	if is_dashing:
 		velocity.x = lerp(velocity.x, last_dir * speed * dash_speed, acceleration)
 	elif direction:
@@ -98,9 +84,6 @@ func get_input(delta: float) -> void:
 	if Input.is_action_just_pressed("jump") and (is_on_floor() or coyote):
 		jumping = true
 		velocity.y += jump_speed
-
-	if Input.is_action_just_pressed("print"):
-		print(last_dir)
 
 	# Grappling Hook
 
@@ -123,6 +106,19 @@ func manage_visuals(direction: int):
 		else:
 			animated_sprite.play("run")
 
+func handle_dash():
+	if Input.is_action_just_pressed("dash") and !is_dashing and can_dash:
+		is_dashing = true
+		dash_timer.start()
+
+		can_dash = false
+		dash_cooldown.start()
+
+		dash_speed = 15
+
+		$UI/DashButton.activate()
+	else:
+		dash_speed = 1
 
 func _on_dash_timer_timeout() -> void:
 	is_dashing = false
