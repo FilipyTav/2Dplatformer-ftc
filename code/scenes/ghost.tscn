@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dhykgyecl7nvs"]
+
+[ext_resource type="Texture2D" uid="uid://dggqcywakvsu" path="res://assets/sprites/knight.png" id="1_t76o2"]
+[ext_resource type="Script" uid="uid://bexgqlsu1cggi" path="res://scripts/ghost.gd" id="2_l5lq6"]
+
+[node name="Ghost" type="Sprite2D"]
+modulate = Color(0.391819, 0.391819, 0.391819, 1)
+show_behind_parent = true
+z_index = 999
+texture = ExtResource("1_t76o2")
+region_enabled = true
+region_rect = Rect2(136, 72, 16, 24)
+script = ExtResource("2_l5lq6")

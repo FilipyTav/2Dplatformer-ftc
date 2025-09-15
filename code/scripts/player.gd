@@ -9,7 +9,9 @@ extends CharacterBody2D
 @onready var coyote_timer: Timer = $CoyoteTimer
 @onready var dash_timer: Timer = $DashTimer
 @onready var dash_cooldown: Timer = $DashCooldown
+@onready var ghost_timer: Timer = $DashGhost/GhostTimer
 
+var ghost_node: Resource = preload("res://scenes/ghost.tscn")
 var coyote_frames: int = 6  # How many in-air frames to allow jumping
 var coyote: bool = false  # Track whether it's coyote time or not
 var last_floor: bool = false  # Last frame's on-floor state
@@ -33,6 +35,8 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 func _ready() -> void:
 	coyote_timer.wait_time = coyote_frames / 60.0
 	dash_timer.wait_time = dash_duration
+
+	ghost_timer.wait_time = dash_duration / 6
 	dash_cooldown.wait_time = dash_cd
 
 	$UI/DashButton.cooldown = dash_cd
@@ -113,6 +117,7 @@ func manage_visuals(direction: int):
 
 func handle_dash():
 	if Input.is_action_just_pressed("dash") and !is_dashing and can_dash:
+		ghost_timer.start()
 		is_dashing = true
 		dash_timer.start()
 
@@ -127,6 +132,25 @@ func handle_dash():
 
 func _on_dash_timer_timeout() -> void:
 	is_dashing = false
+	ghost_timer.stop()
 
 func _on_dash_cooldown_timeout() -> void:
 	can_dash = true
+
+func add_ghost():
+	var ghost = ghost_node.instantiate()
+
+	var sprite_size: Vector2 = $AnimatedSprite2D.sprite_frames.get_frame_texture($AnimatedSprite2D.animation, $AnimatedSprite2D.frame).get_size()
+
+	# Make ghost's position match the visual top-left of the original sprite
+	var sprite_offset = Vector2(0, sprite_size.y / 4.0) if $AnimatedSprite2D.centered else Vector2.ZERO
+	ghost.set_property(position - sprite_offset, $AnimatedSprite2D.scale)
+	if (last_dir < 0):
+		ghost.flip_h = true
+	elif (last_dir > 0):
+		ghost.flip_h = false
+
+	get_tree().current_scene.add_child(ghost)
+
+func _on_ghost_timer_timeout() -> void:
+	add_ghost()
