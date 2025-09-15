@@ -2,9 +2,9 @@ extends Node2D
 
 # ---- Config ----
 @export var hook_speed: float = 900.0           # speed player moves toward hook
-@export var rope_extend_speed: float = 1400.0   # visual rope speed
+@export var rope_extend_speed: float = 1000.0   # visual rope speed
 @export var stop_distance: float = 8.0          # distance to stick
-@export var max_rope_distance: float = 300.0    # max rope reach
+@export var max_rope_distance: float = 100.0    # max rope reach
 
 # ---- Nodes ----
 @onready var ray: RayCast2D = $RayCast2D
@@ -35,7 +35,7 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("hook"):
 		fire_rope()
 	# Release hook
-	if Input.is_action_just_released("hook") && !extending:
+	if Input.is_action_just_released("hook"):
 		start_retraction()
 
 	# State machine

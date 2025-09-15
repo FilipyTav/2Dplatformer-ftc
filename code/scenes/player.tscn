@@ -208,8 +208,7 @@ scale = Vector2(0.2, 0.2)
 cooldown = 0.6
 
 [node name="GrappleController" parent="." instance=ExtResource("4_dqkch")]
-rope_extend_speed = 1400.0
-max_rope_distance = 300.0
+hook_speed = 900.0
 
 [connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]

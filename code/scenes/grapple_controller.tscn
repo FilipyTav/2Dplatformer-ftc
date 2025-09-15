@@ -5,7 +5,6 @@
 [node name="GrappleController" type="Node2D"]
 script = ExtResource("1_1gwro")
 hook_speed = 300.0
-max_rope_distance = 100.0
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 target_position = Vector2(200, 0)
