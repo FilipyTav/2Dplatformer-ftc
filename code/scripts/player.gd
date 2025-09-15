@@ -10,6 +10,7 @@ extends CharacterBody2D
 @onready var dash_timer: Timer = $DashTimer
 @onready var dash_cooldown: Timer = $DashCooldown
 @onready var ghost_timer: Timer = $DashGhost/GhostTimer
+@onready var dash_particles: GPUParticles2D = $DashGhost/Particles
 
 var ghost_node: Resource = preload("res://scenes/ghost.tscn")
 var coyote_frames: int = 6  # How many in-air frames to allow jumping
@@ -123,6 +124,7 @@ func handle_dash():
 
 		can_dash = false
 		dash_cooldown.start()
+		dash_particles.emitting = true
 
 		dash_speed = 15
 
@@ -132,6 +134,7 @@ func handle_dash():
 
 func _on_dash_timer_timeout() -> void:
 	is_dashing = false
+	dash_particles.emitting = false
 	ghost_timer.stop()
 
 func _on_dash_cooldown_timeout() -> void:
