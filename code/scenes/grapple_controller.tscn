@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://b2nsjt6lo6t0o"]
+
+[ext_resource type="Script" uid="uid://cgfeol5xsi5en" path="res://scripts/grapple_controller.gd" id="1_1gwro"]
+
+[node name="GrappleController" type="Node2D"]
+script = ExtResource("1_1gwro")
+hook_speed = 300.0
+max_rope_distance = 100.0
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(200, 0)
+
+[node name="Rope" type="Line2D" parent="."]
+scale = Vector2(1, 0.1)
+points = PackedVector2Array(0, 0, 0, 0)
+default_color = Color(0.341176, 0.447059, 1, 1)

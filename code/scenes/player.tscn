@@ -1,8 +1,9 @@
-[gd_scene load_steps=27 format=3 uid="uid://warwyg02m4dv"]
+[gd_scene load_steps=28 format=3 uid="uid://warwyg02m4dv"]
 
 [ext_resource type="Texture2D" uid="uid://dggqcywakvsu" path="res://assets/sprites/knight.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://bff6ufyqlv7po" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="PackedScene" uid="uid://eudw52axa0vg" path="res://scenes/ability_button.tscn" id="3_qhqgy"]
+[ext_resource type="PackedScene" uid="uid://b2nsjt6lo6t0o" path="res://scenes/grapple_controller.tscn" id="4_dqkch"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]
 atlas = ExtResource("1_3vyb7")
@@ -205,6 +206,10 @@ visible = false
 z_index = 999
 scale = Vector2(0.2, 0.2)
 cooldown = 0.6
+
+[node name="GrappleController" parent="." instance=ExtResource("4_dqkch")]
+rope_extend_speed = 1400.0
+max_rope_distance = 300.0
 
 [connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]

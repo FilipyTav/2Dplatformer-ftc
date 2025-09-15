@@ -25,6 +25,8 @@ var can_dash: bool = true
 
 var last_dir: float = 1
 
+var grappling: bool = false
+
 # To sync with rigid nodes
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
@@ -45,7 +47,7 @@ func _physics_process(delta: float) -> void:
 	# 	velocity.y = 0
 	# 	velocity.x = lerp(velocity.x, last_dir * speed * dash_speed, acceleration)
 	# el
-	if not is_on_floor():
+	if !is_on_floor() && !grappling:
 		velocity.y += gravity * delta
 
 	get_input(delta)
@@ -69,19 +71,20 @@ func _on_coyote_timer_timeout() -> void:
 
 func get_input(delta: float) -> void:
 	### Movements
-	handle_dash()
+	if !grappling:
+		handle_dash()
 
-	# Get input direction - -1, 0, 1
-	var direction = Input.get_axis("move_left", "move_right")
+		# Get input direction - -1, 0, 1
+		var direction = Input.get_axis("move_left", "move_right")
 
-	# Moviment on x axis
-	if is_dashing:
-		velocity.x = lerp(velocity.x, last_dir * speed * dash_speed, acceleration)
-	elif direction:
-		last_dir = direction
-		velocity.x = lerp(velocity.x, direction * speed, acceleration)
-	else:
-		velocity.x = lerp(velocity.x, 0.0, friction)
+		# Moviment on x axis
+		if is_dashing:
+			velocity.x = lerp(velocity.x, last_dir * speed * dash_speed, acceleration)
+		elif direction:
+			last_dir = direction
+			velocity.x = lerp(velocity.x, direction * speed, acceleration)
+		else:
+			velocity.x = lerp(velocity.x, 0.0, friction)
 
 	if Input.is_action_just_pressed("jump") and (is_on_floor() or coyote):
 		jumping = true
