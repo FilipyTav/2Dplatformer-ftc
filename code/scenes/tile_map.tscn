@@ -169,6 +169,22 @@ texture = ExtResource("1_tjuek")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_tjuek")
 
+[sub_resource type="Animation" id="Animation_dohrl"]
+length = 0.001
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1430, -84)]
+}
+
 [sub_resource type="Animation" id="Animation_jx7lj"]
 resource_name = "move"
 length = 2.0
@@ -186,9 +202,14 @@ tracks/0/keys = {
 "values": [Vector2(1399, -161), Vector2(1609, -84)]
 }
 
-[sub_resource type="Animation" id="Animation_dohrl"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f6fy2"]
+_data = {
+&"RESET": SubResource("Animation_dohrl"),
+&"move": SubResource("Animation_jx7lj")
+}
+
+[sub_resource type="Animation" id="Animation_f6fy2"]
 length = 0.001
-loop_mode = 2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -199,13 +220,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(1430, -84)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_f6fy2"]
-_data = {
-&"RESET": SubResource("Animation_dohrl"),
-&"move": SubResource("Animation_jx7lj")
+"values": [Vector2(1817, -91)]
 }
 
 [sub_resource type="Animation" id="Animation_47enk"]
@@ -222,21 +237,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(1817, -91), Vector2(1817, -213)]
-}
-
-[sub_resource type="Animation" id="Animation_f6fy2"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1817, -91)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jx7lj"]

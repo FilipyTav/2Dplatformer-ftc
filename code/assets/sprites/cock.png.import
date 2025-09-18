@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://vmj08ogo4rtg"
-path="res://.godot/imported/bg.jpg-0d6615a6d1dc78d67f11db19861b4789.ctex"
+uid="uid://dam3ux7qm1s7m"
+path="res://.godot/imported/cock.png-ef49e65a762fa6c742662d1a3c80079f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/bg.jpg"
-dest_files=["res://.godot/imported/bg.jpg-0d6615a6d1dc78d67f11db19861b4789.ctex"]
+source_file="res://assets/sprites/cock.png"
+dest_files=["res://.godot/imported/cock.png-ef49e65a762fa6c742662d1a3c80079f.ctex"]
 
 [params]
 

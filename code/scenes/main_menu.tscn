@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://e1w14xaoi3hg"]
+[gd_scene load_steps=11 format=3 uid="uid://e1w14xaoi3hg"]
 
 [ext_resource type="Script" uid="uid://dn5a0c1un1a0p" path="res://scripts/main_menu.gd" id="1_8ln24"]
-[ext_resource type="Texture2D" uid="uid://bpbapkxjbqd8d" path="res://assets/sprites/bg.jpg" id="1_bqqt6"]
+[ext_resource type="Texture2D" uid="uid://vmj08ogo4rtg" path="res://assets/sprites/bg.jpg" id="1_bqqt6"]
 [ext_resource type="FontFile" uid="uid://dq5mvqstrqkxb" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="1_l6cm7"]
+[ext_resource type="Texture2D" uid="uid://dam3ux7qm1s7m" path="res://assets/sprites/cock.png" id="3_8ln24"]
 [ext_resource type="FontFile" uid="uid://bd8b3740cfscc" path="res://assets/fonts/PixelOperator8.ttf" id="4_wu84c"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wu84c"]
@@ -56,7 +57,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("1_8ln24")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Bg" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -65,7 +66,22 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_wu84c")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="Cock" type="TextureRect" parent="Bg"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -929.0
+offset_top = -416.0
+offset_right = -188.0
+offset_bottom = 599.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_8ln24")
+
+[node name="MainBtns" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -80,7 +96,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 13
 
-[node name="StartBtn" type="Button" parent="VBoxContainer"]
+[node name="StartBtn" type="Button" parent="MainBtns"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("1_l6cm7")
@@ -92,7 +108,18 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_l6cm7")
 text = "Start
 "
 
-[node name="QuitBtn" type="Button" parent="VBoxContainer"]
+[node name="OptionsBtn" type="Button" parent="MainBtns"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("1_l6cm7")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = SubResource("StyleBoxEmpty_wu84c")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ekxnf")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_wu84c")
+theme_override_styles/normal = SubResource("StyleBoxFlat_l6cm7")
+text = "Options"
+
+[node name="QuitBtn" type="Button" parent="MainBtns"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("1_l6cm7")
@@ -104,22 +131,93 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_l6cm7")
 text = "Quit
 "
 
-[node name="Label" type="Label" parent="."]
+[node name="Title" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -64.5
-offset_top = -165.0
-offset_right = 64.5
-offset_bottom = -142.0
+offset_left = -383.0
+offset_top = -324.0
+offset_right = 383.0
+offset_bottom = -187.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0.475206, 0.313036, 0.890994, 1)
+theme_override_colors/font_outline_color = Color(0.47451, 0.313726, 0.890196, 1)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 5
 theme_override_fonts/font = ExtResource("4_wu84c")
-theme_override_font_sizes/font_size = 60
-text = "{ Nome do Jogo }"
+theme_override_font_sizes/font_size = 100
+text = "RoboCock"
+horizontal_alignment = 1
 
-[connection signal="pressed" from="VBoxContainer/StartBtn" to="." method="_on_start_btn_pressed"]
-[connection signal="pressed" from="VBoxContainer/QuitBtn" to="." method="_on_quit_btn_pressed"]
+[node name="Subtitle" type="Label" parent="Title"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -19.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("4_wu84c")
+theme_override_font_sizes/font_size = 30
+text = "A guerra do galo"
+horizontal_alignment = 1
+
+[node name="Options" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -311.0
+offset_top = -160.0
+offset_right = 311.0
+offset_bottom = 178.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BackBtn" type="Button" parent="Options"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -99.5
+offset_top = -51.0
+offset_right = 99.5
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("1_l6cm7")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = SubResource("StyleBoxEmpty_wu84c")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ekxnf")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_wu84c")
+theme_override_styles/normal = SubResource("StyleBoxFlat_l6cm7")
+text = "Back"
+
+[node name="Label" type="Label" parent="Options"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 67.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("4_wu84c")
+theme_override_font_sizes/font_size = 30
+text = "Options"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Audio" type="AudioStreamPlayer2D" parent="."]
+
+[connection signal="pressed" from="MainBtns/StartBtn" to="." method="_on_start_btn_pressed"]
+[connection signal="pressed" from="MainBtns/OptionsBtn" to="." method="_on_options_btn_pressed"]
+[connection signal="pressed" from="MainBtns/QuitBtn" to="." method="_on_quit_btn_pressed"]
+[connection signal="pressed" from="Options/BackBtn" to="." method="_on_back_btn_pressed"]
