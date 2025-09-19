@@ -245,18 +245,18 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 20
 
-[node name="Audio" type="HBoxContainer" parent="Options/VBoxContainer"]
+[node name="Music" type="HBoxContainer" parent="Options/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Música" type="Label" parent="Options/VBoxContainer/Audio"]
+[node name="Música" type="Label" parent="Options/VBoxContainer/Music"]
 layout_mode = 2
 size_flags_vertical = 1
 theme_override_fonts/font = ExtResource("4_wu84c")
 theme_override_font_sizes/font_size = 30
 text = "Música"
 
-[node name="AudioControl" type="HSlider" parent="Options/VBoxContainer/Audio"]
+[node name="AudioControl" type="HSlider" parent="Options/VBoxContainer/Music"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -268,6 +268,30 @@ step = 0.05
 value = 1.0
 script = ExtResource("6_rtw2f")
 audio_bus_name = "Music"
+
+[node name="SFX" type="HBoxContainer" parent="Options/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 88
+
+[node name="SFX" type="Label" parent="Options/VBoxContainer/SFX"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("4_wu84c")
+theme_override_font_sizes/font_size = 30
+text = "SFX"
+
+[node name="AudioControl" type="HSlider" parent="Options/VBoxContainer/SFX"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_styles/slider = SubResource("StyleBoxLine_8ln24")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_rtw2f")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_oa1go")
+max_value = 1.0
+step = 0.05
+value = 1.0
+script = ExtResource("6_rtw2f")
+audio_bus_name = "Sfx"
 
 [node name="Audio2" type="HBoxContainer" parent="Options/VBoxContainer"]
 layout_mode = 2
@@ -291,5 +315,6 @@ bus = &"Music"
 [connection signal="pressed" from="MainBtns/OptionsBtn" to="." method="_on_options_btn_pressed"]
 [connection signal="pressed" from="MainBtns/QuitBtn" to="." method="_on_quit_btn_pressed"]
 [connection signal="pressed" from="Options/BackBtn" to="." method="_on_back_btn_pressed"]
-[connection signal="value_changed" from="Options/VBoxContainer/Audio/AudioControl" to="Options/VBoxContainer/Audio/AudioControl" method="_on_value_changed"]
+[connection signal="value_changed" from="Options/VBoxContainer/Music/AudioControl" to="Options/VBoxContainer/Music/AudioControl" method="_on_value_changed"]
+[connection signal="value_changed" from="Options/VBoxContainer/SFX/AudioControl" to="Options/VBoxContainer/SFX/AudioControl" method="_on_value_changed"]
 [connection signal="toggled" from="Options/VBoxContainer/Audio2/FullscreenController" to="Options/VBoxContainer/Audio2/FullscreenController" method="_on_toggled"]
