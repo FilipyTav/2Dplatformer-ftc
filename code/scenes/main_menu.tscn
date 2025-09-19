@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://e1w14xaoi3hg"]
+[gd_scene load_steps=17 format=3 uid="uid://e1w14xaoi3hg"]
 
 [ext_resource type="Script" uid="uid://dn5a0c1un1a0p" path="res://scripts/main_menu.gd" id="1_8ln24"]
 [ext_resource type="Texture2D" uid="uid://vmj08ogo4rtg" path="res://assets/sprites/bg.jpg" id="1_bqqt6"]
@@ -7,6 +7,7 @@
 [ext_resource type="FontFile" uid="uid://bd8b3740cfscc" path="res://assets/fonts/PixelOperator8.ttf" id="4_wu84c"]
 [ext_resource type="Script" uid="uid://bmnmdeubbbu1b" path="res://scripts/audio_control.gd" id="6_rtw2f"]
 [ext_resource type="AudioStream" uid="uid://c8u2bf7xensfm" path="res://assets/music/time_for_adventure.mp3" id="7_oa1go"]
+[ext_resource type="Script" uid="uid://dxde15qkoqpe4" path="res://scripts/fullscreen_control.gd" id="7_tbmy8"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wu84c"]
 texture = ExtResource("1_bqqt6")
@@ -229,15 +230,36 @@ text = "Options"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="AudioControl" type="HSlider" parent="Options"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Options"]
 layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_left = 105.0
-offset_top = 79.0
-offset_right = -84.0
-offset_bottom = 136.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -198.0
+offset_top = -67.0
+offset_right = 198.0
+offset_bottom = 67.0
 grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="Audio" type="HBoxContainer" parent="Options/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Música" type="Label" parent="Options/VBoxContainer/Audio"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("4_wu84c")
+theme_override_font_sizes/font_size = 30
+text = "Música"
+
+[node name="AudioControl" type="HSlider" parent="Options/VBoxContainer/Audio"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
 theme_override_styles/slider = SubResource("StyleBoxLine_8ln24")
 theme_override_styles/grabber_area = SubResource("StyleBoxLine_rtw2f")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_oa1go")
@@ -247,6 +269,20 @@ value = 1.0
 script = ExtResource("6_rtw2f")
 audio_bus_name = "Music"
 
+[node name="Audio2" type="HBoxContainer" parent="Options/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="FullscreenController" type="CheckButton" parent="Options/VBoxContainer/Audio2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("4_wu84c")
+theme_override_font_sizes/font_size = 30
+text = "Fullscreen
+"
+expand_icon = true
+script = ExtResource("7_tbmy8")
+
 [node name="Bgm" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_oa1go")
 bus = &"Music"
@@ -255,4 +291,5 @@ bus = &"Music"
 [connection signal="pressed" from="MainBtns/OptionsBtn" to="." method="_on_options_btn_pressed"]
 [connection signal="pressed" from="MainBtns/QuitBtn" to="." method="_on_quit_btn_pressed"]
 [connection signal="pressed" from="Options/BackBtn" to="." method="_on_back_btn_pressed"]
-[connection signal="value_changed" from="Options/AudioControl" to="Options/AudioControl" method="_on_value_changed"]
+[connection signal="value_changed" from="Options/VBoxContainer/Audio/AudioControl" to="Options/VBoxContainer/Audio/AudioControl" method="_on_value_changed"]
+[connection signal="toggled" from="Options/VBoxContainer/Audio2/FullscreenController" to="Options/VBoxContainer/Audio2/FullscreenController" method="_on_toggled"]
