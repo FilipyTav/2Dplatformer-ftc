@@ -9,9 +9,10 @@ extends Node2D
 @onready var rope: Line2D = $Line2D
 
 # --- Config vars ---
-@export var rest_length = 200.0
-@export var stiffness = 15.0
+@export var rest_length = 50.0
+@export var stiffness = 800.0
 @export var damping = 1.0
+@export var stop_distance: float = 8.0          # distance to stick
 
 var launched: bool = false
 var target_pos: Vector2 = Vector2.ZERO
@@ -37,24 +38,24 @@ func launch() -> void:
 func retract() -> void:
 	launched = false
 
-func handle_grapple(delta: float) -> void:
+func handle_grapple(_delta: float) -> void:
+	var speed_factor: float = 20.0        # How fast speed grows with distance
+	var min_speed: float = 300.0          # Minimum pull speed (when close)
+	var max_speed: float = stiffness          # Maximum pull speed (when far)
+
 	var target_dir: Vector2 = player.global_position.direction_to(target_pos)
 	var target_dist: float = player.global_position.distance_to(target_pos)
 
-	var displacement: float = target_dist - rest_length
+	# var displacement: float = target_dist - rest_length
 
-	var force = Vector2.ZERO
+	# Pull player
+	if target_dist > stop_distance:
+		# Easing: speed scales with distance, but capped
+		var speed = clamp(target_dist * speed_factor, min_speed, max_speed)
+		player.velocity = target_dir.normalized() * speed  # Full-speed pull
+	else:
+		player.velocity = Vector2.ZERO  # Immediate stop
 
-	if displacement > 0:
-		var spring_force_magnitude = stiffness * displacement
-		var spring_force = target_dir * spring_force_magnitude
-
-		var vel_dot = player.velocity.dot(target_dir)
-		var dmp = -damping * vel_dot * target_dir
-
-		force = spring_force * dmp
-
-	player.velocity += force * delta
 	update_rope()
 	update_tip(to_local(target_pos))
 

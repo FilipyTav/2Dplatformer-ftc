@@ -27,7 +27,7 @@ visible = false
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 rotation = -1.5708
-target_position = Vector2(0, 300)
+target_position = Vector2(0, 600)
 
 [node name="Line2D" type="Line2D" parent="."]
 points = PackedVector2Array(0, 0, 0, 0)
