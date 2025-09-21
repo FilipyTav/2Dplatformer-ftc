@@ -7,12 +7,12 @@
 [node name="Chain" type="Node2D"]
 script = ExtResource("1_i8vwp")
 
+[node name="Pivot" type="Marker2D" parent="."]
+
 [node name="Links" type="Sprite2D" parent="."]
 texture_repeat = 2
-position = Vector2(-7, -6)
 scale = Vector2(0.04, 0.04)
 texture = ExtResource("1_kju67")
-centered = false
 region_enabled = true
 region_rect = Rect2(0, 0, 335, 296)
 
@@ -30,5 +30,6 @@ rotation = -1.5708
 target_position = Vector2(0, 600)
 
 [node name="Line2D" type="Line2D" parent="."]
+visible = false
 points = PackedVector2Array(0, 0, 0, 0)
 width = 1.0

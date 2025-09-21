@@ -58,6 +58,7 @@ func handle_grapple(_delta: float) -> void:
 
 	update_rope()
 	update_tip(to_local(target_pos))
+	update_link()
 
 func update_rope() -> void:
 	rope.set_point_position(1, to_local(target_pos))
@@ -66,3 +67,19 @@ func update_tip(pos: Vector2) -> void:
 	hook_tip.position = pos
 	hook_tip.rotation = pos.angle()
 	hook_tip.rotation += deg_to_rad(90)
+
+func update_link() -> void:
+	var start_pos: Vector2 = rope.get_point_position(0)
+	var end_pos: Vector2 = rope.get_point_position(1)
+
+	var dir: Vector2 =  end_pos - start_pos
+	var length: float = dir.length()
+	var angle: float = dir.angle()
+	var tex: Vector2 = links.texture.get_size()
+
+	links.rotation = angle
+
+	var total_links: float = length / (tex.x * links.scale.x)
+
+	links.region_rect = Rect2(0, 0, total_links * tex.x, tex.y)
+	links.offset.x = (tex.x * total_links) / 2
