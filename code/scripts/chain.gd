@@ -17,6 +17,10 @@ extends Node2D
 var launched: bool = false
 var target_pos: Vector2 = Vector2.ZERO
 
+func _ready() -> void:
+	ray.hide()
+	self.visible = false
+
 func _process(delta: float) -> void:
 	ray.look_at(get_global_mouse_position())
 	ray.rotation += deg_to_rad(-90)
@@ -34,9 +38,11 @@ func launch() -> void:
 	if ray.is_colliding():
 		launched = true
 		target_pos = ray.get_collision_point()
+		self.visible = true
 
 func retract() -> void:
 	launched = false
+	self.visible = false
 
 func handle_grapple(_delta: float) -> void:
 	var speed_factor: float = 20.0        # How fast speed grows with distance
