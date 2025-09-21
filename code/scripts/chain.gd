@@ -2,9 +2,10 @@ extends Node2D
 
 # --- Nodes ---
 @onready var links: Sprite2D = $Links
-@onready var hook_tip: CharacterBody2D = $Tip
+@onready var hook_tip: Sprite2D = $Tip
+
 @onready var ray: RayCast2D = $RayCast2D
-@onready var player: CharacterBody2D
+@onready var player: CharacterBody2D = get_parent()
 @onready var rope: Line2D = $Line2D
 
 # --- Config vars ---
@@ -21,6 +22,9 @@ func _process(delta: float) -> void:
 
 	if Input.is_action_just_pressed("hook"):
 		launch()
+		print(player.global_position.direction_to(target_pos).angle())
+		print(hook_tip.rotation)
+
 	if Input.is_action_just_released("hook"):
 		retract()
 
@@ -36,8 +40,8 @@ func retract() -> void:
 	launched = false
 
 func handle_grapple(delta: float) -> void:
-	# var target_dir: Vector2 = player.global_position.direction_to(target_pos)
-	# var target_dist: float = player.global_position.distance_to(target_pos)
+	var target_dir: Vector2 = player.global_position.direction_to(target_pos)
+	var target_dist: float = player.global_position.distance_to(target_pos)
 
 	# var displacement: float = target_dist - rest_length
 
@@ -54,6 +58,12 @@ func handle_grapple(delta: float) -> void:
 
 	# player.velocity += force * delta
 	update_rope()
+	update_tip(to_local(target_pos), target_dir)
 
 func update_rope() -> void:
 	rope.set_point_position(1, to_local(target_pos))
+
+func update_tip(pos: Vector2, target_dir: Vector2) -> void:
+	hook_tip.position = pos
+	hook_tip.rotation = pos.angle()
+	hook_tip.rotation += deg_to_rad(90)

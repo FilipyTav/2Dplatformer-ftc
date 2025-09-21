@@ -16,19 +16,19 @@ centered = false
 region_enabled = true
 region_rect = Rect2(0, 0, 335, 296)
 
-[node name="Tip" type="CharacterBody2D" parent="."]
-
-[node name="Hook" type="Sprite2D" parent="Tip"]
+[node name="Tip" type="Sprite2D" parent="."]
 position = Vector2(16, 0)
 rotation = 1.5708
 texture = ExtResource("2_r1vlr")
 region_rect = Rect2(0, 0, 32, 32)
+
+[node name="Hook2" type="CharacterBody2D" parent="."]
+visible = false
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 rotation = -1.5708
 target_position = Vector2(0, 300)
 
 [node name="Line2D" type="Line2D" parent="."]
-visible = false
 points = PackedVector2Array(0, 0, 0, 0)
 width = 1.0
