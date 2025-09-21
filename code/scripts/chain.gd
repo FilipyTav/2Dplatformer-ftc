@@ -22,8 +22,6 @@ func _process(delta: float) -> void:
 
 	if Input.is_action_just_pressed("hook"):
 		launch()
-		print(player.global_position.direction_to(target_pos).angle())
-		print(hook_tip.rotation)
 
 	if Input.is_action_just_released("hook"):
 		retract()
@@ -43,27 +41,27 @@ func handle_grapple(delta: float) -> void:
 	var target_dir: Vector2 = player.global_position.direction_to(target_pos)
 	var target_dist: float = player.global_position.distance_to(target_pos)
 
-	# var displacement: float = target_dist - rest_length
+	var displacement: float = target_dist - rest_length
 
 	var force = Vector2.ZERO
 
-	# if displacement > 0:
-	# 	var spring_force_magnitude = stiffness * displacement
-	# 	var spring_force = target_dir * spring_force_magnitude
-	#
-	# 	var vel_dot = player.velocity.dot(target_dir)
-	# 	var damping = -damping * vel_dot * target_dir
-	#
-	# 	force = spring_force * damping
+	if displacement > 0:
+		var spring_force_magnitude = stiffness * displacement
+		var spring_force = target_dir * spring_force_magnitude
 
-	# player.velocity += force * delta
+		var vel_dot = player.velocity.dot(target_dir)
+		var dmp = -damping * vel_dot * target_dir
+
+		force = spring_force * dmp
+
+	player.velocity += force * delta
 	update_rope()
-	update_tip(to_local(target_pos), target_dir)
+	update_tip(to_local(target_pos))
 
 func update_rope() -> void:
 	rope.set_point_position(1, to_local(target_pos))
 
-func update_tip(pos: Vector2, target_dir: Vector2) -> void:
+func update_tip(pos: Vector2) -> void:
 	hook_tip.position = pos
 	hook_tip.rotation = pos.angle()
 	hook_tip.rotation += deg_to_rad(90)
