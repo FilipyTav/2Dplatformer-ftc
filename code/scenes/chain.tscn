@@ -1,17 +1,15 @@
 [gd_scene load_steps=4 format=3 uid="uid://c2m2ontsmppwk"]
 
+[ext_resource type="Script" uid="uid://cgpxhj6smi1np" path="res://scripts/chain.gd" id="1_i8vwp"]
 [ext_resource type="Texture2D" uid="uid://bp037k331ai3l" path="res://assets/sprites/chain_link.png" id="1_kju67"]
 [ext_resource type="Texture2D" uid="uid://jhcn5mvps36w" path="res://assets/sprites/hook.png" id="2_r1vlr"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r1vlr"]
-radius = 6.0
-
 [node name="Chain" type="Node2D"]
+script = ExtResource("1_i8vwp")
 
 [node name="Links" type="Sprite2D" parent="."]
 texture_repeat = 2
-position = Vector2(6, 10)
-rotation = 1.5708
+position = Vector2(-7, -6)
 scale = Vector2(0.04, 0.04)
 texture = ExtResource("1_kju67")
 centered = false
@@ -21,8 +19,16 @@ region_rect = Rect2(0, 0, 335, 296)
 [node name="Tip" type="CharacterBody2D" parent="."]
 
 [node name="Hook" type="Sprite2D" parent="Tip"]
+position = Vector2(16, 0)
+rotation = 1.5708
 texture = ExtResource("2_r1vlr")
 region_rect = Rect2(0, 0, 32, 32)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Tip"]
-shape = SubResource("CapsuleShape2D_r1vlr")
+[node name="RayCast2D" type="RayCast2D" parent="."]
+rotation = -1.5708
+target_position = Vector2(0, 300)
+
+[node name="Line2D" type="Line2D" parent="."]
+visible = false
+points = PackedVector2Array(0, 0, 0, 0)
+width = 1.0
