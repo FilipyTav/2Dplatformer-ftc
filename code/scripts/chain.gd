@@ -10,9 +10,10 @@ extends Node2D
 
 # --- Config vars ---
 @export var rest_length = 50.0
-@export var stiffness = 800.0
+@export var stiffness = 300.0
 @export var damping = 1.0
-@export var stop_distance: float = 8.0          # distance to stick
+# distance to stick
+@export var stop_distance: float = 4.0
 
 var launched: bool = false
 var target_pos: Vector2 = Vector2.ZERO
@@ -33,6 +34,8 @@ func _process(delta: float) -> void:
 
 	if launched:
 		handle_grapple(delta)
+	else:
+		retract()
 
 func launch() -> void:
 	if ray.is_colliding():

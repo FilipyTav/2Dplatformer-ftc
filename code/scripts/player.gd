@@ -44,6 +44,9 @@ func _ready() -> void:
 	# It gets in the way in the editor
 	$UI.visible = true
 
+func _process(delta: float) -> void:
+	grappling = $Chain.launched
+
 func _physics_process(delta: float) -> void:
 	# Gravity
 	# Ignore
@@ -91,12 +94,10 @@ func get_input(delta: float) -> void:
 		else:
 			velocity.x = lerp(velocity.x, 0.0, friction)
 
-	if Input.is_action_just_pressed("jump") and (is_on_floor() or coyote):
+	if Input.is_action_just_pressed("jump") and (is_on_floor() or coyote or grappling):
 		jumping = true
+		$Chain.launched = false
 		velocity.y += jump_speed
-
-	# Grappling Hook
-
 
 func manage_visuals(direction: int):
 	# Flip sprite

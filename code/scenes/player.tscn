@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://dggqcywakvsu" path="res://assets/sprites/knight.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://bff6ufyqlv7po" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="PackedScene" uid="uid://eudw52axa0vg" path="res://scenes/ability_button.tscn" id="3_qhqgy"]
-[ext_resource type="PackedScene" uid="uid://b2nsjt6lo6t0o" path="res://scenes/grapple_controller.tscn" id="4_dqkch"]
+[ext_resource type="PackedScene" uid="uid://c2m2ontsmppwk" path="res://scenes/chain.tscn" id="4_dqkch"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]
 atlas = ExtResource("1_3vyb7")
@@ -222,9 +222,6 @@ z_index = 999
 scale = Vector2(0.2, 0.2)
 cooldown = 0.6
 
-[node name="GrappleController" parent="." instance=ExtResource("4_dqkch")]
-hook_speed = 900.0
-
 [node name="DashGhost" type="Node2D" parent="."]
 
 [node name="GhostTimer" type="Timer" parent="DashGhost"]
@@ -234,6 +231,10 @@ show_behind_parent = true
 emitting = false
 amount = 20
 process_material = SubResource("ParticleProcessMaterial_qlg0r")
+
+[node name="Chain" parent="." instance=ExtResource("4_dqkch")]
+position = Vector2(0, -6)
+scale = Vector2(0.25, 0.25)
 
 [connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
