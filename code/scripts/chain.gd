@@ -47,7 +47,7 @@ func retract() -> void:
 	launched = false
 	self.visible = false
 
-func handle_grapple(_delta: float) -> void:
+func pull_player():
 	var speed_factor: float = 20.0        # How fast speed grows with distance
 	var min_speed: float = 300.0          # Minimum pull speed (when close)
 	var max_speed: float = stiffness          # Maximum pull speed (when far)
@@ -57,13 +57,16 @@ func handle_grapple(_delta: float) -> void:
 
 	# var displacement: float = target_dist - rest_length
 
-	# Pull player
 	if target_dist > stop_distance:
 		# Easing: speed scales with distance, but capped
 		var speed = clamp(target_dist * speed_factor, min_speed, max_speed)
 		player.velocity = target_dir.normalized() * speed  # Full-speed pull
 	else:
 		player.velocity = Vector2.ZERO  # Immediate stop
+
+
+func handle_grapple(_delta: float) -> void:
+	pull_player()
 
 	update_rope()
 	update_tip(to_local(target_pos))
