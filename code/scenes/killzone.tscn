@@ -10,5 +10,9 @@ script = ExtResource("1_xlapc")
 wait_time = 0.6
 one_shot = true
 
+[node name="DmgCooldown" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="DmgCooldown" to="." method="_on_dmg_cooldown_timeout"]
