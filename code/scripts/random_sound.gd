@@ -5,17 +5,24 @@ extends AudioStreamPlayer
 
 @onready var player: AudioStreamPlayer2D = $AudioStreamPlayer2D
 
+var last_index = -1
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	randomize()
 	set_bus_on_audio_players(self, audio_bus)
 
+
 func play_random_sound():
 	if sound_files.size() == 0:
 		return
 
-	var random_sound = sound_files[randi() % sound_files.size()]
-	player.stream = random_sound
+	var index = randi() % sound_files.size()
+	while index == last_index and sound_files.size() > 1:
+		index = randi() % sound_files.size()
+
+	last_index = index
+	player.stream = sound_files[index]
 	player.play()
 
 # Set bus on all AudioStreamPlayers inside a node
