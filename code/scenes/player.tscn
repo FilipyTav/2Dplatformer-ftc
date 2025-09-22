@@ -1,9 +1,10 @@
-[gd_scene load_steps=32 format=3 uid="uid://warwyg02m4dv"]
+[gd_scene load_steps=33 format=3 uid="uid://warwyg02m4dv"]
 
 [ext_resource type="Texture2D" uid="uid://dggqcywakvsu" path="res://assets/sprites/knight.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://bff6ufyqlv7po" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="PackedScene" uid="uid://eudw52axa0vg" path="res://scenes/ability_button.tscn" id="3_qhqgy"]
 [ext_resource type="PackedScene" uid="uid://c2m2ontsmppwk" path="res://scenes/chain.tscn" id="4_dqkch"]
+[ext_resource type="PackedScene" uid="uid://c6od8w7jyny3f" path="res://scenes/health_bar.tscn" id="4_tuyoq"]
 [ext_resource type="PackedScene" uid="uid://kgiu7637g01e" path="res://scenes/random_sound.tscn" id="5_qlg0r"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]
@@ -216,12 +217,15 @@ one_shot = true
 one_shot = true
 
 [node name="UI" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="DashButton" parent="UI" instance=ExtResource("3_qhqgy")]
 z_index = 999
+offset_top = 57.0
+offset_bottom = 569.0
 scale = Vector2(0.2, 0.2)
 cooldown = 0.6
+
+[node name="HealthBar" parent="UI" instance=ExtResource("4_tuyoq")]
 
 [node name="DashGhost" type="Node2D" parent="."]
 

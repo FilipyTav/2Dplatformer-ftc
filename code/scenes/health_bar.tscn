@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://c6od8w7jyny3f"]
+
+[ext_resource type="Texture2D" uid="uid://co47do7ekshrn" path="res://assets/sprites/HUD/hud_heartFull.png" id="1_1bvlm"]
+[ext_resource type="Script" uid="uid://hesto5nuuh5r" path="res://scripts/health_bar.gd" id="1_y3kqx"]
+
+[node name="HealthBar" type="HBoxContainer"]
+offset_right = 169.0
+offset_bottom = 45.0
+rotation = -0.00134602
+theme_override_constants/separation = 5
+script = ExtResource("1_y3kqx")
+
+[node name="1" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("1_1bvlm")
+stretch_mode = 2

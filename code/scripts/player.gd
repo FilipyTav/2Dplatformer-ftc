@@ -4,6 +4,7 @@ extends CharacterBody2D
 @export_range(0.0 , 1.0) var acceleration = 0.25
 @export var speed = 180
 @export var jump_speed = -300
+@export var max_health: int = 3
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var coyote_timer: Timer = $CoyoteTimer
@@ -17,6 +18,7 @@ var coyote_frames: int = 6  # How many in-air frames to allow jumping
 var coyote: bool = false  # Track whether it's coyote time or not
 var last_floor: bool = false  # Last frame's on-floor state
 var jumping: bool = false
+var health = max_health
 
 # Multiply by speed
 @export var dash_speed: float = 15
@@ -40,6 +42,7 @@ func _ready() -> void:
 	ghost_timer.wait_time = dash_duration / 6
 	dash_cooldown.wait_time = dash_cd
 
+	$UI/HealthBar.populate(max_health)
 	$UI/DashButton.cooldown = dash_cd
 	# It gets in the way in the editor
 	$UI.visible = true
