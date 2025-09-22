@@ -176,4 +176,8 @@ func take_damage(value: int):
 		die()
 
 func die() -> void:
+	Engine.time_scale = .5
+	await get_tree().create_timer(.5).timeout
+	Engine.time_scale = 1
+	get_tree().reload_current_scene()
 	print("Player died!")
