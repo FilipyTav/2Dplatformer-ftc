@@ -1,9 +1,14 @@
-[gd_scene load_steps=12 format=3 uid="uid://bdrc4sw3rv5s5"]
+[gd_scene load_steps=17 format=3 uid="uid://bdrc4sw3rv5s5"]
 
+[ext_resource type="Shader" uid="uid://bo2bx3stpwg2x" path="res://scenes/options_menu.gdshader" id="1_3xsyx"]
 [ext_resource type="FontFile" uid="uid://dq5mvqstrqkxb" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="1_lfjc7"]
 [ext_resource type="FontFile" uid="uid://bd8b3740cfscc" path="res://assets/fonts/PixelOperator8.ttf" id="2_3xsyx"]
 [ext_resource type="Script" uid="uid://bmnmdeubbbu1b" path="res://scripts/audio_control.gd" id="3_dhn0l"]
 [ext_resource type="Script" uid="uid://dxde15qkoqpe4" path="res://scripts/fullscreen_control.gd" id="4_k61yy"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dhn0l"]
+shader = ExtResource("1_3xsyx")
+shader_parameter/lod = 0.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wu84c"]
 
@@ -53,8 +58,133 @@ thickness = 6
 color = Color(0.0901961, 0.266667, 0.964706, 1)
 thickness = 6
 
+[sub_resource type="Animation" id="Animation_3xsyx"]
+resource_name = "blur"
+length = 0.3
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/lod")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.15, 0, 0.15, 0, 2, -0.15, 0, 0.15, 0),
+"times": PackedFloat32Array(0, 0.3)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate:r")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1, -0.15, 0, 0.15, 0, 1, -0.15, 0, 0.15, 0),
+"times": PackedFloat32Array(0, 0.3)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:modulate:g")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1, -0.15, 0, 0.15, 0, 1, -0.15, 0, 0.15, 0),
+"times": PackedFloat32Array(0, 0.3)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:modulate:b")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1, -0.15, 0, 0.15, 0, 1, -0.15, 0, 0.15, 0),
+"times": PackedFloat32Array(0, 0.3)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:modulate:a")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.15, 0, 0.15, 0, 1, -0.15, 0, 0.15, 0),
+"times": PackedFloat32Array(0, 0.3)
+}
+
+[sub_resource type="Animation" id="Animation_dhn0l"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/lod")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.15, 0, 0.15, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate:r")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.15, 0, 0.15, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:modulate:g")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.15, 0, 0.15, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:modulate:b")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.15, 0, 0.15, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:modulate:a")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.15, 0, 0.15, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dhn0l"]
+_data = {
+&"RESET": SubResource("Animation_dhn0l"),
+&"blur": SubResource("Animation_3xsyx")
+}
+
 [node name="Options" type="Panel"]
 process_mode = 3
+modulate = Color(1, 1, 1, 0)
+material = SubResource("ShaderMaterial_dhn0l")
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -178,6 +308,11 @@ text = "Fullscreen
 "
 expand_icon = true
 script = ExtResource("4_k61yy")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_dhn0l")
+}
 
 [connection signal="value_changed" from="VBoxContainer/Music/AudioControl" to="VBoxContainer/Music/AudioControl" method="_on_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/SFX/AudioControl" to="VBoxContainer/SFX/AudioControl" method="_on_value_changed"]

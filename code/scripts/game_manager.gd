@@ -2,6 +2,7 @@ extends Node
 
 @onready var score_label: Label = $"../Labels/ScoreLabel"
 @onready var options: Panel = $"../UI/Options"
+var options_animplay: AnimationPlayer = null
 
 var score: int = 0
 
@@ -10,6 +11,7 @@ func _ready() -> void:
 	var quit_btn = options.get_node("BackBtn")
 	quit_btn.text = "Quit"
 	quit_btn.connect("pressed", self._on_quit_btn_pressed)
+	options_animplay = options.get_node("AnimationPlayer")
 
 func add_point() -> void:
 	score += 1
@@ -18,6 +20,8 @@ func add_point() -> void:
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("pause"):
 		options.hide() if options.visible else options.show()
+		options_animplay.play("blur") if options.visible else options_animplay.play_backwards("blur")
+		
 		get_tree().paused = !get_tree().paused
 
 func _on_quit_btn_pressed() -> void:
