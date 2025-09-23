@@ -4,6 +4,10 @@ extends Control
 @onready var options: Panel = $Options
 @onready var bg: Panel = $Bg
 
+@onready var start_btn: Button = $MainBtns/StartBtn
+@onready var options_btn: Button = $MainBtns/OptionsBtn
+@onready var quit_btn: Button = $MainBtns/QuitBtn
+var selected_btn: Button = null
 
 func _ready() -> void:
 	main_btns.visible = true
@@ -11,6 +15,8 @@ func _ready() -> void:
 	bg.visible = true
 	$Bg/Cock.visible = true
 	
+	selected_btn = start_btn
+	selected_btn.grab_focus()
 
 func _on_start_btn_pressed() -> void:
 		get_tree().change_scene_to_file("res://scenes/game.tscn")
