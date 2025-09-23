@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bdrc4sw3rv5s5"]
+[gd_scene load_steps=18 format=3 uid="uid://bdrc4sw3rv5s5"]
 
 [ext_resource type="Shader" uid="uid://bo2bx3stpwg2x" path="res://scenes/options_menu.gdshader" id="1_3xsyx"]
 [ext_resource type="FontFile" uid="uid://dq5mvqstrqkxb" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="1_lfjc7"]
@@ -9,6 +9,9 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dhn0l"]
 shader = ExtResource("1_3xsyx")
 shader_parameter/lod = 0.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3xsyx"]
+bg_color = Color(0.580392, 0.47451, 0.517647, 0.52549)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wu84c"]
 
@@ -198,6 +201,15 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3xsyx")
 
 [node name="BackBtn" type="Button" parent="."]
 layout_mode = 1
