@@ -1,0 +1,183 @@
+[gd_scene load_steps=12 format=3 uid="uid://bdrc4sw3rv5s5"]
+
+[ext_resource type="FontFile" uid="uid://dq5mvqstrqkxb" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="1_lfjc7"]
+[ext_resource type="FontFile" uid="uid://bd8b3740cfscc" path="res://assets/fonts/PixelOperator8.ttf" id="2_3xsyx"]
+[ext_resource type="Script" uid="uid://bmnmdeubbbu1b" path="res://scripts/audio_control.gd" id="3_dhn0l"]
+[ext_resource type="Script" uid="uid://dxde15qkoqpe4" path="res://scripts/fullscreen_control.gd" id="4_k61yy"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wu84c"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ekxnf"]
+bg_color = Color(0, 0, 0, 0.47451)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 0.431373)
+shadow_size = 5
+shadow_offset = Vector2(0, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wu84c"]
+bg_color = Color(0.310617, 0.310617, 0.310617, 0.47451)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 0.431373)
+shadow_size = 5
+shadow_offset = Vector2(0, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l6cm7"]
+bg_color = Color(0.74061, 0.571632, 0.191868, 1)
+border_width_top = 10
+border_width_bottom = 10
+border_color = Color(0.741176, 0.572549, 0.192157, 1)
+border_blend = true
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 0.431373)
+shadow_size = 5
+shadow_offset = Vector2(0, 3)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_8ln24"]
+color = Color(1, 1, 1, 1)
+thickness = 6
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_rtw2f"]
+color = Color(0.0901961, 0.266667, 0.964706, 1)
+thickness = 6
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_oa1go"]
+color = Color(0.0901961, 0.266667, 0.964706, 1)
+thickness = 6
+
+[node name="Options" type="Panel"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -311.0
+offset_top = -169.0
+offset_right = 311.0
+offset_bottom = 169.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="BackBtn" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -99.5
+offset_top = -51.0
+offset_right = 99.5
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("1_lfjc7")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = SubResource("StyleBoxEmpty_wu84c")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ekxnf")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_wu84c")
+theme_override_styles/normal = SubResource("StyleBoxFlat_l6cm7")
+text = "Back"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 67.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_3xsyx")
+theme_override_font_sizes/font_size = 30
+text = "Options"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -198.0
+offset_top = -67.0
+offset_right = 198.0
+offset_bottom = 67.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="Music" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Música" type="Label" parent="VBoxContainer/Music"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("2_3xsyx")
+theme_override_font_sizes/font_size = 30
+text = "Música"
+
+[node name="AudioControl" type="HSlider" parent="VBoxContainer/Music"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_styles/slider = SubResource("StyleBoxLine_8ln24")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_rtw2f")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_oa1go")
+max_value = 1.0
+step = 0.05
+value = 1.0
+script = ExtResource("3_dhn0l")
+audio_bus_name = "Music"
+
+[node name="SFX" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 88
+
+[node name="SFX" type="Label" parent="VBoxContainer/SFX"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("2_3xsyx")
+theme_override_font_sizes/font_size = 30
+text = "SFX"
+
+[node name="AudioControl" type="HSlider" parent="VBoxContainer/SFX"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_styles/slider = SubResource("StyleBoxLine_8ln24")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_rtw2f")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_oa1go")
+max_value = 1.0
+step = 0.05
+value = 1.0
+script = ExtResource("3_dhn0l")
+audio_bus_name = "Sfx"
+
+[node name="Audio2" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="FullscreenController" type="CheckButton" parent="VBoxContainer/Audio2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_3xsyx")
+theme_override_font_sizes/font_size = 30
+text = "Fullscreen
+"
+expand_icon = true
+script = ExtResource("4_k61yy")
+
+[connection signal="value_changed" from="VBoxContainer/Music/AudioControl" to="VBoxContainer/Music/AudioControl" method="_on_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/SFX/AudioControl" to="VBoxContainer/SFX/AudioControl" method="_on_value_changed"]
+[connection signal="toggled" from="VBoxContainer/Audio2/FullscreenController" to="VBoxContainer/Audio2/FullscreenController" method="_on_toggled"]
