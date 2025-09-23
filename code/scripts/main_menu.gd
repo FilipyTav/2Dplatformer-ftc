@@ -14,6 +14,7 @@ func _ready() -> void:
 	options.visible = false
 	bg.visible = true
 	$Bg/Cock.visible = true
+	options.get_node("AnimationPlayer").play("blur")
 	
 	selected_btn = start_btn
 	selected_btn.grab_focus()
@@ -31,3 +32,7 @@ func _on_quit_btn_pressed() -> void:
 
 func _on_back_btn_pressed() -> void:
 	_ready()
+
+func show_options() -> void:
+	# TODO:
+	pass
