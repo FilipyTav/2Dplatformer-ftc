@@ -166,6 +166,12 @@ func add_ghost():
 func _on_ghost_timer_timeout() -> void:
 	add_ghost()
 
+func heal(value: int):
+	self.health += value
+	# Make sure health doesn't go below 0
+	self.health = clamp(health, 0, max_health)
+	$UI/HealthBar.update_health(self.health)
+
 func take_damage(value: int):
 	self.health -= value
 	# Make sure health doesn't go below 0

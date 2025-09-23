@@ -14,17 +14,14 @@ func _ready() -> void:
 
 func _on_body_entered(body:Node2D) -> void:
 	# Make sure the body is the player (check its type)
-	print(body)
 	if body.is_in_group("player"):  # Make sure player is in the "player" group
 		if !dmg_cd.is_stopped():
-			print("Runnin")
 			return
 
 		deal_damage(body)
 
 # Function to deal damage
 func deal_damage(body: Node) -> void:
-	print("Take dmg")
 	# You can connect this to a signal or directly affect the player's health
 	if body.has_method("take_damage"):
 		body.take_damage(damage)
