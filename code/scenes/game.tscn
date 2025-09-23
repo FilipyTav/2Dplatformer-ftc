@@ -1,5 +1,6 @@
-[gd_scene load_steps=13 format=3 uid="uid://bcy552wrfnjmi"]
+[gd_scene load_steps=14 format=3 uid="uid://bcy552wrfnjmi"]
 
+[ext_resource type="PackedScene" uid="uid://bdrc4sw3rv5s5" path="res://scenes/options_menu.tscn" id="1_0tnpc"]
 [ext_resource type="Script" uid="uid://bxwbupnamiaqy" path="res://scripts/game_manager.gd" id="1_gee14"]
 [ext_resource type="PackedScene" uid="uid://warwyg02m4dv" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="PackedScene" uid="uid://bkh0g70fqsf0y" path="res://scenes/tile_map.tscn" id="2_yqjtg"]
@@ -52,8 +53,13 @@ distance = -167.0
 
 [node name="Game" type="Node2D"]
 
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Options" parent="UI" instance=ExtResource("1_0tnpc")]
+
 [node name="GameManager" type="Node" parent="."]
 unique_name_in_owner = true
+process_mode = 3
 script = ExtResource("1_gee14")
 
 [node name="Labels" type="Node2D" parent="."]
