@@ -12,6 +12,7 @@ extends CharacterBody2D
 @onready var dash_cooldown: Timer = $DashCooldown
 @onready var ghost_timer: Timer = $DashGhost/GhostTimer
 @onready var dash_particles: GPUParticles2D = $DashGhost/Particles
+@onready var sword: Node2D = $Sword
 
 var ghost_node: Resource = preload("res://scenes/ghost.tscn")
 var coyote_frames: int = 6  # How many in-air frames to allow jumping
@@ -75,6 +76,8 @@ func _physics_process(delta: float) -> void:
 		coyote_timer.start()
 
 	last_floor = is_on_floor()
+	update_child_position(sword)
+
 
 func _on_coyote_timer_timeout() -> void:
 	coyote = false
@@ -187,3 +190,18 @@ func die() -> void:
 	Engine.time_scale = 1
 	get_tree().reload_current_scene()
 	print("Player died!")
+
+# This function will update the child node's position based on the parent's flip state
+func update_child_position(node: Node2D):
+	# left
+	if animated_sprite.flip_h:
+		# Flip the child's X position relative to the parent’s origin
+		node.position.x = -abs(node.position.x)
+		if node.has_method("set_info"):
+			node.set_info(-1)
+	# right
+	else:
+		# Ensure the child node's position is set correctly when not flipped
+		node.position.x = abs(node.position.x)
+		if node.has_method("set_info"):
+			node.set_info(1)

@@ -47,3 +47,4 @@ shape = SubResource("WorldBoundaryShape2D_5erce")
 
 [node name="Player" parent="." instance=ExtResource("2_uoys6")]
 position = Vector2(268, 232)
+scale = Vector2(3, 3)
