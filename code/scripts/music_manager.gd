@@ -17,8 +17,8 @@ const tracks: Dictionary[String, String] = {
 	}
 
 # References to the nodes in our scene
-@onready var track_current: AudioStreamPlayer = $Current
-@onready var track_next: AudioStreamPlayer = $Next
+@onready var track_current: AudioStreamPlayer2D = $Current
+@onready var track_next: AudioStreamPlayer2D = $Next
 
 
 # crossfades to a new audio stream
