@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://d1yavckoy7rev"
+path="res://.godot/imported/dano no escorpião.mp3-9b71d05542422650c0f56c15488ef251.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/sfx/custom/dano no escorpião.mp3"
+dest_files=["res://.godot/imported/dano no escorpião.mp3-9b71d05542422650c0f56c15488ef251.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
