@@ -1,16 +1,14 @@
-[gd_scene load_steps=10 format=3 uid="uid://bcy552wrfnjmi"]
+[gd_scene load_steps=8 format=3 uid="uid://bcy552wrfnjmi"]
 
 [ext_resource type="PackedScene" uid="uid://bdrc4sw3rv5s5" path="res://scenes/options_menu.tscn" id="1_0tnpc"]
 [ext_resource type="Script" uid="uid://bxwbupnamiaqy" path="res://scripts/game_manager.gd" id="1_gee14"]
 [ext_resource type="PackedScene" uid="uid://warwyg02m4dv" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="PackedScene" uid="uid://bkh0g70fqsf0y" path="res://scenes/tile_map.tscn" id="2_yqjtg"]
-[ext_resource type="FontFile" uid="uid://dq5mvqstrqkxb" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="4_gee14"]
 [ext_resource type="PackedScene" uid="uid://b5de1pr2gbvj0" path="res://scenes/coin.tscn" id="4_lbhrr"]
-[ext_resource type="PackedScene" uid="uid://ddaap0e14cb4v" path="res://scenes/slime.tscn" id="4_p57ef"]
 [ext_resource type="PackedScene" uid="uid://4ibsoyfl87oa" path="res://scenes/killzone.tscn" id="5_iywne"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_p57ef"]
-distance = -167.0
+distance = -133.0
 
 [node name="Game" type="Node2D"]
 
@@ -23,21 +21,6 @@ unique_name_in_owner = true
 process_mode = 3
 script = ExtResource("1_gee14")
 
-[node name="Labels" type="Node2D" parent="."]
-position = Vector2(248, 1)
-
-[node name="ScoreLabel" type="Label" parent="Labels"]
-z_index = 999
-offset_left = -15.0
-offset_top = 2.0
-offset_right = 149.0
-offset_bottom = 25.0
-theme_override_fonts/font = ExtResource("4_gee14")
-theme_override_font_sizes/font_size = 8
-text = "Points: 0"
-horizontal_alignment = 1
-autowrap_mode = 2
-
 [node name="Map" type="Node2D" parent="."]
 position = Vector2(0, 128)
 
@@ -45,6 +28,7 @@ position = Vector2(0, 128)
 position = Vector2(0, -27)
 
 [node name="Items" type="Node2D" parent="."]
+visible = false
 position = Vector2(0, 103)
 
 [node name="Coins" type="Node2D" parent="Items"]
@@ -61,24 +45,19 @@ position = Vector2(168, -104)
 [node name="Coin4" parent="Items/Coins" instance=ExtResource("4_lbhrr")]
 position = Vector2(-186, -36)
 
-[node name="Enemies" type="Node2D" parent="."]
-
-[node name="Slimes" type="Node2D" parent="Enemies"]
-
-[node name="Slime" parent="Enemies/Slimes" instance=ExtResource("4_p57ef")]
-position = Vector2(40, 102)
-
 [node name="Player" parent="." instance=ExtResource("1_uwrxv")]
 position = Vector2(-1242, 80)
 scale = Vector2(1.5, 1.5)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(0, -6)
-zoom = Vector2(4, 4)
-limit_bottom = 190
+zoom = Vector2(2, 2)
+limit_bottom = 330
 position_smoothing_enabled = true
 
 [node name="Void" parent="." instance=ExtResource("5_iywne")]
+collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Void"]
+position = Vector2(0, 271)
 shape = SubResource("WorldBoundaryShape2D_p57ef")
