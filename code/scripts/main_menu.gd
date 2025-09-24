@@ -10,29 +10,41 @@ extends Control
 var selected_btn: Button = null
 
 func _ready() -> void:
-	main_btns.visible = true
-	options.visible = false
-	bg.visible = true
-	$Bg/Cock.visible = true
-	options.get_node("AnimationPlayer").play("blur")
-	
+	bg.show()
 	selected_btn = start_btn
-	selected_btn.grab_focus()
+	hide_options()
+	show_main()
+
+	var back_btn = options.get_node("BackBtn")
+	back_btn.connect("pressed", self._on_back_btn_pressed)
 
 func _on_start_btn_pressed() -> void:
 		get_tree().change_scene_to_file("res://scenes/game.tscn")
 
 func _on_options_btn_pressed() -> void:
-	main_btns.visible = false
-	options.visible = true
-	$Bg/Cock.visible = false
+	hide_main()
+	show_options()
 
 func _on_quit_btn_pressed() -> void:
 	get_tree().quit()
 
 func _on_back_btn_pressed() -> void:
-	_ready()
+	hide_options()
+	show_main()
+	# get_tree().reload_current_scene()
+
+func show_main() -> void:
+	main_btns.show()
+	$Bg/Cock.show()
+	selected_btn.grab_focus()
+
+func hide_main() -> void:
+	main_btns.hide()
+	$Bg/Cock.hide()
 
 func show_options() -> void:
-	# TODO:
-	pass
+	options.get_node("AnimationPlayer").play("blur")
+	options.show()
+
+func hide_options() -> void:
+	options.hide()
