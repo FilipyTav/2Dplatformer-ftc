@@ -30,6 +30,7 @@ func set_info(dir: int):
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	self.hide()
 	set_info(1)
 
 
