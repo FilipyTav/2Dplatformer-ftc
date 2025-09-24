@@ -1,0 +1,97 @@
+[gd_scene load_steps=14 format=3 uid="uid://chkt6nwpjlx8i"]
+
+[ext_resource type="Script" uid="uid://c100lt65wgnmw" path="res://scripts/scorpion.gd" id="1_mcw2v"]
+[ext_resource type="Texture2D" uid="uid://c36r1x00sad6o" path="res://assets/sprites/enemies/Scorpion-walk-Sheet.png" id="2_mcw2v"]
+[ext_resource type="PackedScene" uid="uid://4ibsoyfl87oa" path="res://scenes/killzone.tscn" id="3_62dlh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gam5m"]
+atlas = ExtResource("2_mcw2v")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_62dlh"]
+atlas = ExtResource("2_mcw2v")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oaqn1"]
+atlas = ExtResource("2_mcw2v")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jit3f"]
+atlas = ExtResource("2_mcw2v")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_omdpm"]
+atlas = ExtResource("2_mcw2v")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qcyhm"]
+atlas = ExtResource("2_mcw2v")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_32inj"]
+atlas = ExtResource("2_mcw2v")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_v5wyi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gam5m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_62dlh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oaqn1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jit3f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_omdpm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qcyhm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_32inj")
+}],
+"loop": true,
+"name": &"Wal",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0l8pv"]
+size = Vector2(22, 10)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mcw2v"]
+radius = 3.0
+
+[node name="Scorpion" type="Node2D"]
+script = ExtResource("1_mcw2v")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_v5wyi")
+animation = &"Wal"
+autoplay = "Wal"
+frame_progress = 0.965197
+flip_h = true
+
+[node name="Killzone" parent="." instance=ExtResource("3_62dlh")]
+collision_layer = 8
+
+[node name="Body" type="CollisionShape2D" parent="Killzone"]
+position = Vector2(0, 10)
+shape = SubResource("RectangleShape2D_0l8pv")
+
+[node name="Tail" type="CollisionShape2D" parent="Killzone"]
+position = Vector2(-2, -4)
+shape = SubResource("CircleShape2D_mcw2v")
+
+[node name="RayRight" type="RayCast2D" parent="."]
+position = Vector2(0, 10)
+target_position = Vector2(16, 0)
+
+[node name="RayLeft" type="RayCast2D" parent="."]
+position = Vector2(0, 10)
+target_position = Vector2(-16, 0)
