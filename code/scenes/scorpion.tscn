@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://chkt6nwpjlx8i"]
+[gd_scene load_steps=15 format=3 uid="uid://chkt6nwpjlx8i"]
 
 [ext_resource type="Script" uid="uid://c100lt65wgnmw" path="res://scripts/scorpion.gd" id="1_mcw2v"]
 [ext_resource type="Texture2D" uid="uid://c36r1x00sad6o" path="res://assets/sprites/enemies/Scorpion-walk-Sheet.png" id="2_mcw2v"]
 [ext_resource type="PackedScene" uid="uid://4ibsoyfl87oa" path="res://scenes/killzone.tscn" id="3_62dlh"]
+[ext_resource type="PackedScene" uid="uid://ddhvjg4837qua" path="res://scenes/floor_detection.tscn" id="4_gam5m"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gam5m"]
 atlas = ExtResource("2_mcw2v")
@@ -74,7 +75,7 @@ script = ExtResource("1_mcw2v")
 sprite_frames = SubResource("SpriteFrames_v5wyi")
 animation = &"Wal"
 autoplay = "Wal"
-frame_progress = 0.965197
+frame_progress = 0.840562
 flip_h = true
 
 [node name="Killzone" parent="." instance=ExtResource("3_62dlh")]
@@ -95,3 +96,6 @@ target_position = Vector2(16, 0)
 [node name="RayLeft" type="RayCast2D" parent="."]
 position = Vector2(0, 10)
 target_position = Vector2(-16, 0)
+
+[node name="FloorDetection" parent="." instance=ExtResource("4_gam5m")]
+position = Vector2(10, 10)
