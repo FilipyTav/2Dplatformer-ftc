@@ -20,6 +20,10 @@ const tracks: Dictionary[String, String] = {
 @onready var track_current: AudioStreamPlayer2D = $Current
 @onready var track_next: AudioStreamPlayer2D = $Next
 
+func _ready() -> void:
+	crossfade_to(load(tracks["Entering"]))
+	await try_await(1.4)
+	crossfade_to(load(tracks["LevelLoop"]))
 
 # crossfades to a new audio stream
 func crossfade_to(audio_stream: AudioStream) -> void:
@@ -28,13 +32,20 @@ func crossfade_to(audio_stream: AudioStream) -> void:
 	if track_current.playing and track_next.playing:
 		return
 
+
 	# The `playing` property of the stream players tells us which track is active.
 	# If it's track two, we fade to track one, and vice-versa.
 	if track_next.playing:
 		track_current.stream = audio_stream
+		track_current.stream.loop = true
 		track_current.play()
 		_anim_player.play("FadeToCurrent")
 	else:
 		track_next.stream = audio_stream
+		track_next.stream.loop = true
 		track_next.play()
 		_anim_player.play("FadeToNext")
+
+func try_await(time: float):
+	await get_tree().create_timer(time).timeout
+	print("After timout")
