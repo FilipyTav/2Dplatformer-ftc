@@ -11,22 +11,23 @@ var direction: int = 1
 @onready var tail: CollisionShape2D = $Killzone/Tail
 @onready var floor_detection: RayCast2D = $FloorDetection
 
+var on_floor: bool = true
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	floor_detection.floor_changed.connect(_floor_changed)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if (ray_right.is_colliding()):
-		direction = -1
-		animated_sprite.flip_h = false
-	if (ray_left.is_colliding()):
-		direction = 1
-		animated_sprite.flip_h = true
-	update_child_position(tail)
+	if (ray_right.is_colliding()) || (ray_left.is_colliding()) || !on_floor:
+		change_dir()
+		update_child_position(tail)
+		update_child_position_reverse(floor_detection)
+		on_floor = true
+
 	position.x += direction * speed * delta
-	
-	
+
+
 # This function will update the child node's position based on the parent's flip state
 func update_child_position(node: Node2D):
 	# left
@@ -38,10 +39,19 @@ func update_child_position(node: Node2D):
 		# Ensure the child node's position is set correctly when not flipped
 		node.position.x = abs(node.position.x)
 
-# TODO:
-func change_dir() -> void:
-	pass
+func update_child_position_reverse(node: Node2D):
+	# left
+	if animated_sprite.flip_h:
+		# Flip the child's X position relative to the parent’s origin
+		node.position.x = abs(node.position.x)
+	# right
+	else:
+		# Ensure the child node's position is set correctly when not flipped
+		node.position.x = -abs(node.position.x)
 
-func _floor_changed(on_floor: bool):
-	print(on_floor)
-	pass
+func change_dir() -> void:
+	direction *= -1
+	animated_sprite.flip_h = !animated_sprite.flip_h
+
+func _floor_changed(is_on_floor: bool):
+	on_floor = is_on_floor

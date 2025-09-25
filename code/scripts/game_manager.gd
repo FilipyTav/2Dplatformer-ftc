@@ -24,6 +24,9 @@ func _process(delta: float) -> void:
 
 		get_tree().paused = !get_tree().paused
 
+	if Input.is_action_just_pressed("slow"):
+		Engine.time_scale = 1. if Engine.time_scale < 1. else .2
+
 func _on_menu_btn_pressed() -> void:
 	get_tree().paused = false
 	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
