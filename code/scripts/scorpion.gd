@@ -10,6 +10,7 @@ var direction: int = 1
 @onready var body: CollisionShape2D = $Killzone/Body
 @onready var tail: CollisionShape2D = $Killzone/Tail
 @onready var floor_detection: RayCast2D = $FloorDetection
+@onready var attack_col: CollisionShape2D = $Killzone/Attack
 
 var on_floor: bool = true
 
@@ -19,10 +20,13 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	attack_col.disabled = !($AnimatedSprite2D.animation == "Attack" && $AnimatedSprite2D.frame > 1)
+
 	if (ray_right.is_colliding()) || (ray_left.is_colliding()) || !on_floor:
 		change_dir()
 		update_child_position(tail)
 		update_child_position_reverse(floor_detection)
+		update_child_position_reverse(attack_col)
 		on_floor = true
 
 	position.x += direction * speed * delta

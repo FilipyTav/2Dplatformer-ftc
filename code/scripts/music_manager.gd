@@ -48,4 +48,3 @@ func crossfade_to(audio_stream: AudioStream) -> void:
 
 func try_await(time: float):
 	await get_tree().create_timer(time).timeout
-	print("After timout")
