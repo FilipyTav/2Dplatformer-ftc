@@ -1,6 +1,7 @@
 extends Node2D
 
-const speed: float = 60.0
+@export var max_speed: float = 60.0
+var speed: float = 60.0
 
 var direction: int = 1
 
@@ -11,8 +12,14 @@ var direction: int = 1
 @onready var tail: CollisionShape2D = $Killzone/Tail
 @onready var floor_detection: RayCast2D = $FloorDetection
 @onready var attack_col: CollisionShape2D = $Killzone/Attack
+@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 var on_floor: bool = true
+var max_anim_cycles: int = 3
+var anim_cycles: int = 0
+var walk_frames: int = 7
+var attack_frames: int = 6
+var current_frame: int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -20,7 +27,8 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	attack_col.disabled = !($AnimatedSprite2D.animation == "Attack" && $AnimatedSprite2D.frame > 1)
+	attack_col.disabled = !(sprite.animation == "Attack" && sprite.frame > 1)
+	manage_transitions()
 
 	if (ray_right.is_colliding()) || (ray_left.is_colliding()) || !on_floor:
 		change_dir()
@@ -59,3 +67,31 @@ func change_dir() -> void:
 
 func _floor_changed(is_on_floor: bool):
 	on_floor = is_on_floor
+
+# TODO: make it work
+func _die():
+	body.disabled = true
+	tail.disabled = true
+	attack_col.disabled = true
+	sprite.play("Die")
+	await sprite.animation_finished
+	queue_free()
+
+func manage_transitions() -> void:
+	match sprite.animation:
+		"Walk":
+			if (sprite.frame >= walk_frames - 1):
+				anim_cycles += 1
+
+		"Attack":
+			if (sprite.frame >= attack_frames - 1):
+				anim_cycles = 0
+		_:
+			pass
+
+	if anim_cycles > 4:
+		sprite.play("Attack")
+		speed = 0
+	else:
+		sprite.play("Walk")
+		speed = max_speed
