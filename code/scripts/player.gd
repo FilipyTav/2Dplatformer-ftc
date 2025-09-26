@@ -12,7 +12,7 @@ extends CharacterBody2D
 @onready var dash_cooldown: Timer = $DashCooldown
 @onready var ghost_timer: Timer = $DashGhost/GhostTimer
 @onready var dash_particles: GPUParticles2D = $DashGhost/Particles
-@onready var sword: Node2D = $Sword
+@onready var hitbox: Hitbox = $Hitbox
 
 var ghost_node: Resource = preload("res://scenes/ghost.tscn")
 var coyote_frames: int = 6  # How many in-air frames to allow jumping
@@ -52,13 +52,6 @@ func _process(delta: float) -> void:
 	grappling = $Chain.launched
 
 func _physics_process(delta: float) -> void:
-	# Gravity
-	# Ignore
-	# if is_dashing:
-	# 	# Lock vertical position by keeping velocity.y = 0
-	# 	velocity.y = 0
-	# 	velocity.x = lerp(velocity.x, last_dir * speed * dash_speed, acceleration)
-	# el
 	if !is_on_floor() && !grappling:
 		velocity.y += gravity * delta
 
@@ -76,7 +69,6 @@ func _physics_process(delta: float) -> void:
 		coyote_timer.start()
 
 	last_floor = is_on_floor()
-	update_child_position(sword)
 
 
 func _on_coyote_timer_timeout() -> void:
@@ -98,6 +90,7 @@ func get_input(delta: float) -> void:
 			velocity.x = lerp(velocity.x, direction * speed, acceleration)
 		else:
 			velocity.x = lerp(velocity.x, 0.0, friction)
+	hitbox.rotation = deg_to_rad(60) if animated_sprite.flip_h else deg_to_rad(-60)
 
 	if Input.is_action_just_pressed("jump") and (is_on_floor() or coyote or grappling):
 		jumping = true
@@ -122,6 +115,8 @@ func manage_visuals(direction: int):
 			animated_sprite.play("idle")
 		else:
 			animated_sprite.play("run")
+	update_child_position(hitbox)
+
 
 func manage_sounds():
 	if jumping:
@@ -197,11 +192,7 @@ func update_child_position(node: Node2D):
 	if animated_sprite.flip_h:
 		# Flip the child's X position relative to the parent’s origin
 		node.position.x = -abs(node.position.x)
-		if node.has_method("set_info"):
-			node.set_info(-1)
 	# right
 	else:
 		# Ensure the child node's position is set correctly when not flipped
 		node.position.x = abs(node.position.x)
-		if node.has_method("set_info"):
-			node.set_info(1)

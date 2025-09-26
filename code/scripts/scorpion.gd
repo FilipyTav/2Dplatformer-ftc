@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var max_speed: float = 60.0
+@export var max_speed: float = 00.0
 var speed: float = 60.0
 
 var direction: int = 1

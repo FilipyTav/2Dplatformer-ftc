@@ -37,7 +37,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_1yp6w"]
 resource_name = "slashtol"
-length = 0.25
+length = 0.4
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -45,7 +45,7 @@ tracks/0/path = NodePath("Sprite2D:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25),
+"times": PackedFloat32Array(0, 0.4),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [0.436332, -1.91986]
@@ -57,7 +57,7 @@ tracks/1/path = NodePath("Sprite2D/Hitbox/CollisionShape2D:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.0001, 0.0002, 0.233333),
+"times": PackedFloat32Array(0, 0.0001, 0.0002, 0.4),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [true, true, false, true]

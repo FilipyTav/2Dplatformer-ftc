@@ -4,12 +4,13 @@ extends Area2D
 
 func _init() -> void:
 	self.collision_layer = 0
-	self.collision_mask = 5
+	self.collision_mask = 1 << 5
 
 func _ready() -> void:
 	connect("area_entered", self._on_area_entered)
 
 func _on_area_entered(hitbox: Hitbox) -> void:
+	print("Entered")
 	if !hitbox:
 		return
 
