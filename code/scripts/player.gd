@@ -105,16 +105,17 @@ func manage_visuals(direction: int):
 	elif (direction < 0):
 		animated_sprite.flip_h = true
 
-	# Jump
-	if (jumping):
+	if (is_dashing):
+		animated_sprite.play("dash")
+	elif (jumping):
 		animated_sprite.play("jump")
-
-	# Play animation
-	if (is_on_floor()):
+	elif (is_on_floor()):
 		if (!direction):
 			animated_sprite.play("idle")
 		else:
 			animated_sprite.play("run")
+
+	# Dash
 	update_child_position(hitbox)
 
 
