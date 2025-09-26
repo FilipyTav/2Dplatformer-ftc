@@ -1,6 +1,5 @@
 extends Node
 
-@onready var score_label: Label = $"../Labels/ScoreLabel"
 @onready var options: Panel = $"../UI/Options"
 var options_animplay: AnimationPlayer = null
 
@@ -15,7 +14,6 @@ func _ready() -> void:
 
 func add_point() -> void:
 	score += 1
-	score_label.text = "Poins: " + str(score)
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("pause"):

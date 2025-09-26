@@ -143,8 +143,9 @@ position = Vector2(168, -104)
 position = Vector2(-186, -36)
 
 [node name="Player" parent="." instance=ExtResource("1_uwrxv")]
-position = Vector2(-1130, 79)
-scale = Vector2(1.5, 1.5)
+position = Vector2(-1240, 132)
+scale = Vector2(1.7, 1.7)
+jump_speed = -350
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(0, -6)
@@ -154,6 +155,7 @@ position_smoothing_enabled = true
 
 [node name="Void" parent="." instance=ExtResource("5_iywne")]
 collision_layer = 0
+damage = 9999999999999
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Void"]
 position = Vector2(0, 271)

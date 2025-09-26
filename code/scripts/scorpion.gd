@@ -1,7 +1,7 @@
 extends Node2D
 
 @export var max_health: int = 1
-@export var max_speed: float = 00.0
+@export var max_speed: float = 60.0
 var speed: float = 60.0
 
 var health: int = 0
@@ -32,8 +32,6 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	attack_col.disabled = !(sprite.animation == "Attack" && sprite.frame > 1)
-	if self.health:
-		manage_transitions()
 
 	if (ray_right.is_colliding()) || (ray_left.is_colliding()) || !on_floor:
 		change_dir()
@@ -42,7 +40,9 @@ func _process(delta: float) -> void:
 		update_child_position_reverse(attack_col)
 		on_floor = true
 
-	position.x += direction * speed * delta
+	if self.health:
+		manage_transitions()
+		position.x += direction * speed * delta
 
 
 # This function will update the child node's position based on the parent's flip state
