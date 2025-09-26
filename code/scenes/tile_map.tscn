@@ -1,6 +1,7 @@
-[gd_scene load_steps=18 format=4 uid="uid://bkh0g70fqsf0y"]
+[gd_scene load_steps=20 format=4 uid="uid://bkh0g70fqsf0y"]
 
 [ext_resource type="Texture2D" uid="uid://bowudmdsfc0ie" path="res://assets/sprites/map/tileset_fatec.png" id="1_47enk"]
+[ext_resource type="Script" uid="uid://bwdfacj7sjw00" path="res://scripts/tile_map.gd" id="1_f6fy2"]
 [ext_resource type="PackedScene" uid="uid://bnokq5fvaxkrt" path="res://scenes/platform.tscn" id="2_47enk"]
 [ext_resource type="Texture2D" uid="uid://k5kf8bn0abgr" path="res://assets/sprites/map/game_bg.jpg" id="2_jx7lj"]
 [ext_resource type="Texture2D" uid="uid://ck3un8odx0l7u" path="res://assets/sprites/map/quadra.png" id="3_dohrl"]
@@ -276,7 +277,12 @@ _data = {
 &"move": SubResource("Animation_47enk")
 }
 
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_dohrl"]
+a = Vector2(-1, 79)
+b = Vector2(0, -200)
+
 [node name="TileMap" type="Node2D"]
+script = ExtResource("1_f6fy2")
 
 [node name="Mid" type="TileMapLayer" parent="."]
 z_index = -1
@@ -334,3 +340,15 @@ libraries = {
 &"": SubResource("AnimationLibrary_jx7lj")
 }
 autoplay = "move"
+
+[node name="AreaTriggers" type="Node2D" parent="."]
+
+[node name="EnterBoss" type="Area2D" parent="AreaTriggers"]
+position = Vector2(741, 79)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaTriggers/EnterBoss"]
+shape = SubResource("SegmentShape2D_dohrl")
+
+[connection signal="body_entered" from="AreaTriggers/EnterBoss" to="." method="_on_enter_boss_body_entered"]

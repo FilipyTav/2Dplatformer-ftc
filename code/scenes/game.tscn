@@ -122,10 +122,10 @@ position = Vector2(0, -27)
 [node name="Enemies" type="Node2D" parent="Map"]
 
 [node name="Scorpion" parent="Map/Enemies" instance=ExtResource("4_gee14")]
-position = Vector2(-274, -60)
+position = Vector2(-275, -75)
 
 [node name="Scorpion2" parent="Map/Enemies" instance=ExtResource("4_gee14")]
-position = Vector2(-351, -27)
+position = Vector2(-512, -74)
 
 [node name="Items" type="Node2D" parent="."]
 visible = false
@@ -146,7 +146,7 @@ position = Vector2(168, -104)
 position = Vector2(-186, -36)
 
 [node name="Player" parent="." instance=ExtResource("1_uwrxv")]
-position = Vector2(723, 218)
+position = Vector2(703, 241)
 speed = 150
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
