@@ -16,7 +16,6 @@ func ghosting() -> void:
 func _ready() -> void:
 	ghosting()
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass

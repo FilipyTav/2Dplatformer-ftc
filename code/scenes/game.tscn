@@ -146,7 +146,7 @@ position = Vector2(168, -104)
 position = Vector2(-186, -36)
 
 [node name="Player" parent="." instance=ExtResource("1_uwrxv")]
-position = Vector2(703, 241)
+position = Vector2(-152, 172)
 speed = 150
 
 [node name="Camera2D" type="Camera2D" parent="Player"]

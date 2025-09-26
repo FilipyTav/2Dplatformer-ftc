@@ -297,10 +297,11 @@ dash_speed = 25.0
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_u8vuu")
-animation = &"idle"
+animation = &"dash"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, -3.5)
 shape = SubResource("RectangleShape2D_ur7pv")
 
@@ -336,6 +337,7 @@ amount = 20
 process_material = SubResource("ParticleProcessMaterial_qlg0r")
 
 [node name="Chain" parent="." instance=ExtResource("4_dqkch")]
+visible = false
 position = Vector2(0, -6)
 scale = Vector2(0.25, 0.25)
 stiffness = 200.0
@@ -346,6 +348,7 @@ stiffness = 200.0
 audio_bus = "Sfx"
 
 [node name="Hitbox" type="Area2D" parent="."]
+visible = false
 position = Vector2(8, -8)
 rotation = -1.0472
 script = ExtResource("7_fjrip")

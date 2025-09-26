@@ -153,7 +153,7 @@ func add_ghost():
 	var sprite_size: Vector2 = $AnimatedSprite2D.sprite_frames.get_frame_texture($AnimatedSprite2D.animation, $AnimatedSprite2D.frame).get_size()
 
 	# Make ghost's position match the visual top-left of the original sprite
-	var sprite_offset = Vector2(0, sprite_size.y / 4.0) if $AnimatedSprite2D.centered else Vector2.ZERO
+	var sprite_offset = Vector2(0, sprite_size.y / 8) if $AnimatedSprite2D.centered else Vector2.ZERO
 	ghost.set_property(position - sprite_offset, $AnimatedSprite2D.scale)
 	if (last_dir < 0):
 		ghost.flip_h = true
