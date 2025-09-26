@@ -1,8 +1,10 @@
 extends Node2D
 
+@export var max_health: int = 1
 @export var max_speed: float = 00.0
 var speed: float = 60.0
 
+var health: int = 0
 var direction: int = 1
 
 @onready var ray_left = $RayLeft
@@ -13,6 +15,7 @@ var direction: int = 1
 @onready var floor_detection: RayCast2D = $FloorDetection
 @onready var attack_col: CollisionShape2D = $Killzone/Attack
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var hurtbox: Hurtbox = $Hurtbox
 
 var on_floor: bool = true
 var max_anim_cycles: int = 3
@@ -24,11 +27,13 @@ var current_frame: int = 0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	floor_detection.floor_changed.connect(_floor_changed)
+	health = max_health
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	attack_col.disabled = !(sprite.animation == "Attack" && sprite.frame > 1)
-	manage_transitions()
+	if self.health:
+		manage_transitions()
 
 	if (ray_right.is_colliding()) || (ray_left.is_colliding()) || !on_floor:
 		change_dir()
@@ -68,11 +73,17 @@ func change_dir() -> void:
 func _floor_changed(is_on_floor: bool):
 	on_floor = is_on_floor
 
-# TODO: make it work
-func _die():
+func take_damage(value: int) -> void:
+	self.health = clamp(self.health - value, 0, max_health)
+	if !self.health:
+		die()
+
+func die():
 	body.disabled = true
 	tail.disabled = true
 	attack_col.disabled = true
+	hurtbox.monitoring = false
+
 	sprite.play("Die")
 	await sprite.animation_finished
 	queue_free()

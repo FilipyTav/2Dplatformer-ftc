@@ -198,7 +198,7 @@ script = ExtResource("1_mcw2v")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_v5wyi")
-animation = &"Attack"
+animation = &"Walk"
 autoplay = "Attack"
 flip_h = true
 
