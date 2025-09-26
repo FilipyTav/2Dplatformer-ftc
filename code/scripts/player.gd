@@ -107,7 +107,7 @@ func manage_visuals(direction: int):
 
 	if (is_dashing):
 		animated_sprite.play("dash")
-	elif (jumping):
+	elif (jumping && !grappling):
 		animated_sprite.play("jump")
 	elif (is_on_floor()):
 		if (!direction):
