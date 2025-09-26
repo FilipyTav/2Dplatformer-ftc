@@ -203,7 +203,6 @@ autoplay = "Attack"
 flip_h = true
 
 [node name="Killzone" parent="." instance=ExtResource("3_62dlh")]
-visible = false
 collision_layer = 8
 
 [node name="Body" type="CollisionShape2D" parent="Killzone"]
@@ -235,6 +234,6 @@ script = ExtResource("7_jit3f")
 metadata/_custom_type_script = "uid://ddh0o4n5gboxr"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2(-1, 11.5)
+position = Vector2(0, 10)
 shape = SubResource("RectangleShape2D_omdpm")
 debug_color = Color(2.02149e-06, 0.619171, 0.572414, 0.42)

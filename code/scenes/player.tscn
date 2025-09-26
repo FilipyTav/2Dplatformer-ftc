@@ -246,6 +246,7 @@ process_material = SubResource("ParticleProcessMaterial_qlg0r")
 [node name="Chain" parent="." instance=ExtResource("4_dqkch")]
 position = Vector2(0, -6)
 scale = Vector2(0.25, 0.25)
+stiffness = 200.0
 
 [node name="Audio" type="Node2D" parent="."]
 

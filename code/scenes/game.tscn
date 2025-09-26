@@ -124,6 +124,9 @@ position = Vector2(0, -27)
 [node name="Scorpion" parent="Map/Enemies" instance=ExtResource("4_gee14")]
 position = Vector2(-274, -60)
 
+[node name="Scorpion2" parent="Map/Enemies" instance=ExtResource("4_gee14")]
+position = Vector2(-351, -27)
+
 [node name="Items" type="Node2D" parent="."]
 visible = false
 position = Vector2(0, 103)
@@ -144,11 +147,12 @@ position = Vector2(-186, -36)
 
 [node name="Player" parent="." instance=ExtResource("1_uwrxv")]
 position = Vector2(-622, 114)
+speed = 150
 jump_speed = -250
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(0, -6)
-zoom = Vector2(2, 2)
+zoom = Vector2(4, 4)
 limit_bottom = 330
 position_smoothing_enabled = true
 
