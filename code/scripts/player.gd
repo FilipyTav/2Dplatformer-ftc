@@ -13,6 +13,7 @@ extends CharacterBody2D
 @onready var ghost_timer: Timer = $DashGhost/GhostTimer
 @onready var dash_particles: GPUParticles2D = $DashGhost/Particles
 @onready var hitbox: Hitbox = $Hitbox
+@onready var sfx: Node2D = $Sfx
 
 var ghost_node: Resource = preload("res://scenes/ghost.tscn")
 var coyote_frames: int = 6  # How many in-air frames to allow jumping
@@ -120,8 +121,8 @@ func manage_visuals(direction: int):
 
 
 func manage_sounds():
-	if jumping:
-		$Audio/Jump.play_random_sound()
+	if (jumping):
+		$Sfx/Jump.play()
 
 func handle_dash():
 	if Input.is_action_just_pressed("dash") and !is_dashing and can_dash:
@@ -176,16 +177,18 @@ func take_damage(value: int):
 	# Make sure health doesn't go below 0
 	self.health = clamp(health, 0, max_health)
 	$UI/HealthBar.update_health(self.health)
+	$Sfx/TakeDmg.play()
 
 	if !self.health:
 		die()
 
 func die() -> void:
+	$Sfx/Die.play()
 	Engine.time_scale = .5
-	await get_tree().create_timer(.5).timeout
+	await get_tree().create_timer(.8).timeout
 	Engine.time_scale = 1
+	get_tree().paused = false
 	get_tree().reload_current_scene()
-	print("Player died!")
 
 # This function will update the child node's position based on the parent's flip state
 func update_child_position(node: Node2D):

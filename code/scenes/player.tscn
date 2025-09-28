@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://warwyg02m4dv"]
+[gd_scene load_steps=52 format=3 uid="uid://warwyg02m4dv"]
 
 [ext_resource type="Texture2D" uid="uid://dggqcywakvsu" path="res://assets/sprites/knight.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://bff6ufyqlv7po" path="res://scripts/player.gd" id="1_g2els"]
@@ -8,8 +8,10 @@
 [ext_resource type="PackedScene" uid="uid://c2m2ontsmppwk" path="res://scenes/chain.tscn" id="4_dqkch"]
 [ext_resource type="PackedScene" uid="uid://c6od8w7jyny3f" path="res://scenes/health_bar.tscn" id="4_tuyoq"]
 [ext_resource type="Texture2D" uid="uid://bnl6c2aulx7xh" path="res://assets/sprites/player/Galo_Jump-Sheet.png" id="4_y4r1p"]
-[ext_resource type="PackedScene" uid="uid://kgiu7637g01e" path="res://scenes/random_sound.tscn" id="5_qlg0r"]
 [ext_resource type="Script" uid="uid://bplv8k4snpkht" path="res://scripts/hitbox.gd" id="7_fjrip"]
+[ext_resource type="AudioStream" uid="uid://rtllfsgwyn7i" path="res://assets/sounds/sfx/custom/pulando.mp3" id="9_y4r1p"]
+[ext_resource type="AudioStream" uid="uid://bi8xdynhmvfoy" path="res://assets/sounds/sfx/custom/dano no galo.mp3" id="10_d2wvv"]
+[ext_resource type="AudioStream" uid="uid://dj556a386y4qd" path="res://assets/sounds/sfx/custom/game over sound.wav" id="11_3v2ag"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4ni07"]
 atlas = ExtResource("2_smehm")
@@ -342,10 +344,19 @@ position = Vector2(0, -6)
 scale = Vector2(0.25, 0.25)
 stiffness = 200.0
 
-[node name="Audio" type="Node2D" parent="."]
+[node name="Sfx" type="Node2D" parent="."]
 
-[node name="Jump" parent="Audio" instance=ExtResource("5_qlg0r")]
-audio_bus = "Sfx"
+[node name="Jump" type="AudioStreamPlayer2D" parent="Sfx"]
+stream = ExtResource("9_y4r1p")
+bus = &"Sfx"
+
+[node name="TakeDmg" type="AudioStreamPlayer2D" parent="Sfx"]
+stream = ExtResource("10_d2wvv")
+bus = &"Sfx"
+
+[node name="Die" type="AudioStreamPlayer2D" parent="Sfx"]
+stream = ExtResource("11_3v2ag")
+bus = &"Sfx"
 
 [node name="Hitbox" type="Area2D" parent="."]
 visible = false
