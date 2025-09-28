@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://chkt6nwpjlx8i"]
+[gd_scene load_steps=36 format=3 uid="uid://chkt6nwpjlx8i"]
 
 [ext_resource type="Script" uid="uid://c100lt65wgnmw" path="res://scripts/scorpion.gd" id="1_mcw2v"]
 [ext_resource type="Texture2D" uid="uid://c36r1x00sad6o" path="res://assets/sprites/enemies/Scorpion-walk-Sheet.png" id="2_mcw2v"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://ddhvjg4837qua" path="res://scenes/floor_detection.tscn" id="4_gam5m"]
 [ext_resource type="Texture2D" uid="uid://rhuf6w44guk6" path="res://assets/sprites/enemies/Scorpion-death-Sheet.png" id="4_oaqn1"]
 [ext_resource type="Script" uid="uid://ddh0o4n5gboxr" path="res://scripts/hurtbox.gd" id="7_jit3f"]
+[ext_resource type="AudioStream" uid="uid://qfj66chavhhj" path="res://assets/sounds/sfx/custom/inimigo morrendo.mp3" id="8_omdpm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_87f53"]
 atlas = ExtResource("3_oaqn1")
@@ -237,3 +238,9 @@ metadata/_custom_type_script = "uid://ddh0o4n5gboxr"
 position = Vector2(0, 10)
 shape = SubResource("RectangleShape2D_omdpm")
 debug_color = Color(2.02149e-06, 0.619171, 0.572414, 0.42)
+
+[node name="Sfx" type="Node2D" parent="."]
+
+[node name="Die" type="AudioStreamPlayer2D" parent="Sfx"]
+stream = ExtResource("8_omdpm")
+bus = &"Sfx"

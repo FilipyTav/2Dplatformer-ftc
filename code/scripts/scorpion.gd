@@ -79,12 +79,13 @@ func take_damage(value: int) -> void:
 		die()
 
 func die():
+	sprite.play("Die")
+	$Sfx/Die.play()
 	body.disabled = true
 	tail.disabled = true
 	attack_col.disabled = true
 	hurtbox.monitoring = false
 
-	sprite.play("Die")
 	await sprite.animation_finished
 	queue_free()
 
