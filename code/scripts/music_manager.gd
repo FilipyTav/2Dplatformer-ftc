@@ -55,9 +55,6 @@ func crossfade_to(audio_stream: AudioStream) -> void:
 		anim_player.play("FadeTo2")
 		current = track2.stream
 
-	print(track1.playing)
-	print(track2.playing)
-
 func try_await(time: float):
 	await get_tree().create_timer(time).timeout
 

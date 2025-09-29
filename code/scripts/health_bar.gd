@@ -16,8 +16,6 @@ func populate(max_health: int) -> void:
 		var heart: TextureRect = $'1'.duplicate()
 		self.add_child(heart)
 
-	print(self.get_child_count())
-
 func update_health(value: int):
 	match mode:
 		Mode.SIMPLE:

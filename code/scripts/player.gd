@@ -184,10 +184,13 @@ func take_damage(value: int):
 
 func die() -> void:
 	$Sfx/Die.play()
+	animated_sprite.play("die")
+	print(animated_sprite.animation)
+
 	Engine.time_scale = .5
-	await get_tree().create_timer(.8).timeout
-	Engine.time_scale = 1
 	get_tree().paused = false
+	await animated_sprite.animation_finished
+	Engine.time_scale = 1
 	get_tree().reload_current_scene()
 
 # This function will update the child node's position based on the parent's flip state
