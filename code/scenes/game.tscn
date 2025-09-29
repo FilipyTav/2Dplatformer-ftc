@@ -146,7 +146,7 @@ position = Vector2(168, -104)
 position = Vector2(-186, -36)
 
 [node name="Player" parent="." instance=ExtResource("1_uwrxv")]
-position = Vector2(330, 240)
+position = Vector2(700, 196)
 speed = 150
 jump_speed = -350
 
