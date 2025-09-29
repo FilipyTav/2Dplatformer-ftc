@@ -1,6 +1,7 @@
 extends Node
 
-@onready var _anim_player: AnimationPlayer = $AnimationPlayer
+@onready var anim_player: AnimationPlayer = $AnimationPlayer
+@onready var game_manager: Node = $"$../$GameManager"
 
 # Declare variables for the AudioStreamPlayer nodes
 # var music_player_current: AudioStreamPlayer
@@ -17,34 +18,48 @@ const tracks: Dictionary[String, String] = {
 	}
 
 # References to the nodes in our scene
-@onready var track_current: AudioStreamPlayer2D = $Current
-@onready var track_next: AudioStreamPlayer2D = $Next
+@onready var track1: AudioStreamPlayer2D = $Track1
+@onready var track2: AudioStreamPlayer2D = $Track2
+@onready var current: AudioStream
 
 func _ready() -> void:
 	crossfade_to(load(tracks["Entering"]))
-	await try_await(1.4)
+	await try_await(current.get_length())
 	crossfade_to(load(tracks["LevelLoop"]))
 
 # crossfades to a new audio stream
 func crossfade_to(audio_stream: AudioStream) -> void:
 	# If both tracks are playing, we're calling the function in the middle of a fade.
 	# We return early to avoid jumps in the sound.
-	if track_current.playing and track_next.playing:
+	if track1.playing and track2.playing:
 		return
-
 
 	# The `playing` property of the stream players tells us which track is active.
 	# If it's track two, we fade to track one, and vice-versa.
-	if track_next.playing:
-		track_current.stream = audio_stream
-		track_current.stream.loop = true
-		track_current.play()
-		_anim_player.play("FadeToCurrent")
+	# Next
+	if track2.playing:
+		track1.stream = audio_stream
+		track1.stream.loop = true
+		track2.stop()
+		track1.play()
+
+		anim_player.play("FadeTo1")
+		current = track1.stream
+	# Current
 	else:
-		track_next.stream = audio_stream
-		track_next.stream.loop = true
-		track_next.play()
-		_anim_player.play("FadeToNext")
+		track2.stream = audio_stream
+		track2.stream.loop = true
+		track1.stop()
+		track2.play()
+
+		anim_player.play("FadeTo2")
+		current = track2.stream
+
+	print(track1.playing)
+	print(track2.playing)
 
 func try_await(time: float):
 	await get_tree().create_timer(time).timeout
+
+func _on_tile_map_on_boss_area_entered(_body:Node2D) -> void:
+	crossfade_to(load(tracks["EnterGym"]))

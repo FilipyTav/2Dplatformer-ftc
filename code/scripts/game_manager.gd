@@ -12,8 +12,6 @@ func _ready() -> void:
 	menu_btn.text = "Menu"
 	menu_btn.connect("pressed", self._on_menu_btn_pressed)
 	options_animplay = options.get_node("AnimationPlayer")
-	
-	# tile_map.on_enter_boss_entered.connect(self._boss_area_entered)
 
 func add_point() -> void:
 	score += 1

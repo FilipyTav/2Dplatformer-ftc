@@ -4,7 +4,7 @@ extends Node2D
 @onready var animation_player: AnimationPlayer = $Mid/AnimationPlayer
 @onready var boss_door_anim: AnimationPlayer = $Mid/BossDoor/AnimationPlayer
 
-signal on_enter_boss_entered(body: Node2D)
+signal on_boss_area_entered(body: Node2D)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -19,4 +19,5 @@ func _on_enter_boss_body_entered(body: Node2D) -> void:
 		animation_player.play("lighten")
 		boss_door_anim.play("close")
 		enter_boss.queue_free()
-		on_enter_boss_entered.emit(body)
+
+		on_boss_area_entered.emit(body)

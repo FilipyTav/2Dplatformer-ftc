@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/2. Fase Looping.mp3-81f4fa2e8ed6c166a2654ecac
 [params]
 
 loop=false
-loop_offset=0
-bpm=0
+loop_offset=0.0
+bpm=0.0
 beat_count=0
 bar_beats=4
