@@ -12,7 +12,7 @@ extends CharacterBody2D
 @onready var dash_cooldown: Timer = $DashCooldown
 @onready var ghost_timer: Timer = $DashGhost/GhostTimer
 @onready var dash_particles: GPUParticles2D = $DashGhost/Particles
-@onready var hitbox: Hitbox = $Hitbox
+@onready var hitbox: Hitbox = $Attack
 @onready var sfx: Node2D = $Sfx
 
 var ghost_node: Resource = preload("res://scenes/ghost.tscn")
@@ -33,6 +33,7 @@ var can_dash: bool = true
 var last_dir: float = 1
 
 var grappling: bool = false
+var attacking: bool = false
 
 # To sync with rigid nodes
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -99,6 +100,12 @@ func get_input(delta: float) -> void:
 		velocity.y += jump_speed
 		manage_sounds()
 
+	if Input.is_action_pressed("attack"):
+		attacking = true
+	if Input.is_action_just_released("attack"):
+		attacking = false
+
+
 func manage_visuals(direction: int):
 	# Flip sprite
 	if (direction > 0):
@@ -118,6 +125,11 @@ func manage_visuals(direction: int):
 
 	# Dash
 	update_child_position(hitbox)
+
+	# TODO: also does not work
+	if (attacking):
+		animated_sprite.play("attack")
+
 
 
 func manage_sounds():
@@ -184,6 +196,7 @@ func take_damage(value: int):
 
 func die() -> void:
 	$Sfx/Die.play()
+	# TODO: does not work!
 	animated_sprite.play("die")
 	print(animated_sprite.animation)
 

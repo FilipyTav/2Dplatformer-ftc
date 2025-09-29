@@ -164,7 +164,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack",
-"speed": 10.0
+"speed": 2.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -298,8 +298,8 @@ gravity = Vector3(0, 0, 0)
 color_ramp = SubResource("GradientTexture1D_bbnym")
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_smehm"]
-radius = 3.41542
-height = 20.3538
+radius = 6.0
+height = 34.0
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 z_index = 5
@@ -311,8 +311,10 @@ dash_speed = 25.0
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_u8vuu")
-animation = &"die"
+animation = &"attack"
 autoplay = "idle"
+frame = 1
+frame_progress = 0.551936
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -370,14 +372,14 @@ bus = &"Sfx"
 stream = ExtResource("11_3v2ag")
 bus = &"Sfx"
 
-[node name="Hitbox" type="Area2D" parent="."]
-visible = false
-position = Vector2(8, -8)
+[node name="Attack" type="Area2D" parent="."]
+position = Vector2(23, -10)
 rotation = -1.0472
 script = ExtResource("7_fjrip")
 metadata/_custom_type_script = "uid://bplv8k4snpkht"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Attack"]
+rotation = -0.523598
 shape = SubResource("CapsuleShape2D_smehm")
 debug_color = Color(0.865801, 0.000572948, 0.860999, 0.42)
 
