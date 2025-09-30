@@ -62,7 +62,7 @@ func shoot_projectile() -> void:
 	var proj = projectile.instantiate()
 	proj.position = projectile_origin.position
 	proj.scale = Vector2(8, 8)
-	proj.speed = 70
+	proj.speed = 300
 	self.add_child(proj)
 
 func _on_projectile_timer_timeout() -> void:

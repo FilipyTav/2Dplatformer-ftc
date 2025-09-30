@@ -210,14 +210,13 @@ func die() -> void:
 	$Sfx/Die.play()
 	can_change_anim = false
 	animated_sprite.play("death")
-	await animated_sprite.animation_finished
-	can_change_anim = true
 	
-	print(animated_sprite.animation)
+	get_tree().paused = false
 
 	Engine.time_scale = .5
-	get_tree().paused = false
-	# await animated_sprite.animation_finished
+	await animated_sprite.animation_finished
+	can_change_anim = true
+
 	Engine.time_scale = 1
 	get_tree().reload_current_scene()
 
