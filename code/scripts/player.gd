@@ -104,7 +104,7 @@ func get_input(delta: float) -> void:
 		velocity.y += jump_speed
 		manage_sounds()
 
-	if Input.is_action_just_pressed("attack"):
+	if Input.is_action_pressed("attack"):
 		attacking = true
 	if Input.is_action_just_released("attack"):
 		attacking = false

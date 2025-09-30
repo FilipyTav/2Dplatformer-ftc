@@ -11,6 +11,7 @@ extends CharacterBody2D
 @onready var origins: Node2D = tilemap.find_child("RayOrigins")
 @onready var health_bar: ProgressBar = $UI/ProgressBar
 @onready var projectile_origin: Marker2D = $ProjectileOrigin
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 var ray_origins: Array[Marker2D]
 var health: int = 0
@@ -57,6 +58,16 @@ func attack() -> void:
 func take_damage(value: int):
 	health = clamp(health - value, 0, max_health)
 	health_bar.value = health
+	
+	if (self.health <= 0):
+		die()
+
+func die() -> void:
+	animation_player.play("victory")
+	await animation_player.animation_finished
+	animation_player.play("disappear")
+
+	self.queue_free()
 
 func shoot_projectile() -> void:
 	var proj = projectile.instantiate()
