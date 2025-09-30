@@ -1,7 +1,8 @@
-[gd_scene load_steps=20 format=3 uid="uid://dd28km44fdik4"]
+[gd_scene load_steps=21 format=3 uid="uid://dd28km44fdik4"]
 
 [ext_resource type="Script" uid="uid://ulhi28i4gfji" path="res://scripts/boss.gd" id="1_2cdgk"]
 [ext_resource type="Texture2D" uid="uid://c36r1x00sad6o" path="res://assets/sprites/enemies/Scorpion-walk-Sheet.png" id="1_dlmty"]
+[ext_resource type="PackedScene" uid="uid://d2eau08g56o57" path="res://scenes/death_ray.tscn" id="2_2cdgk"]
 [ext_resource type="FontFile" uid="uid://bd8b3740cfscc" path="res://assets/fonts/PixelOperator8.ttf" id="3_jncid"]
 [ext_resource type="FontFile" uid="uid://dq5mvqstrqkxb" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="4_qnbj4"]
 [ext_resource type="Script" uid="uid://b80icnvkehv7n" path="res://scripts/boss_state.gd" id="5_r3bxh"]
@@ -124,6 +125,7 @@ size = Vector2(259.225, 100.209)
 [node name="Boss" type="CharacterBody2D"]
 collision_layer = 8
 script = ExtResource("1_2cdgk")
+death_ray = ExtResource("2_2cdgk")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(10, 10)
@@ -211,4 +213,7 @@ rotation = -0.0119986
 scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_qsl3t")
 
+[node name="AttackTimer" type="Timer" parent="."]
+
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

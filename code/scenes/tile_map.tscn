@@ -1,11 +1,10 @@
-[gd_scene load_steps=18 format=4 uid="uid://bkh0g70fqsf0y"]
+[gd_scene load_steps=17 format=4 uid="uid://bkh0g70fqsf0y"]
 
 [ext_resource type="Texture2D" uid="uid://bowudmdsfc0ie" path="res://assets/sprites/map/tileset_fatec.png" id="1_47enk"]
 [ext_resource type="Script" uid="uid://bwdfacj7sjw00" path="res://scripts/tile_map.gd" id="1_f6fy2"]
 [ext_resource type="PackedScene" uid="uid://bnokq5fvaxkrt" path="res://scenes/platform.tscn" id="2_47enk"]
 [ext_resource type="Texture2D" uid="uid://k5kf8bn0abgr" path="res://assets/sprites/map/game_bg.jpg" id="2_jx7lj"]
 [ext_resource type="Texture2D" uid="uid://ck3un8odx0l7u" path="res://assets/sprites/map/quadra.png" id="3_dohrl"]
-[ext_resource type="PackedScene" uid="uid://dd28km44fdik4" path="res://scenes/boss.tscn" id="6_kvphj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dohrl"]
 texture = ExtResource("1_47enk")
@@ -387,10 +386,6 @@ position = Vector2(1090.74, -0.750166)
 scale = Vector2(1.21723, 0.845051)
 texture = ExtResource("3_dohrl")
 
-[node name="Grapple" type="TileMapLayer" parent="Mid"]
-tile_map_data = PackedByteArray("AADg//z/AAADAAAAAAAAAAAAAAADAAAAAAAEAAAAAAADAAAAAAAIAAAAAAADAAAAAAAMAAAAAAADAAAAAAAQAAAAAAADAAAAAAAUAAAAAAADAAAAAADl//z/AAADAAAAAAAbAAIAAAADAAAAAAAbAP7/AAADAAAAAAAhAAIAAAADAAAAAAAhAP7/AAADAAAAAAA=")
-tile_set = SubResource("TileSet_f6fy2")
-
 [node name="Platforms" type="TileMapLayer" parent="Mid"]
 z_index = 2
 use_parent_material = true
@@ -418,8 +413,27 @@ libraries = {
 &"": SubResource("AnimationLibrary_5ie0g")
 }
 
-[node name="Boss" parent="Mid" instance=ExtResource("6_kvphj")]
-position = Vector2(1274, -36)
+[node name="RayOrigins" type="Node2D" parent="Mid"]
+
+[node name="Marker2D" type="Marker2D" parent="Mid/RayOrigins"]
+position = Vector2(880.3, -172)
+
+[node name="Marker2D2" type="Marker2D" parent="Mid/RayOrigins"]
+position = Vector2(1072.3, -172)
+
+[node name="Marker2D3" type="Marker2D" parent="Mid/RayOrigins"]
+position = Vector2(1277.3, -83)
+
+[node name="Marker2D4" type="Marker2D" parent="Mid/RayOrigins"]
+position = Vector2(1277.3, 38)
+
+[node name="Marker2D5" type="Marker2D" parent="Mid/RayOrigins"]
+position = Vector2(1277.3, 134)
+
+[node name="Grapple" type="TileMapLayer" parent="."]
+position = Vector2(0.7, 0)
+tile_map_data = PackedByteArray("AADg//z/AAADAAAAAAAAAAAAAAADAAAAAAAEAAAAAAADAAAAAAAIAAAAAAADAAAAAAAMAAAAAAADAAAAAAAQAAAAAAADAAAAAAAUAAAAAAADAAAAAADl//z/AAADAAAAAAAbAAIAAAADAAAAAAAbAP7/AAADAAAAAAAhAAIAAAADAAAAAAAhAP7/AAADAAAAAAA=")
+tile_set = SubResource("TileSet_f6fy2")
 
 [node name="AreaTriggers" type="Node2D" parent="."]
 

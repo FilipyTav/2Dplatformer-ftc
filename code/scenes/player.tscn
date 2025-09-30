@@ -280,7 +280,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ur7pv"]
-size = Vector2(10, 15)
+size = Vector2(10, 18)
 
 [sub_resource type="Gradient" id="Gradient_dqkch"]
 offsets = PackedFloat32Array(0, 0.0111111, 0.977778, 1)
@@ -311,14 +311,12 @@ dash_speed = 25.0
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_u8vuu")
-animation = &"attack"
+animation = &"idle"
 autoplay = "idle"
-frame = 1
-frame_progress = 0.551936
+frame_progress = 0.814486
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(0, -3.5)
+position = Vector2(0, -5)
 shape = SubResource("RectangleShape2D_ur7pv")
 
 [node name="CoyoteTimer" type="Timer" parent="."]
