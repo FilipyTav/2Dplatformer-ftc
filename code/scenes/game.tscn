@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bcy552wrfnjmi"]
+[gd_scene load_steps=16 format=3 uid="uid://bcy552wrfnjmi"]
 
 [ext_resource type="PackedScene" uid="uid://bdrc4sw3rv5s5" path="res://scenes/options_menu.tscn" id="1_0tnpc"]
 [ext_resource type="Script" uid="uid://bxwbupnamiaqy" path="res://scripts/game_manager.gd" id="1_gee14"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dd28km44fdik4" path="res://scenes/boss.tscn" id="5_0tnpc"]
 [ext_resource type="PackedScene" uid="uid://4ibsoyfl87oa" path="res://scenes/killzone.tscn" id="5_iywne"]
 [ext_resource type="Script" uid="uid://tcn4w8o3pfov" path="res://scripts/music_manager.gd" id="7_gee14"]
+[ext_resource type="PackedScene" uid="uid://ymuqmt10uwwm" path="res://scenes/video_player.tscn" id="10_vtaks"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_p57ef"]
 distance = -133.0
@@ -186,6 +187,9 @@ bus = &"Music"
 libraries = {
 &"": SubResource("AnimationLibrary_gee14")
 }
+
+[node name="VideoPlayer" parent="." instance=ExtResource("10_vtaks")]
+z_index = 4096
 
 [connection signal="on_boss_area_entered" from="Map/TileMap" to="Map/Boss" method="_on_tile_map_on_boss_area_entered"]
 [connection signal="on_boss_area_entered" from="Map/TileMap" to="MusicManager" method="_on_tile_map_on_boss_area_entered"]
