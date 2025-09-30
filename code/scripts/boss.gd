@@ -63,7 +63,7 @@ func attack() -> void:
 func take_damage(value: int):
 	health = clamp(health - value, 0, max_health)
 	health_bar.value = health
-	
+
 	if (self.health <= 0):
 		die()
 
@@ -77,7 +77,7 @@ func die() -> void:
 func shoot_projectile() -> void:
 	var proj = projectile.instantiate()
 	proj.position = projectile_origin.position
-	proj.scale = Vector2(8, 8)
+	proj.scale = Vector2(15, 15)
 	proj.speed = 300
 	self.add_child(proj)
 

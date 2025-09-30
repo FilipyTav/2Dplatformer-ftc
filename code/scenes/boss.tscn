@@ -145,7 +145,7 @@ scale = Vector2(2.10156, 2.10156)
 sprite_frames = SubResource("SpriteFrames_2avx2")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.80259
+frame_progress = 0.291728
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

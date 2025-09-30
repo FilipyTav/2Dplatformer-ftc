@@ -1,8 +1,12 @@
 extends Node2D
 
 @export var speed: float = 200.0
+
 @onready var player: CharacterBody2D
 @onready var boss: CharacterBody2D = get_parent()
+@onready var sprite_anim: AnimatedSprite2D = $AnimatedSprite2D
+
+var animations: Array[String] = ["projectile1", "projectile2"]
 
 var direction: Vector2 = Vector2.ZERO
 var damage: int = 1
@@ -11,9 +15,11 @@ var follow_player: bool = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	randomize()
 	player = get_tree().get_first_node_in_group("player")
 	if player:
 		direction = (player.global_position - global_position).normalized()
+	sprite_anim.play(animations[randi() % animations.size()])
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
