@@ -2,6 +2,7 @@ extends Node2D
 
 @export var speed: float = 200.0
 @onready var player: CharacterBody2D
+@onready var boss: CharacterBody2D = get_parent()
 
 var direction: Vector2 = Vector2.ZERO
 var damage: int = 1
@@ -21,7 +22,7 @@ func _process(delta: float) -> void:
 		direction = (player.global_position - self.global_position).normalized()
 		self.position += direction * speed * delta
 	else:
-		direction = (owner.global_position - self.global_position).normalized()
+		direction = (boss.global_position - self.global_position).normalized()
 		self.position += direction * speed * 10 * delta
 
 func _on_area_2d_body_entered(body: Node2D) -> void:

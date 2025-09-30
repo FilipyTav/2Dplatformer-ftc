@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @export var death_ray: PackedScene
+@export var projectile: PackedScene
 @export var damage: int = 1
 @export var atk_cd: float = 3
 @export var max_health: int = 4
@@ -9,6 +10,7 @@ extends CharacterBody2D
 @onready var tilemap: Node2D = owner.find_child("TileMap")
 @onready var origins: Node2D = tilemap.find_child("RayOrigins")
 @onready var health_bar: ProgressBar = $UI/ProgressBar
+@onready var projectile_origin: Marker2D = $ProjectileOrigin
 
 var ray_origins: Array[Marker2D]
 var health: int = 0
@@ -55,3 +57,14 @@ func attack() -> void:
 func take_damage(value: int):
 	health = clamp(health - value, 0, max_health)
 	health_bar.value = health
+
+func shoot_projectile() -> void:
+	var proj = projectile.instantiate()
+	proj.position = projectile_origin.position
+	proj.scale = Vector2(8, 8)
+	proj.speed = 70
+	self.add_child(proj)
+
+func _on_projectile_timer_timeout() -> void:
+	print("Shoot")
+	shoot_projectile()
