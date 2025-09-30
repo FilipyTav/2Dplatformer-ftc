@@ -92,7 +92,6 @@ func get_input(delta: float) -> void:
 			velocity.x = lerp(velocity.x, direction * speed, acceleration)
 		else:
 			velocity.x = lerp(velocity.x, 0.0, friction)
-	atk_hitbox.rotation = deg_to_rad(60) if animated_sprite.flip_h else deg_to_rad(-60)
 
 	if Input.is_action_just_pressed("jump") and (is_on_floor() or coyote or grappling):
 		jumping = true
@@ -123,8 +122,11 @@ func manage_visuals(direction: int):
 		else:
 			animated_sprite.play("run")
 
-	# Dash
 	update_child_position(atk_hitbox)
+	if (animated_sprite.flip_h):
+		atk_hitbox.scale.x = -1
+	else:
+		atk_hitbox.scale.x = 1
 
 	# TODO: also does not work
 	if (attacking):
@@ -202,7 +204,7 @@ func die() -> void:
 
 	Engine.time_scale = .5
 	get_tree().paused = false
-	await animated_sprite.animation_finished
+	# await animated_sprite.animation_finished
 	Engine.time_scale = 1
 	get_tree().reload_current_scene()
 
