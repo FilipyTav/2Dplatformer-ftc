@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://bv4ap5e6fjrp"]
+
+[ext_resource type="Script" uid="uid://di1mmgfb8hc6f" path="res://scripts/boss_projectile.gd" id="1_6ienu"]
+[ext_resource type="Texture2D" uid="uid://sxk62bqfek7f" path="res://assets/sprites/coin.png" id="1_h0i0c"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h0i0c"]
+radius = 1.0
+
+[node name="BossProjectile" type="Node2D"]
+script = ExtResource("1_6ienu")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1.90735e-06, 3.8147e-06)
+scale = Vector2(0.233333, 0.233333)
+texture = ExtResource("1_h0i0c")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 16)
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_h0i0c")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

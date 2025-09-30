@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://4t2k3i2usavf"]
+[gd_scene load_steps=7 format=3 uid="uid://4t2k3i2usavf"]
 
-[ext_resource type="PackedScene" uid="uid://dd28km44fdik4" path="res://scenes/boss.tscn" id="2_uoys6"]
+[ext_resource type="PackedScene" uid="uid://bv4ap5e6fjrp" path="res://scenes/boss_projectile.tscn" id="2_uoys6"]
+[ext_resource type="PackedScene" uid="uid://warwyg02m4dv" path="res://scenes/player.tscn" id="3_wvbfd"]
 [ext_resource type="PackedScene" uid="uid://4ibsoyfl87oa" path="res://scenes/killzone.tscn" id="6_bh55n"]
 
 [sub_resource type="GDScript" id="GDScript_esy2p"]
@@ -45,5 +46,10 @@ shape = SubResource("RectangleShape2D_uoys6")
 position = Vector2(335, 261)
 shape = SubResource("WorldBoundaryShape2D_5erce")
 
-[node name="Boss" parent="." instance=ExtResource("2_uoys6")]
-position = Vector2(272, 24)
+[node name="BossProjectile" parent="." instance=ExtResource("2_uoys6")]
+position = Vector2(234, 164)
+scale = Vector2(8, 8)
+speed = 50.0
+
+[node name="Player" parent="." instance=ExtResource("3_wvbfd")]
+position = Vector2(294.5, 234.5)
