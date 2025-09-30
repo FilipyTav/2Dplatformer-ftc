@@ -26,10 +26,12 @@ func _ready() -> void:
 		ray_origins.append(point)
 
 	atk_timer.wait_time = atk_cd
+	health_bar.hide()
 
 func start() -> void:
 	atk_timer.start()
 	projectile_timer.start()
+	health_bar.show()
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():

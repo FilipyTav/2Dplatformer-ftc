@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dd28km44fdik4"]
+[gd_scene load_steps=23 format=3 uid="uid://dd28km44fdik4"]
 
 [ext_resource type="Script" uid="uid://ulhi28i4gfji" path="res://scripts/boss.gd" id="1_2cdgk"]
 [ext_resource type="PackedScene" uid="uid://d2eau08g56o57" path="res://scenes/death_ray.tscn" id="2_2cdgk"]
@@ -124,6 +124,20 @@ _data = {
 &"victory": SubResource("Animation_qnbj4")
 }
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2avx2"]
+bg_color = Color(1, 0.560784, 0.741176, 0.447059)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qsl3t"]
+bg_color = Color(0.886275, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2cdgk"]
 size = Vector2(19, 20)
 
@@ -145,7 +159,7 @@ scale = Vector2(2.10156, 2.10156)
 sprite_frames = SubResource("SpriteFrames_2avx2")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.291728
+frame_progress = 0.720255
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -164,6 +178,10 @@ offset_top = 42.0
 offset_right = 150.0
 offset_bottom = 69.0
 grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_2avx2")
+theme_override_styles/fill = SubResource("StyleBoxFlat_qsl3t")
 max_value = 4.0
 step = 1.0
 value = 4.0
@@ -175,6 +193,9 @@ offset_left = -12.0
 offset_top = -41.0
 offset_right = 311.0
 offset_bottom = -10.0
+theme_override_colors/font_color = Color(0.489291, 0.000301106, 0.52906, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 3
 theme_override_fonts/font = ExtResource("3_jncid")
 theme_override_font_sizes/font_size = 30
 text = "Kaosarion"
