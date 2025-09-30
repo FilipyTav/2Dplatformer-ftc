@@ -130,7 +130,6 @@ func manage_visuals(direction: int):
 	else:
 		atk_hitbox.scale.x = 1
 
-	# TODO: also does not work
 	if (attacking):
 		animated_sprite.play("attack")
 		can_change_anim = false
@@ -203,8 +202,11 @@ func take_damage(value: int):
 
 func die() -> void:
 	$Sfx/Die.play()
-	# TODO: does not work!
-	animated_sprite.play("die")
+	can_change_anim = false
+	animated_sprite.play("death")
+	await animated_sprite.animation_finished
+	can_change_anim = true
+	
 	print(animated_sprite.animation)
 
 	Engine.time_scale = .5
