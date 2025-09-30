@@ -231,6 +231,7 @@ target_position = Vector2(-16, 0)
 position = Vector2(10, 10)
 
 [node name="Hurtbox" type="Area2D" parent="."]
+monitoring = false
 script = ExtResource("7_jit3f")
 metadata/_custom_type_script = "uid://ddh0o4n5gboxr"
 

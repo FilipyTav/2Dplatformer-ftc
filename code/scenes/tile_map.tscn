@@ -1,11 +1,10 @@
-[gd_scene load_steps=24 format=4 uid="uid://bkh0g70fqsf0y"]
+[gd_scene load_steps=23 format=4 uid="uid://bkh0g70fqsf0y"]
 
 [ext_resource type="Texture2D" uid="uid://bowudmdsfc0ie" path="res://assets/sprites/map/tileset_fatec.png" id="1_47enk"]
 [ext_resource type="Script" uid="uid://bwdfacj7sjw00" path="res://scripts/tile_map.gd" id="1_f6fy2"]
 [ext_resource type="PackedScene" uid="uid://bnokq5fvaxkrt" path="res://scenes/platform.tscn" id="2_47enk"]
 [ext_resource type="Texture2D" uid="uid://k5kf8bn0abgr" path="res://assets/sprites/map/game_bg.jpg" id="2_jx7lj"]
 [ext_resource type="Texture2D" uid="uid://ck3un8odx0l7u" path="res://assets/sprites/map/quadra.png" id="3_dohrl"]
-[ext_resource type="PackedScene" uid="uid://dd28km44fdik4" path="res://scenes/boss.tscn" id="6_kvphj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dohrl"]
 texture = ExtResource("1_47enk")
@@ -505,8 +504,5 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AreaTriggers/EnterBoss"]
 shape = SubResource("SegmentShape2D_dohrl")
-
-[node name="Boss" parent="." instance=ExtResource("6_kvphj")]
-position = Vector2(1208, -47)
 
 [connection signal="body_entered" from="AreaTriggers/EnterBoss" to="." method="_on_enter_boss_body_entered"]

@@ -1,7 +1,7 @@
-[gd_scene load_steps=19 format=3 uid="uid://dd28km44fdik4"]
+[gd_scene load_steps=20 format=3 uid="uid://dd28km44fdik4"]
 
+[ext_resource type="Script" uid="uid://ulhi28i4gfji" path="res://scripts/boss.gd" id="1_2cdgk"]
 [ext_resource type="Texture2D" uid="uid://c36r1x00sad6o" path="res://assets/sprites/enemies/Scorpion-walk-Sheet.png" id="1_dlmty"]
-[ext_resource type="Script" uid="uid://ddh0o4n5gboxr" path="res://scripts/hurtbox.gd" id="2_neq0i"]
 [ext_resource type="FontFile" uid="uid://bd8b3740cfscc" path="res://assets/fonts/PixelOperator8.ttf" id="3_jncid"]
 [ext_resource type="FontFile" uid="uid://dq5mvqstrqkxb" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="4_qnbj4"]
 [ext_resource type="Script" uid="uid://b80icnvkehv7n" path="res://scripts/boss_state.gd" id="5_r3bxh"]
@@ -64,6 +64,21 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Animation" id="Animation_r3bxh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UI/Label:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_qnbj4"]
 resource_name = "victory"
 length = 2.0
@@ -94,31 +109,21 @@ tracks/1/keys = {
 }]
 }
 
-[sub_resource type="Animation" id="Animation_r3bxh"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("UI/Label:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_r3bxh"]
 _data = {
 &"RESET": SubResource("Animation_r3bxh"),
 &"victory": SubResource("Animation_qnbj4")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_neq0i"]
-radius = 13.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2cdgk"]
+size = Vector2(19, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qsl3t"]
+size = Vector2(259.225, 100.209)
 
 [node name="Boss" type="CharacterBody2D"]
+collision_layer = 8
+script = ExtResource("1_2cdgk")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(10, 10)
@@ -131,17 +136,6 @@ frame_progress = 0.899638
 libraries = {
 &"": SubResource("AnimationLibrary_r3bxh")
 }
-
-[node name="Hurtbox" type="Area2D" parent="."]
-scale = Vector2(10, 10)
-collision_layer = 9
-collision_mask = 2
-script = ExtResource("2_neq0i")
-metadata/_custom_type_script = "uid://ddh0o4n5gboxr"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2(3.5, 2.5)
-shape = SubResource("CircleShape2D_neq0i")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -178,6 +172,7 @@ theme_override_font_sizes/font_size = 50
 text = "Vitória!!!"
 
 [node name="Debug" type="Label" parent="."]
+visible = false
 offset_left = -39.0
 offset_top = -95.0
 offset_right = 69.0
@@ -201,3 +196,19 @@ script = ExtResource("5_r3bxh")
 
 [node name="Death" type="Node2D" parent="FSM"]
 script = ExtResource("5_r3bxh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(109, 148)
+shape = SubResource("RectangleShape2D_2cdgk")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(-11.7955, 102.546)
+rotation = -0.0119986
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_qsl3t")
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
