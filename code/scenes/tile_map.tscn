@@ -1,10 +1,11 @@
-[gd_scene load_steps=23 format=4 uid="uid://bkh0g70fqsf0y"]
+[gd_scene load_steps=18 format=4 uid="uid://bkh0g70fqsf0y"]
 
 [ext_resource type="Texture2D" uid="uid://bowudmdsfc0ie" path="res://assets/sprites/map/tileset_fatec.png" id="1_47enk"]
 [ext_resource type="Script" uid="uid://bwdfacj7sjw00" path="res://scripts/tile_map.gd" id="1_f6fy2"]
 [ext_resource type="PackedScene" uid="uid://bnokq5fvaxkrt" path="res://scenes/platform.tscn" id="2_47enk"]
 [ext_resource type="Texture2D" uid="uid://k5kf8bn0abgr" path="res://assets/sprites/map/game_bg.jpg" id="2_jx7lj"]
 [ext_resource type="Texture2D" uid="uid://ck3un8odx0l7u" path="res://assets/sprites/map/quadra.png" id="3_dohrl"]
+[ext_resource type="PackedScene" uid="uid://dd28km44fdik4" path="res://scenes/boss.tscn" id="6_kvphj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dohrl"]
 texture = ExtResource("1_47enk")
@@ -345,82 +346,6 @@ _data = {
 &"lighten": SubResource("Animation_kvphj")
 }
 
-[sub_resource type="Animation" id="Animation_dohrl"]
-length = 0.001
-loop_mode = 2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1430, -84)]
-}
-
-[sub_resource type="Animation" id="Animation_jx7lj"]
-resource_name = "move"
-length = 2.0
-loop_mode = 2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(1399, -161), Vector2(1609, -84)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_f6fy2"]
-_data = {
-&"RESET": SubResource("Animation_dohrl"),
-&"move": SubResource("Animation_jx7lj")
-}
-
-[sub_resource type="Animation" id="Animation_f6fy2"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1817, -91)]
-}
-
-[sub_resource type="Animation" id="Animation_47enk"]
-resource_name = "move"
-loop_mode = 2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(1817, -91), Vector2(1817, -213)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_jx7lj"]
-_data = {
-&"RESET": SubResource("Animation_f6fy2"),
-&"move": SubResource("Animation_47enk")
-}
-
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_dohrl"]
 a = Vector2(-1, 79)
 b = Vector2(0, -200)
@@ -463,37 +388,38 @@ scale = Vector2(1.21723, 0.845051)
 texture = ExtResource("3_dohrl")
 
 [node name="Grapple" type="TileMapLayer" parent="Mid"]
-tile_map_data = PackedByteArray("AADg//z/AAADAAAAAAAAAAAAAAADAAAAAAAEAAAAAAADAAAAAAAIAAAAAAADAAAAAAAMAAAAAAADAAAAAAAQAAAAAAADAAAAAAAUAAAAAAADAAAAAADl//z/AAADAAAAAAA=")
+tile_map_data = PackedByteArray("AADg//z/AAADAAAAAAAAAAAAAAADAAAAAAAEAAAAAAADAAAAAAAIAAAAAAADAAAAAAAMAAAAAAADAAAAAAAQAAAAAAADAAAAAAAUAAAAAAADAAAAAADl//z/AAADAAAAAAAbAAIAAAADAAAAAAAbAP7/AAADAAAAAAAhAAIAAAADAAAAAAAhAP7/AAADAAAAAAA=")
 tile_set = SubResource("TileSet_f6fy2")
+
+[node name="Platforms" type="TileMapLayer" parent="Mid"]
+z_index = 2
+use_parent_material = true
+position = Vector2(-4.7, 0)
+tile_set = SubResource("TileSet_47enk")
+
+[node name="Left" type="Node2D" parent="Mid/Platforms"]
+
+[node name="Platform2" parent="Mid/Platforms/Left" instance=ExtResource("2_47enk")]
+position = Vector2(885, 58)
+
+[node name="Platform3" parent="Mid/Platforms/Left" instance=ExtResource("2_47enk")]
+position = Vector2(885, -69)
+
+[node name="Right" type="Node2D" parent="Mid/Platforms"]
+
+[node name="Platform4" parent="Mid/Platforms/Right" instance=ExtResource("2_47enk")]
+position = Vector2(1076, 59)
+
+[node name="Platform5" parent="Mid/Platforms/Right" instance=ExtResource("2_47enk")]
+position = Vector2(1076, -68)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Mid"]
 libraries = {
 &"": SubResource("AnimationLibrary_5ie0g")
 }
 
-[node name="Platforms" type="TileMapLayer" parent="."]
-visible = false
-use_parent_material = true
-position = Vector2(-4, 0)
-tile_set = SubResource("TileSet_47enk")
-
-[node name="Platform2" parent="Platforms" instance=ExtResource("2_47enk")]
-position = Vector2(1430, -84)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Platforms/Platform2"]
-libraries = {
-&"": SubResource("AnimationLibrary_f6fy2")
-}
-autoplay = "move"
-
-[node name="Platform3" parent="Platforms" instance=ExtResource("2_47enk")]
-position = Vector2(1817, -91)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Platforms/Platform3"]
-libraries = {
-&"": SubResource("AnimationLibrary_jx7lj")
-}
-autoplay = "move"
+[node name="Boss" parent="Mid" instance=ExtResource("6_kvphj")]
+position = Vector2(1274, -36)
 
 [node name="AreaTriggers" type="Node2D" parent="."]
 

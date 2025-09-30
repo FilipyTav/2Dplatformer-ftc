@@ -3,11 +3,12 @@
 [ext_resource type="Texture2D" uid="uid://csnqrp3tppw3q" path="res://assets/sprites/platforms.png" id="1_ba0x2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nlgqw"]
-size = Vector2(32, 8)
+size = Vector2(46, 11)
 
 [node name="Platform" type="AnimatableBody2D" groups=["moving_scenario"]]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.5625, 1.27778)
 texture = ExtResource("1_ba0x2")
 region_enabled = true
 region_rect = Rect2(16, 48, 32, 9)
