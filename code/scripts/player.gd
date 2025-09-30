@@ -14,6 +14,7 @@ extends CharacterBody2D
 @onready var dash_particles: GPUParticles2D = $DashGhost/Particles
 @onready var atk_hitbox: Area2D = $Attack
 @onready var sfx: Node2D = $Sfx
+@onready var collision_shape_2d: CollisionShape2D = $Attack/CollisionShape2D
 
 var ghost_node: Resource = preload("res://scenes/ghost.tscn")
 var coyote_frames: int = 6  # How many in-air frames to allow jumping
@@ -39,6 +40,8 @@ var attacking: bool = false
 # To sync with rigid nodes
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+var atk_frames: int = 4
+
 func _ready() -> void:
 	coyote_timer.wait_time = coyote_frames / 60.0
 	dash_timer.wait_time = dash_duration
@@ -50,6 +53,7 @@ func _ready() -> void:
 	$UI/DashButton.cooldown = dash_cd
 	# It gets in the way in the editor
 	$UI.visible = true
+	collision_shape_2d.disabled = true
 
 func _process(delta: float) -> void:
 	grappling = $Chain.launched
@@ -100,7 +104,7 @@ func get_input(delta: float) -> void:
 		velocity.y += jump_speed
 		manage_sounds()
 
-	if Input.is_action_pressed("attack"):
+	if Input.is_action_just_pressed("attack"):
 		attacking = true
 	if Input.is_action_just_released("attack"):
 		attacking = false
@@ -132,10 +136,12 @@ func manage_visuals(direction: int):
 
 	if (attacking):
 		animated_sprite.play("attack")
+		if (animated_sprite.frame > 0):
+			collision_shape_2d.disabled = false
 		can_change_anim = false
-		print("atk")
 		await animated_sprite.animation_finished
 		can_change_anim = true
+		collision_shape_2d.disabled = true
 
 
 func manage_sounds():
