@@ -66,5 +66,4 @@ func shoot_projectile() -> void:
 	self.add_child(proj)
 
 func _on_projectile_timer_timeout() -> void:
-	print("Shoot")
 	shoot_projectile()

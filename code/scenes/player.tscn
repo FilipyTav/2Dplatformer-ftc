@@ -163,7 +163,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack",
-"speed": 2.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -214,7 +214,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_2dvfe")
 }],
 "loop": false,
-"name": &"die",
+"name": &"death",
 "speed": 8.0
 }, {
 "frames": [{
@@ -310,9 +310,10 @@ dash_speed = 25.0
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_u8vuu")
-animation = &"idle"
+animation = &"attack"
 autoplay = "idle"
-frame_progress = 0.814486
+frame = 3
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -5)

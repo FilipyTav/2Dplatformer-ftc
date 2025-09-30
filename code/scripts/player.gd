@@ -21,6 +21,7 @@ var coyote: bool = false  # Track whether it's coyote time or not
 var last_floor: bool = false  # Last frame's on-floor state
 var jumping: bool = false
 var health = max_health
+var can_change_anim: bool = true
 
 # Multiply by speed
 @export var dash_speed: float = 15
@@ -112,15 +113,16 @@ func manage_visuals(direction: int):
 	elif (direction < 0):
 		animated_sprite.flip_h = true
 
-	if (is_dashing):
-		animated_sprite.play("dash")
-	elif (jumping && !grappling):
-		animated_sprite.play("jump")
-	elif (is_on_floor()):
-		if (!direction):
-			animated_sprite.play("idle")
-		else:
-			animated_sprite.play("run")
+	if (can_change_anim):
+		if (is_dashing):
+			animated_sprite.play("dash")
+		elif (jumping && !grappling):
+			animated_sprite.play("jump")
+		elif (is_on_floor()):
+			if (!direction):
+				animated_sprite.play("idle")
+			else:
+				animated_sprite.play("run")
 
 	update_child_position(atk_hitbox)
 	if (animated_sprite.flip_h):
@@ -131,7 +133,10 @@ func manage_visuals(direction: int):
 	# TODO: also does not work
 	if (attacking):
 		animated_sprite.play("attack")
-
+		can_change_anim = false
+		print("atk")
+		await animated_sprite.animation_finished
+		can_change_anim = true
 
 
 func manage_sounds():
