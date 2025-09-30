@@ -12,7 +12,7 @@ extends CharacterBody2D
 @onready var dash_cooldown: Timer = $DashCooldown
 @onready var ghost_timer: Timer = $DashGhost/GhostTimer
 @onready var dash_particles: GPUParticles2D = $DashGhost/Particles
-@onready var hitbox: Hitbox = $Attack
+@onready var atk_hitbox: Area2D = $Attack
 @onready var sfx: Node2D = $Sfx
 
 var ghost_node: Resource = preload("res://scenes/ghost.tscn")
@@ -92,7 +92,7 @@ func get_input(delta: float) -> void:
 			velocity.x = lerp(velocity.x, direction * speed, acceleration)
 		else:
 			velocity.x = lerp(velocity.x, 0.0, friction)
-	hitbox.rotation = deg_to_rad(60) if animated_sprite.flip_h else deg_to_rad(-60)
+	atk_hitbox.rotation = deg_to_rad(60) if animated_sprite.flip_h else deg_to_rad(-60)
 
 	if Input.is_action_just_pressed("jump") and (is_on_floor() or coyote or grappling):
 		jumping = true
@@ -124,7 +124,7 @@ func manage_visuals(direction: int):
 			animated_sprite.play("run")
 
 	# Dash
-	update_child_position(hitbox)
+	update_child_position(atk_hitbox)
 
 	# TODO: also does not work
 	if (attacking):

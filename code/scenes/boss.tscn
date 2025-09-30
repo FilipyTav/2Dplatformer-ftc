@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dd28km44fdik4"]
+[gd_scene load_steps=23 format=3 uid="uid://dd28km44fdik4"]
 
 [ext_resource type="Script" uid="uid://ulhi28i4gfji" path="res://scripts/boss.gd" id="1_2cdgk"]
 [ext_resource type="Texture2D" uid="uid://c36r1x00sad6o" path="res://assets/sprites/enemies/Scorpion-walk-Sheet.png" id="1_dlmty"]
@@ -7,6 +7,7 @@
 [ext_resource type="FontFile" uid="uid://dq5mvqstrqkxb" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="4_qnbj4"]
 [ext_resource type="Script" uid="uid://b80icnvkehv7n" path="res://scripts/boss_state.gd" id="5_r3bxh"]
 [ext_resource type="Script" uid="uid://cyvekegcxqj8t" path="res://scripts/boss_fsm.gd" id="5_wqpjq"]
+[ext_resource type="PackedScene" uid="uid://bv4ap5e6fjrp" path="res://scenes/boss_projectile.tscn" id="8_qsl3t"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_neq0i"]
 atlas = ExtResource("1_dlmty")
@@ -122,7 +123,10 @@ size = Vector2(19, 20)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qsl3t"]
 size = Vector2(259.225, 100.209)
 
-[node name="Boss" type="CharacterBody2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_qsl3t"]
+radius = 106.075
+
+[node name="Boss" type="CharacterBody2D" groups=["boss"]]
 collision_layer = 8
 script = ExtResource("1_2cdgk")
 death_ray = ExtResource("2_2cdgk")
@@ -210,10 +214,18 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(-11.7955, 102.546)
 rotation = -0.0119986
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_qsl3t")
 
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(56, -6)
+shape = SubResource("CircleShape2D_qsl3t")
+
 [node name="AttackTimer" type="Timer" parent="."]
+
+[node name="BossProjectile" parent="." instance=ExtResource("8_qsl3t")]
+position = Vector2(-13.9999, 0)
+scale = Vector2(10, 10)
+speed = 80.0
 
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

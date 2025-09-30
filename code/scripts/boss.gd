@@ -15,7 +15,6 @@ func _ready() -> void:
 
 	for point in origins.get_children():
 		ray_origins.append(point)
-		print(point.position)
 
 	atk_timer.wait_time = atk_cd
 	atk_timer.start()
@@ -35,7 +34,6 @@ func _on_attack_timer_timeout() -> void:
 	attack()
 
 func attack() -> void:
-	print("ATk")
 	var rd_index: int = randi() % ray_origins.size()
 	var ray_point: Marker2D = ray_origins[rd_index]
 	var ray = death_ray.instantiate()
@@ -49,3 +47,6 @@ func attack() -> void:
 
 	tilemap.add_child(ray)
 	ray.anim_player.play("appear")
+
+func take_damage(value: int):
+	print("Boss took")
