@@ -146,7 +146,6 @@ libraries = {
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="ProgressBar" type="ProgressBar" parent="UI"]
-visible = false
 custom_minimum_size = Vector2(300, 20)
 anchors_preset = 5
 anchor_left = 0.5
@@ -155,8 +154,9 @@ offset_left = -150.0
 offset_right = 150.0
 offset_bottom = 27.0
 grow_horizontal = 2
-step = 25.0
-value = 100.0
+max_value = 4.0
+step = 1.0
+value = 4.0
 rounded = true
 
 [node name="Name" type="Label" parent="UI/ProgressBar"]
