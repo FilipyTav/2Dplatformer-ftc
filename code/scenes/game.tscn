@@ -132,6 +132,7 @@ position = Vector2(-512, -74)
 position = Vector2(-512, -74)
 
 [node name="Boss" parent="Map" instance=ExtResource("5_0tnpc")]
+z_index = 99
 position = Vector2(1274, -36)
 
 [node name="Items" type="Node2D" parent="."]
@@ -186,4 +187,5 @@ libraries = {
 &"": SubResource("AnimationLibrary_gee14")
 }
 
+[connection signal="on_boss_area_entered" from="Map/TileMap" to="Map/Boss" method="_on_tile_map_on_boss_area_entered"]
 [connection signal="on_boss_area_entered" from="Map/TileMap" to="MusicManager" method="_on_tile_map_on_boss_area_entered"]

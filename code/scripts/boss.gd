@@ -5,6 +5,7 @@ extends CharacterBody2D
 @export var damage: int = 1
 @export var atk_cd: float = 3
 @export var max_health: int = 4
+@export var activated: bool = false
 
 @onready var atk_timer: Timer = $AttackTimer
 @onready var tilemap: Node2D = owner.find_child("TileMap")
@@ -12,6 +13,7 @@ extends CharacterBody2D
 @onready var health_bar: ProgressBar = $UI/ProgressBar
 @onready var projectile_origin: Marker2D = $ProjectileOrigin
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var projectile_timer: Timer = $ProjectileTimer
 
 var ray_origins: Array[Marker2D]
 var health: int = 0
@@ -24,7 +26,10 @@ func _ready() -> void:
 		ray_origins.append(point)
 
 	atk_timer.wait_time = atk_cd
+
+func start() -> void:
 	atk_timer.start()
+	projectile_timer.start()
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
@@ -78,3 +83,7 @@ func shoot_projectile() -> void:
 
 func _on_projectile_timer_timeout() -> void:
 	shoot_projectile()
+
+
+func _on_tile_map_on_boss_area_entered(body: Node2D) -> void:
+	start()
