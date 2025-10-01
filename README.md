@@ -1,12 +1,8 @@
-<<<<<<< HEAD
-# {Nome do jogo}
+# RoboCock
 
 ## Screenshots
-{
 
-Screenshots.png
-
-}
+![Logo](./code/assets/cutscenes/icon.png.png) 
 
 Feito com [Godot Engine](https://godotengine.org/).
 
