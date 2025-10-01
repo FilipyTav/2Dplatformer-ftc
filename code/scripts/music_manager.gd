@@ -86,3 +86,6 @@ func play(track: String) -> void:
 
 func current_finish() -> void:
 	await try_await(current.get_length())
+
+func _on_boss_game_end() -> void:
+	stop()
