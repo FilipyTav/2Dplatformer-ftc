@@ -377,7 +377,7 @@ tile_set = SubResource("TileSet_47enk")
 
 [node name="Level" type="Sprite2D" parent="Mid/Bg"]
 z_index = -1
-position = Vector2(2, 0)
+position = Vector2(0, 5)
 texture = ExtResource("2_jx7lj")
 
 [node name="Boss" type="Sprite2D" parent="Mid/Bg"]
