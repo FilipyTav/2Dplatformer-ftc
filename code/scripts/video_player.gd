@@ -28,6 +28,7 @@ func play(index: int) -> void:
 	playing_cutscene.emit(true)
 
 func skip() -> void:
+	video_player = ($UI/VideoStreamPlayer)
 	video_player.stop()
 	video_player.hide()
 	playing_cutscene.emit(false)

@@ -4,16 +4,24 @@ extends Node
 @onready var tile_map: Node2D = $"../Map/TileMap"
 @onready var video_player: Node2D = $"../VideoPlayer"
 var options_animplay: AnimationPlayer = null
+static var cutscene0played: bool = false
 
 var score: int = 0
 
 func _ready() -> void:
-	video_player.play(0)
+	if (!cutscene0played):
+		video_player.play(0)
+		cutscene0played = true
+	else:
+		video_player.skip()
+
+
 	options.hide()
 	var menu_btn = options.get_node("BackBtn")
 	menu_btn.text = "Menu"
 	menu_btn.connect("pressed", self._on_menu_btn_pressed)
 	options_animplay = options.get_node("AnimationPlayer")
+	print("working????")
 
 func add_point() -> void:
 	score += 1
