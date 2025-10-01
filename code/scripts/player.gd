@@ -58,7 +58,7 @@ func _ready() -> void:
 	$UI/DashButton.cooldown = dash_cd
 	# It gets in the way in the editor
 	collision_shape_2d.disabled = true
-	# self.position = starting_position
+	self.position = starting_position
 
 func _process(delta: float) -> void:
 	grappling = $Chain.launched
@@ -219,13 +219,15 @@ func take_damage(value: int):
 	if (value < 0):
 		value = 0
 
-	self.health -= value
 	# Make sure health doesn't go below 0
-	self.health = clamp(health, 0, max_health)
+	self.health = clamp(health - value, 0, max_health)
+
+	if (!invincible):
+		$Sfx/TakeDmg.play()
+		$InviTimer.start()
+
 	$UI/HealthBar.update_health(self.health)
-	$Sfx/TakeDmg.play()
 	can_take_dmg = false
-	$InviTimer.start()
 
 	if !self.health:
 		die()

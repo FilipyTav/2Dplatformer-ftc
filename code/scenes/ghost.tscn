@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://bexgqlsu1cggi" path="res://scripts/ghost.gd" id="2_l5lq6"]
 
 [node name="Ghost" type="Sprite2D"]
-modulate = Color(1, 1, 1, 0.152941)
+modulate = Color(1, 1, 1, 0.27451)
 show_behind_parent = true
 z_index = -1
 texture = ExtResource("1_l5lq6")
