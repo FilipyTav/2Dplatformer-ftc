@@ -501,5 +501,9 @@ text = "Click"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Extra" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AADs/wAAAAAEAAAAAADr/wAAAAAEAAAAAADq/wAAAAAEAAAAAADp/wAAAAAEAAAAAAA=")
+tile_set = SubResource("TileSet_f6fy2")
+
 [connection signal="body_entered" from="AreaTriggers/EnterBoss" to="." method="_on_enter_boss_body_entered"]
 [connection signal="body_exited" from="AreaTriggers/Checkpoint" to="." method="_on_checkpoint_body_exited"]
