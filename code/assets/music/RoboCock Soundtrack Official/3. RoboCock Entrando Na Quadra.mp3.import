@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c8u5qwoi2lkcp"
+path="res://.godot/imported/3. RoboCock Entrando Na Quadra.mp3-a281f4d2dfec7a177ce65a65370960f4.mp3str"
+
+[deps]
+
+source_file="res://assets/music/RoboCock Soundtrack Official/3. RoboCock Entrando Na Quadra.mp3"
+dest_files=["res://.godot/imported/3. RoboCock Entrando Na Quadra.mp3-a281f4d2dfec7a177ce65a65370960f4.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

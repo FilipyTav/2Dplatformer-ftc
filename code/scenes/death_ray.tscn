@@ -1,0 +1,102 @@
+[gd_scene load_steps=8 format=3 uid="uid://d2eau08g56o57"]
+
+[ext_resource type="Script" uid="uid://lchkswdlpv71" path="res://scripts/death_ray.gd" id="1_5ntbm"]
+
+[sub_resource type="Gradient" id="Gradient_e5ilu"]
+colors = PackedColorArray(1, 0, 0, 1, 1, 0, 0.627451, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5ntbm"]
+gradient = SubResource("Gradient_e5ilu")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e5ilu"]
+size = Vector2(124, 16)
+
+[sub_resource type="Animation" id="Animation_5ntbm"]
+resource_name = "appear"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.900624, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.529412), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Area2D/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_1506d"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Area2D/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1506d"]
+_data = {
+&"RESET": SubResource("Animation_1506d"),
+&"appear": SubResource("Animation_5ntbm")
+}
+
+[node name="DeathRay" type="Node2D"]
+modulate = Color(1, 1, 1, 0)
+z_index = 5
+script = ExtResource("1_5ntbm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.9375, 0.25)
+texture = SubResource("GradientTexture2D_5ntbm")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_e5ilu")
+disabled = true
+
+[node name="Stay" type="Timer" parent="."]
+wait_time = 1.2
+one_shot = true
+autostart = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_1506d")
+}
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="Stay" to="." method="_on_stay_timeout"]

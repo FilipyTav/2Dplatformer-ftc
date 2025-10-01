@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://ciimaqcm0x6tp"
+path="res://.godot/imported/Galo Entrando Na Quadra.mp3-8ee69e7fc263f486d7ce001fdf6001bc.mp3str"
+
+[deps]
+
+source_file="res://assets/cutscenes/Galo Entrando Na Quadra.mp3"
+dest_files=["res://.godot/imported/Galo Entrando Na Quadra.mp3-8ee69e7fc263f486d7ce001fdf6001bc.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

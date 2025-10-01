@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://ddhvjg4837qua"]
+
+[ext_resource type="Script" uid="uid://cqkuv3bwjwpks" path="res://scripts/floor_detection.gd" id="1_jwadk"]
+
+[node name="FloorDetection" type="RayCast2D"]
+target_position = Vector2(0, 10)
+script = ExtResource("1_jwadk")

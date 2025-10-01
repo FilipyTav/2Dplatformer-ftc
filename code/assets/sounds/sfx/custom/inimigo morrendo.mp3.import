@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://qfj66chavhhj"
+path="res://.godot/imported/inimigo morrendo.mp3-ec0a3c993cab5c381277923a4835cee2.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/sfx/custom/inimigo morrendo.mp3"
+dest_files=["res://.godot/imported/inimigo morrendo.mp3-ec0a3c993cab5c381277923a4835cee2.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

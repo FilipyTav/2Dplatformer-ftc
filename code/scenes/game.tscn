@@ -1,0 +1,215 @@
+[gd_scene load_steps=16 format=3 uid="uid://bcy552wrfnjmi"]
+
+[ext_resource type="PackedScene" uid="uid://bdrc4sw3rv5s5" path="res://scenes/options_menu.tscn" id="1_0tnpc"]
+[ext_resource type="Script" uid="uid://bxwbupnamiaqy" path="res://scripts/game_manager.gd" id="1_gee14"]
+[ext_resource type="PackedScene" uid="uid://warwyg02m4dv" path="res://scenes/player.tscn" id="1_uwrxv"]
+[ext_resource type="PackedScene" uid="uid://bkh0g70fqsf0y" path="res://scenes/tile_map.tscn" id="2_yqjtg"]
+[ext_resource type="PackedScene" uid="uid://chkt6nwpjlx8i" path="res://scenes/scorpion.tscn" id="4_gee14"]
+[ext_resource type="PackedScene" uid="uid://b5de1pr2gbvj0" path="res://scenes/coin.tscn" id="4_lbhrr"]
+[ext_resource type="PackedScene" uid="uid://dd28km44fdik4" path="res://scenes/boss.tscn" id="5_0tnpc"]
+[ext_resource type="PackedScene" uid="uid://4ibsoyfl87oa" path="res://scenes/killzone.tscn" id="5_iywne"]
+[ext_resource type="Script" uid="uid://tcn4w8o3pfov" path="res://scripts/music_manager.gd" id="7_gee14"]
+[ext_resource type="PackedScene" uid="uid://ymuqmt10uwwm" path="res://scenes/video_player.tscn" id="10_vtaks"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_p57ef"]
+distance = -133.0
+
+[sub_resource type="Animation" id="Animation_u5sy4"]
+resource_name = "FadeToTrack1"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Track1:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(5.66, 1),
+"update": 0,
+"values": [-80.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Track2:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(5.65, 1),
+"update": 0,
+"values": [0.0, -80.0]
+}
+
+[sub_resource type="Animation" id="Animation_0tnpc"]
+resource_name = "FadeToNext"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Track1:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(5.65, 1),
+"update": 0,
+"values": [0.0, -80.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Track2:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(5.6, 1),
+"update": 0,
+"values": [-80.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_gee14"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Track1:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Track2:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gee14"]
+_data = {
+&"FadeTo1": SubResource("Animation_u5sy4"),
+&"FadeTo2": SubResource("Animation_0tnpc"),
+&"RESET": SubResource("Animation_gee14")
+}
+
+[node name="Game" type="Node2D"]
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Options" parent="UI" instance=ExtResource("1_0tnpc")]
+
+[node name="Map" type="Node2D" parent="."]
+position = Vector2(0, 128)
+
+[node name="TileMap" parent="Map" instance=ExtResource("2_yqjtg")]
+position = Vector2(0, -27)
+
+[node name="Enemies" type="Node2D" parent="Map"]
+
+[node name="Scorpion" parent="Map/Enemies" instance=ExtResource("4_gee14")]
+position = Vector2(-275, -75)
+
+[node name="Scorpion2" parent="Map/Enemies" instance=ExtResource("4_gee14")]
+position = Vector2(-512, -74)
+
+[node name="Scorpion3" parent="Map/Enemies" instance=ExtResource("4_gee14")]
+position = Vector2(-512, -74)
+
+[node name="Scorpion4" parent="Map/Enemies" instance=ExtResource("4_gee14")]
+position = Vector2(-78, 118)
+
+[node name="Scorpion5" parent="Map/Enemies" instance=ExtResource("4_gee14")]
+position = Vector2(107, 118)
+
+[node name="Scorpion6" parent="Map/Enemies" instance=ExtResource("4_gee14")]
+position = Vector2(191, 118)
+
+[node name="Scorpion7" parent="Map/Enemies" instance=ExtResource("4_gee14")]
+position = Vector2(12, 118)
+
+[node name="Scorpion8" parent="Map/Enemies" instance=ExtResource("4_gee14")]
+position = Vector2(274, 118)
+
+[node name="Boss" parent="Map" instance=ExtResource("5_0tnpc")]
+z_index = 99
+position = Vector2(1274, -36)
+
+[node name="Items" type="Node2D" parent="."]
+visible = false
+position = Vector2(0, 103)
+
+[node name="Coins" type="Node2D" parent="Items"]
+
+[node name="Coin" parent="Items/Coins" instance=ExtResource("4_lbhrr")]
+position = Vector2(72, -25)
+
+[node name="Coin2" parent="Items/Coins" instance=ExtResource("4_lbhrr")]
+position = Vector2(167, -138)
+
+[node name="Coin3" parent="Items/Coins" instance=ExtResource("4_lbhrr")]
+position = Vector2(168, -104)
+
+[node name="Coin4" parent="Items/Coins" instance=ExtResource("4_lbhrr")]
+position = Vector2(-186, -36)
+
+[node name="Player" parent="." instance=ExtResource("1_uwrxv")]
+position = Vector2(692, 211)
+speed = 150
+jump_speed = -350
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(0, -6)
+zoom = Vector2(2, 2)
+limit_bottom = 330
+position_smoothing_enabled = true
+
+[node name="Void" parent="." instance=ExtResource("5_iywne")]
+collision_layer = 0
+damage = 9999999999999
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Void"]
+position = Vector2(0, 271)
+shape = SubResource("WorldBoundaryShape2D_p57ef")
+
+[node name="MusicManager" type="Node2D" parent="."]
+process_mode = 3
+script = ExtResource("7_gee14")
+
+[node name="Track1" type="AudioStreamPlayer2D" parent="MusicManager"]
+bus = &"Music"
+
+[node name="Track2" type="AudioStreamPlayer2D" parent="MusicManager"]
+bus = &"Music"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MusicManager"]
+libraries = {
+&"": SubResource("AnimationLibrary_gee14")
+}
+
+[node name="VideoPlayer" parent="." instance=ExtResource("10_vtaks")]
+
+[node name="GameManager" type="Node" parent="."]
+unique_name_in_owner = true
+process_mode = 3
+script = ExtResource("1_gee14")
+
+[connection signal="checkpoint_entered" from="Map/TileMap" to="Player" method="_on_tile_map_checkpoint_entered"]
+[connection signal="on_boss_area_entered" from="Map/TileMap" to="Map/Boss" method="_on_tile_map_on_boss_area_entered"]
+[connection signal="on_boss_area_entered" from="Map/TileMap" to="MusicManager" method="_on_tile_map_on_boss_area_entered"]
+[connection signal="game_end" from="Map/Boss" to="VideoPlayer" method="_on_boss_game_end"]
+[connection signal="boss_can_start" from="MusicManager" to="Map/Boss" method="_on_music_manager_boss_can_start"]
+[connection signal="playing_cutscene" from="VideoPlayer" to="Player" method="_on_video_player_playing_cutscene"]
+[connection signal="video_finished" from="VideoPlayer" to="Player" method="_on_video_player_video_finished"]
+[connection signal="video_finished" from="VideoPlayer" to="GameManager" method="_on_video_player_video_finished"]

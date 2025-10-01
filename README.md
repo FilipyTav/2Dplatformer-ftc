@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # {Nome do jogo}
 
 ## Screenshots
