@@ -4,11 +4,13 @@ extends Node
 # var music_player_current: AudioStreamPlayer
 # var music_player_next: AudioStreamPlayer
 
+signal boss_can_start(value: bool)
+
 const tracks: Dictionary[String, String] = {
 	"Entering": "res://assets/music/RoboCock Soundtrack Official/1. Pre Fase.mp3",
 	"LevelLoop": "res://assets/music/RoboCock Soundtrack Official/2. Fase Looping.mp3",
 	"EnterGym": "res://assets/music/RoboCock Soundtrack Official/3. RoboCock Entrando Na Quadra.mp3",
-	"BossDialogue": "res://assets/music/RoboCock Soundtrack Official/4. Dialogo Pre Boos.mp3",
+	"BossDialogue": "res://assets/cutscenes/Galo Entrando Na Quadra.mp3",
 	"PreBoss": "res://assets/music/RoboCock Soundtrack Official/5. Pre Boss.mp3",
 	"BossLoop": "res://assets/music/RoboCock Soundtrack Official/6. Boss Looping.mp3",
 	"Final": "res://assets/music/RoboCock Soundtrack Official/7. Cut Scene Final.mp3"
@@ -57,7 +59,10 @@ func try_await(time: float):
 	await get_tree().create_timer(time).timeout
 
 func _on_tile_map_on_boss_area_entered(_body:Node2D) -> void:
-	crossfade_to(load(tracks["EnterGym"]))
+	crossfade_to(load(tracks["BossDialogue"]))
+	await current_finish()
+	boss_can_start.emit(true)
+	crossfade_to(load(tracks["BossLoop"]))
 
 func stop():
 	track1.stop()

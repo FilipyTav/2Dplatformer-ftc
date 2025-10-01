@@ -17,6 +17,7 @@ extends CharacterBody2D
 
 var ray_origins: Array[Marker2D]
 var health: int = 0
+static var can_start: bool = false
 
 func _ready() -> void:
 	randomize()
@@ -90,4 +91,8 @@ func _on_projectile_timer_timeout() -> void:
 
 
 func _on_tile_map_on_boss_area_entered(body: Node2D) -> void:
+	pass
+
+func _on_music_manager_boss_can_start(value: bool) -> void:
+	can_start = value
 	start()
