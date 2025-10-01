@@ -360,7 +360,7 @@ tile_set = SubResource("TileSet_f6fy2")
 
 [node name="BossDoor" type="TileMapLayer" parent="Mid"]
 modulate = Color(1, 1, 1, 0)
-tile_map_data = PackedByteArray("AAAVAAYAAAAAAAAAAAAVAAcAAAAAAAAAAAAVAAgAAAAAAAAAAAAVAAkAAAAAAAAAAAAVAAoAAAAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAAVAAYAAAAAAAAAAAAVAAcAAAAAAAAAAAAVAAgAAAAAAAAAAAAVAAkAAAAAAAAAAAAVAAoAAAAAAAAAAAAWAAYAAAAAAAAAAAAWAAcAAAAAAAAAAAAWAAgAAAAAAAAAAAAWAAkAAAAAAAAAAAAWAAoAAAAAAAAAAAA=")
 tile_set = SubResource("TileSet_f6fy2")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Mid/BossDoor"]
