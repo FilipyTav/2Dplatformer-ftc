@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dam3ux7qm1s7m" path="res://assets/sprites/cock.png" id="3_8ln24"]
 [ext_resource type="FontFile" uid="uid://bd8b3740cfscc" path="res://assets/fonts/PixelOperator8.ttf" id="4_wu84c"]
 [ext_resource type="PackedScene" uid="uid://bdrc4sw3rv5s5" path="res://scenes/options_menu.tscn" id="6_oa1go"]
-[ext_resource type="AudioStream" uid="uid://c8u2bf7xensfm" path="res://assets/music/time_for_adventure.mp3" id="7_oa1go"]
+[ext_resource type="AudioStream" uid="uid://cg6ma0snkoo0v" path="res://assets/cutscenes/Looping Tela Inicial.mp3" id="7_oa1go"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wu84c"]
 texture = ExtResource("1_bqqt6")
@@ -174,6 +174,7 @@ offset_top = -136.0
 offset_bottom = 202.0
 
 [node name="Bgm" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(5, 0)
 stream = ExtResource("7_oa1go")
 autoplay = true
 bus = &"Music"

@@ -7,6 +7,7 @@ extends Control
 @onready var start_btn: Button = $MainBtns/StartBtn
 @onready var options_btn: Button = $MainBtns/OptionsBtn
 @onready var quit_btn: Button = $MainBtns/QuitBtn
+@onready var bgm: AudioStreamPlayer2D = $Bgm
 var selected_btn: Button = null
 
 func _ready() -> void:
@@ -19,6 +20,7 @@ func _ready() -> void:
 	back_btn.connect("pressed", self._on_back_btn_pressed)
 
 func _on_start_btn_pressed() -> void:
+		bgm.stop()
 		get_tree().change_scene_to_file("res://scenes/game.tscn")
 
 func _on_options_btn_pressed() -> void:
