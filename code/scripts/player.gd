@@ -23,6 +23,7 @@ var last_floor: bool = false  # Last frame's on-floor state
 var jumping: bool = false
 var health = max_health
 var can_change_anim: bool = true
+var damage: int = 1
 
 # Multiply by speed
 @export var dash_speed: float = 15
@@ -243,3 +244,9 @@ func _on_video_player_playing_cutscene(value:bool) -> void:
 
 func _on_video_player_video_finished() -> void:
 	on_cutscene = false
+
+func _on_attack_area_entered(area: Area2D) -> void:
+	if (area.is_in_group("enemies")):
+		var ow = area.owner
+		if ow.has_method("take_damage"):
+			ow.take_damage(damage)

@@ -181,6 +181,9 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_omdpm"]
+size = Vector2(22, 11)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0l8pv"]
 size = Vector2(22, 10)
 
@@ -191,9 +194,6 @@ radius = 3.0
 radius = 3.0
 height = 18.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_omdpm"]
-size = Vector2(22, 11)
-
 [node name="Scorpion" type="Node2D"]
 script = ExtResource("1_mcw2v")
 
@@ -203,7 +203,19 @@ animation = &"Walk"
 autoplay = "Attack"
 flip_h = true
 
-[node name="Killzone" parent="." instance=ExtResource("3_62dlh")]
+[node name="Hurtbox" type="Area2D" parent="." groups=["enemies"]]
+collision_layer = 8
+collision_mask = 2
+monitoring = false
+script = ExtResource("7_jit3f")
+metadata/_custom_type_script = "uid://ddh0o4n5gboxr"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, 10)
+shape = SubResource("RectangleShape2D_omdpm")
+debug_color = Color(2.02149e-06, 0.619171, 0.572414, 0.42)
+
+[node name="Killzone" parent="." groups=["enemies"] instance=ExtResource("3_62dlh")]
 collision_layer = 8
 
 [node name="Body" type="CollisionShape2D" parent="Killzone"]
@@ -229,16 +241,6 @@ target_position = Vector2(-16, 0)
 
 [node name="FloorDetection" parent="." instance=ExtResource("4_gam5m")]
 position = Vector2(10, 10)
-
-[node name="Hurtbox" type="Area2D" parent="."]
-monitoring = false
-script = ExtResource("7_jit3f")
-metadata/_custom_type_script = "uid://ddh0o4n5gboxr"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2(0, 10)
-shape = SubResource("RectangleShape2D_omdpm")
-debug_color = Color(2.02149e-06, 0.619171, 0.572414, 0.42)
 
 [node name="Sfx" type="Node2D" parent="."]
 

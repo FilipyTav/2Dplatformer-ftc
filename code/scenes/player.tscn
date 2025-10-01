@@ -384,3 +384,4 @@ debug_color = Color(0.865801, 0.000572948, 0.860999, 0.42)
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="DashCooldown" to="." method="_on_dash_cooldown_timeout"]
 [connection signal="timeout" from="DashGhost/GhostTimer" to="." method="_on_ghost_timer_timeout"]
+[connection signal="area_entered" from="Attack" to="." method="_on_attack_area_entered"]
