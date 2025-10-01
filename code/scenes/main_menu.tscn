@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://e1w14xaoi3hg"]
+[gd_scene load_steps=13 format=3 uid="uid://e1w14xaoi3hg"]
 
 [ext_resource type="Script" uid="uid://dn5a0c1un1a0p" path="res://scripts/main_menu.gd" id="1_8ln24"]
 [ext_resource type="Texture2D" uid="uid://vmj08ogo4rtg" path="res://assets/sprites/bg.jpg" id="1_bqqt6"]
 [ext_resource type="FontFile" uid="uid://dq5mvqstrqkxb" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="1_l6cm7"]
 [ext_resource type="Texture2D" uid="uid://dam3ux7qm1s7m" path="res://assets/sprites/cock.png" id="3_8ln24"]
+[ext_resource type="Texture2D" uid="uid://dwsol2odk3neb" path="res://assets/cutscenes/icon.png.png" id="3_tbmy8"]
 [ext_resource type="FontFile" uid="uid://bd8b3740cfscc" path="res://assets/fonts/PixelOperator8.ttf" id="4_wu84c"]
 [ext_resource type="PackedScene" uid="uid://bdrc4sw3rv5s5" path="res://scenes/options_menu.tscn" id="6_oa1go"]
 [ext_resource type="AudioStream" uid="uid://cg6ma0snkoo0v" path="res://assets/cutscenes/Looping Tela Inicial.mp3" id="7_oa1go"]
@@ -33,10 +34,10 @@ shadow_size = 5
 shadow_offset = Vector2(0, 3)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l6cm7"]
-bg_color = Color(0.74061, 0.571632, 0.191868, 1)
+bg_color = Color(0.905435, 0.156124, 0.208378, 1)
 border_width_top = 10
 border_width_bottom = 10
-border_color = Color(0.741176, 0.572549, 0.192157, 1)
+border_color = Color(0.180392, 0.180392, 0.180392, 0.666667)
 border_blend = true
 corner_radius_top_left = 20
 corner_radius_top_right = 20
@@ -66,6 +67,19 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_wu84c")
 
+[node name="Logo" type="TextureRect" parent="Bg"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -267.0
+offset_top = -77.0
+offset_right = 2433.0
+offset_bottom = 2623.0
+grow_horizontal = 2
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_tbmy8")
+
 [node name="Cock" type="TextureRect" parent="Bg"]
 layout_mode = 1
 anchors_preset = 8
@@ -73,27 +87,30 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -585.0
-offset_top = -236.0
-offset_right = -158.0
-offset_bottom = 349.0
+offset_left = 447.0
+offset_top = 189.0
+offset_right = 874.0
+offset_bottom = 774.0
 grow_horizontal = 2
 grow_vertical = 2
+rotation = 0.00099777
+scale = Vector2(0.3, 0.3)
 texture = ExtResource("3_8ln24")
+flip_h = true
 
 [node name="MainBtns" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 7
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 0.5
+anchor_bottom = 1.0
 offset_left = -267.5
-offset_top = -54.5
+offset_top = -273.0
 offset_right = 267.5
-offset_bottom = 54.5
+offset_bottom = -94.0
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
 theme_override_constants/separation = 13
 
 [node name="StartBtn" type="Button" parent="MainBtns"]
@@ -132,6 +149,7 @@ text = "Quit
 "
 
 [node name="Title" type="Label" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
