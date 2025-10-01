@@ -70,6 +70,8 @@ func take_damage(value: int):
 		die()
 
 func die() -> void:
+	atk_timer.stop()
+	projectile_timer.stop()
 	animation_player.play("victory")
 	await animation_player.animation_finished
 	animation_player.play("disappear")

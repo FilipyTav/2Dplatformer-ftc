@@ -29,7 +29,7 @@ func _process(delta: float) -> void:
 		self.position += direction * speed * delta
 	else:
 		direction = (boss.global_position - self.global_position).normalized()
-		self.position += direction * speed * 10 * delta
+		self.position += direction * speed * 2 * delta
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.has_method("take_damage"):
