@@ -41,6 +41,7 @@ var attacking: bool = false
 # To sync with rigid nodes
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var on_cutscene: bool = false
+var can_take_dmg: bool = true
 
 var atk_frames: int = 4
 
@@ -204,11 +205,16 @@ func heal(value: int):
 	$UI/HealthBar.update_health(self.health)
 
 func take_damage(value: int):
+	if (!can_take_dmg):
+		return
+
 	self.health -= value
 	# Make sure health doesn't go below 0
 	self.health = clamp(health, 0, max_health)
 	$UI/HealthBar.update_health(self.health)
 	$Sfx/TakeDmg.play()
+	can_take_dmg = false
+	$InviTimer.start()
 
 	if !self.health:
 		die()
@@ -250,3 +256,6 @@ func _on_attack_area_entered(area: Area2D) -> void:
 		var ow = area.owner
 		if ow.has_method("take_damage"):
 			ow.take_damage(damage)
+
+func _on_invi_timer_timeout() -> void:
+	can_take_dmg = true
