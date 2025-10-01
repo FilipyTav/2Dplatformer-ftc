@@ -31,6 +31,7 @@ func skip() -> void:
 	video_player = ($UI/VideoStreamPlayer)
 	video_player.stop()
 	video_player.hide()
+
 	playing_cutscene.emit(false)
 	video_finished.emit()
 

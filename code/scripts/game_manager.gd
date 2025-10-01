@@ -3,6 +3,7 @@ extends Node
 @onready var options: Panel = $"../UI/Options"
 @onready var tile_map: Node2D = $"../Map/TileMap"
 @onready var video_player: Node2D = $"../VideoPlayer"
+@onready var music_manager: Node2D = $"../MusicManager"
 var options_animplay: AnimationPlayer = null
 static var cutscene0played: bool = false
 
@@ -15,13 +16,11 @@ func _ready() -> void:
 	else:
 		video_player.skip()
 
-
 	options.hide()
 	var menu_btn = options.get_node("BackBtn")
 	menu_btn.text = "Menu"
 	menu_btn.connect("pressed", self._on_menu_btn_pressed)
 	options_animplay = options.get_node("AnimationPlayer")
-	print("working????")
 
 func add_point() -> void:
 	score += 1
@@ -42,4 +41,7 @@ func _on_menu_btn_pressed() -> void:
 
 
 func _on_video_player_video_finished() -> void:
-	pass # Replace with function body.
+	if (cutscene0played):
+		music_manager.play("Entering")
+		await music_manager.current_finish()
+		music_manager.play("LevelLoop")

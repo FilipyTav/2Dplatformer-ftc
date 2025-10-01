@@ -68,3 +68,6 @@ func stop():
 
 func play(track: String) -> void:
 	crossfade_to(load(tracks[track]))
+
+func current_finish() -> void:
+	await try_await(current.get_length())
