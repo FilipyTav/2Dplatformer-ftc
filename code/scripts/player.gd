@@ -43,6 +43,7 @@ var attacking: bool = false
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var on_cutscene: bool = false
 var can_take_dmg: bool = true
+var invincible: bool = false
 
 var atk_frames: int = 4
 
@@ -117,6 +118,9 @@ func get_input(delta: float) -> void:
 		attacking = true
 	if Input.is_action_just_released("attack"):
 		attacking = false
+
+	if Input.is_action_just_pressed("invincibility"):
+		invincible = !invincible
 
 
 func manage_visuals(direction: int):
@@ -207,7 +211,7 @@ func heal(value: int):
 	$UI/HealthBar.update_health(self.health)
 
 func take_damage(value: int):
-	if (!can_take_dmg):
+	if (!can_take_dmg || invincible):
 		return
 
 	self.health -= value
