@@ -58,7 +58,7 @@ func _ready() -> void:
 	$UI/DashButton.cooldown = dash_cd
 	# It gets in the way in the editor
 	collision_shape_2d.disabled = true
-	self.position = starting_position
+	# self.position = starting_position
 
 func _process(delta: float) -> void:
 	grappling = $Chain.launched

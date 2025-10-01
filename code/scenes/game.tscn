@@ -144,7 +144,7 @@ position = Vector2(274, 118)
 
 [node name="Boss" parent="Map" instance=ExtResource("5_0tnpc")]
 z_index = 99
-position = Vector2(1274, -36)
+position = Vector2(1846, -36)
 
 [node name="Items" type="Node2D" parent="."]
 visible = false
