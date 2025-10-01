@@ -22,10 +22,16 @@ const tracks: Dictionary[String, String] = {
 @onready var current: AudioStream
 
 @onready var anim_player: AnimationPlayer = $AnimationPlayer
-@onready var game_manager: Node = $"$../$GameManager"
+@onready var game_manager: Node = $"../GameManager"
 
 func _ready() -> void:
-	pass
+	play("Entering")
+	await current_finish()
+	play("LevelLoop")
+
+func _process(delta: float) -> void:
+	if (!game_manager.cutscene0played):
+		stop()
 
 # crossfades to a new audio stream
 func crossfade_to(audio_stream: AudioStream) -> void:
@@ -40,7 +46,7 @@ func crossfade_to(audio_stream: AudioStream) -> void:
 	if track2.playing:
 		track1.stream = audio_stream
 		track1.stream.loop = true
-		track2.stop()
+		# track2.stop()
 		track1.play()
 
 		anim_player.play("FadeTo1")
@@ -49,7 +55,7 @@ func crossfade_to(audio_stream: AudioStream) -> void:
 	else:
 		track2.stream = audio_stream
 		track2.stream.loop = true
-		track1.stop()
+		# track1.stop()
 		track2.play()
 
 		anim_player.play("FadeTo2")
@@ -59,10 +65,11 @@ func try_await(time: float):
 	await get_tree().create_timer(time).timeout
 
 func _on_tile_map_on_boss_area_entered(_body:Node2D) -> void:
+	stop()
 	crossfade_to(load(tracks["BossDialogue"]))
 	await current_finish()
-	boss_can_start.emit(true)
 	crossfade_to(load(tracks["BossLoop"]))
+	boss_can_start.emit(true)
 
 func stop():
 	track1.stop()

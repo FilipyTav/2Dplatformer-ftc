@@ -12,7 +12,6 @@ var score: int = 0
 func _ready() -> void:
 	if (!cutscene0played):
 		video_player.play(0)
-		cutscene0played = true
 	else:
 		video_player.skip()
 
@@ -41,6 +40,7 @@ func _on_menu_btn_pressed() -> void:
 
 
 func _on_video_player_video_finished() -> void:
+	cutscene0played = true
 	if (cutscene0played):
 		music_manager.play("Entering")
 		await music_manager.current_finish()

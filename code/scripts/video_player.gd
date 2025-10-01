@@ -29,11 +29,12 @@ func play(index: int) -> void:
 
 func skip() -> void:
 	video_player = ($UI/VideoStreamPlayer)
-	video_player.stop()
-	video_player.hide()
+	if (video_player.is_playing()):
+		video_player.stop()
+		video_player.hide()
 
-	playing_cutscene.emit(false)
-	video_finished.emit()
+		playing_cutscene.emit(false)
+		video_finished.emit()
 
 	if (current_index == 1):
 		get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
