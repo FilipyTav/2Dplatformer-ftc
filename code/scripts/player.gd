@@ -39,6 +39,7 @@ var attacking: bool = false
 
 # To sync with rigid nodes
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+var on_cutscene: bool = false
 
 var atk_frames: int = 4
 
@@ -52,13 +53,17 @@ func _ready() -> void:
 	$UI/HealthBar.populate(max_health)
 	$UI/DashButton.cooldown = dash_cd
 	# It gets in the way in the editor
-	$UI.visible = true
 	collision_shape_2d.disabled = true
 
 func _process(delta: float) -> void:
 	grappling = $Chain.launched
 
 func _physics_process(delta: float) -> void:
+	if (on_cutscene):
+		$UI.hide()
+		return
+	$UI.show()
+
 	if !is_on_floor() && !grappling:
 		velocity.y += gravity * delta
 
@@ -210,7 +215,7 @@ func die() -> void:
 	$Sfx/Die.play()
 	can_change_anim = false
 	animated_sprite.play("death")
-	
+
 	get_tree().paused = false
 
 	Engine.time_scale = .5
@@ -230,3 +235,11 @@ func update_child_position(node: Node2D):
 	else:
 		# Ensure the child node's position is set correctly when not flipped
 		node.position.x = abs(node.position.x)
+
+
+func _on_video_player_playing_cutscene(value:bool) -> void:
+	on_cutscene = value
+
+
+func _on_video_player_video_finished() -> void:
+	on_cutscene = false

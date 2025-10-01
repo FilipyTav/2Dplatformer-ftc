@@ -23,9 +23,10 @@ const tracks: Dictionary[String, String] = {
 @onready var current: AudioStream
 
 func _ready() -> void:
-	crossfade_to(load(tracks["Entering"]))
-	await try_await(current.get_length())
-	crossfade_to(load(tracks["LevelLoop"]))
+	pass
+	# crossfade_to(load(tracks["Entering"]))
+	# await try_await(current.get_length())
+	# crossfade_to(load(tracks["LevelLoop"]))
 
 # crossfades to a new audio stream
 func crossfade_to(audio_stream: AudioStream) -> void:
@@ -60,3 +61,10 @@ func try_await(time: float):
 
 func _on_tile_map_on_boss_area_entered(_body:Node2D) -> void:
 	crossfade_to(load(tracks["EnterGym"]))
+
+func stop():
+	track1.stop()
+	track2.stop()
+
+func play(track: String) -> void:
+	crossfade_to(load(tracks[track]))
