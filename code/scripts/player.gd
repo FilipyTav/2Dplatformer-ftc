@@ -223,7 +223,8 @@ func die() -> void:
 	can_change_anim = true
 
 	Engine.time_scale = 1
-	get_tree().reload_current_scene()
+	if (get_tree()):
+		get_tree().reload_current_scene()
 
 # This function will update the child node's position based on the parent's flip state
 func update_child_position(node: Node2D):
@@ -236,10 +237,8 @@ func update_child_position(node: Node2D):
 		# Ensure the child node's position is set correctly when not flipped
 		node.position.x = abs(node.position.x)
 
-
 func _on_video_player_playing_cutscene(value:bool) -> void:
 	on_cutscene = value
-
 
 func _on_video_player_video_finished() -> void:
 	on_cutscene = false

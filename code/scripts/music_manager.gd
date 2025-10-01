@@ -1,8 +1,5 @@
 extends Node
 
-@onready var anim_player: AnimationPlayer = $AnimationPlayer
-@onready var game_manager: Node = $"$../$GameManager"
-
 # Declare variables for the AudioStreamPlayer nodes
 # var music_player_current: AudioStreamPlayer
 # var music_player_next: AudioStreamPlayer
@@ -22,11 +19,11 @@ const tracks: Dictionary[String, String] = {
 @onready var track2: AudioStreamPlayer2D = $Track2
 @onready var current: AudioStream
 
+@onready var anim_player: AnimationPlayer = $AnimationPlayer
+@onready var game_manager: Node = $"$../$GameManager"
+
 func _ready() -> void:
 	pass
-	# crossfade_to(load(tracks["Entering"]))
-	# await try_await(current.get_length())
-	# crossfade_to(load(tracks["LevelLoop"]))
 
 # crossfades to a new audio stream
 func crossfade_to(audio_stream: AudioStream) -> void:
