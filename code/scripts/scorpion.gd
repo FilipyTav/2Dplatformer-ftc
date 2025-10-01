@@ -80,6 +80,7 @@ func take_damage(value: int) -> void:
 
 func die():
 	sprite.play("Die")
+	$AnimationPlayer.play("death")
 	$Sfx/Die.play()
 	body.disabled = true
 	tail.disabled = true
