@@ -25,6 +25,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	ray.look_at(get_global_mouse_position())
 	ray.rotation += deg_to_rad(-90)
+	ray.target_position.y = rest_length
 
 	if Input.is_action_just_pressed("hook"):
 		launch()

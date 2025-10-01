@@ -354,6 +354,7 @@ process_material = SubResource("ParticleProcessMaterial_qlg0r")
 visible = false
 position = Vector2(0, -6)
 scale = Vector2(0.25, 0.25)
+rest_length = 800.0
 stiffness = 200.0
 
 [node name="Sfx" type="Node2D" parent="."]
