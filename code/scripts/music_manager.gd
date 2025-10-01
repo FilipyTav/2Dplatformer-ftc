@@ -33,6 +33,12 @@ func _process(delta: float) -> void:
 	if (!game_manager.cutscene0played):
 		stop()
 
+	if (Input.is_action_just_pressed("skip")):
+		if (track1.playing && track1.stream == load(tracks["BossDialogue"]) || (track2.playing && track2.stream == load(tracks["BossDialogue"]))):
+			stop()
+			crossfade_to(load(tracks["BossLoop"]))
+			boss_can_start.emit(true)
+
 # crossfades to a new audio stream
 func crossfade_to(audio_stream: AudioStream) -> void:
 	# If both tracks are playing, we're calling the function in the middle of a fade.
