@@ -15,6 +15,8 @@ extends CharacterBody2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var projectile_timer: Timer = $ProjectileTimer
 
+signal game_end()
+
 var ray_origins: Array[Marker2D]
 var health: int = 0
 static var can_start: bool = false
@@ -76,6 +78,7 @@ func die() -> void:
 	animation_player.play("victory")
 	await animation_player.animation_finished
 	animation_player.play("disappear")
+	game_end.emit()
 
 	self.queue_free()
 

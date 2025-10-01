@@ -2,7 +2,7 @@ extends Node2D
 
 # @onready var video_player: VideoStreamPlayer = $UI/VideoStreamPlayer
 var video_player: VideoStreamPlayer
-var cutscenes: Array[String] = ["res://assets/cutscenes/cutscene_begin.ogv"]
+var cutscenes: Array[String] = ["res://assets/cutscenes/cutscene_begin.ogv", "res://assets/cutscenes/cutscene_end.ogv"]
 var current_index: int = -1
 
 signal playing_cutscene(value: bool)
@@ -35,5 +35,11 @@ func skip() -> void:
 	playing_cutscene.emit(false)
 	video_finished.emit()
 
+	if (current_index == 1):
+		get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+
 func _on_video_stream_player_finished() -> void:
 	skip()
+
+func _on_boss_game_end() -> void:
+	play(1)

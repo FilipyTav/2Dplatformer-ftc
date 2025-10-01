@@ -208,6 +208,7 @@ script = ExtResource("1_gee14")
 [connection signal="checkpoint_entered" from="Map/TileMap" to="Player" method="_on_tile_map_checkpoint_entered"]
 [connection signal="on_boss_area_entered" from="Map/TileMap" to="Map/Boss" method="_on_tile_map_on_boss_area_entered"]
 [connection signal="on_boss_area_entered" from="Map/TileMap" to="MusicManager" method="_on_tile_map_on_boss_area_entered"]
+[connection signal="game_end" from="Map/Boss" to="VideoPlayer" method="_on_boss_game_end"]
 [connection signal="boss_can_start" from="MusicManager" to="Map/Boss" method="_on_music_manager_boss_can_start"]
 [connection signal="playing_cutscene" from="VideoPlayer" to="Player" method="_on_video_player_playing_cutscene"]
 [connection signal="video_finished" from="VideoPlayer" to="Player" method="_on_video_player_video_finished"]
