@@ -211,8 +211,13 @@ func heal(value: int):
 	$UI/HealthBar.update_health(self.health)
 
 func take_damage(value: int):
-	if (!can_take_dmg || invincible):
+	if (!can_take_dmg):
 		return
+		
+	if (invincible):
+		value -= 10
+	if (value < 0):
+		value = 0
 
 	self.health -= value
 	# Make sure health doesn't go below 0
