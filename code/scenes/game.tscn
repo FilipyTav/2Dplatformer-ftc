@@ -165,7 +165,7 @@ position = Vector2(168, -104)
 position = Vector2(-186, -36)
 
 [node name="Player" parent="." instance=ExtResource("1_uwrxv")]
-position = Vector2(-246, 176)
+position = Vector2(-103, 200)
 speed = 150
 jump_speed = -350
 
@@ -205,8 +205,9 @@ unique_name_in_owner = true
 process_mode = 3
 script = ExtResource("1_gee14")
 
+[connection signal="checkpoint_entered" from="Map/TileMap" to="Player" method="_on_tile_map_checkpoint_entered"]
 [connection signal="on_boss_area_entered" from="Map/TileMap" to="Map/Boss" method="_on_tile_map_on_boss_area_entered"]
 [connection signal="on_boss_area_entered" from="Map/TileMap" to="MusicManager" method="_on_tile_map_on_boss_area_entered"]
 [connection signal="playing_cutscene" from="VideoPlayer" to="Player" method="_on_video_player_playing_cutscene"]
-[connection signal="video_finished" from="VideoPlayer" to="GameManager" method="_on_video_player_video_finished"]
 [connection signal="video_finished" from="VideoPlayer" to="Player" method="_on_video_player_video_finished"]
+[connection signal="video_finished" from="VideoPlayer" to="GameManager" method="_on_video_player_video_finished"]

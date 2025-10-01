@@ -5,6 +5,7 @@ extends Node2D
 @onready var boss_door_anim: AnimationPlayer = $Mid/BossDoor/AnimationPlayer
 
 signal on_boss_area_entered(body: Node2D)
+signal checkpoint_entered(position: Vector2)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -21,3 +22,9 @@ func _on_enter_boss_body_entered(body: Node2D) -> void:
 		enter_boss.queue_free()
 
 		on_boss_area_entered.emit(body)
+
+
+func _on_checkpoint_body_exited(body:Node2D) -> void:
+	if body.is_in_group("player"):
+		print(body)
+		checkpoint_entered.emit($PlayerCheckpoint.position)

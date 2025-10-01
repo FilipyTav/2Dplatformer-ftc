@@ -445,4 +445,15 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AreaTriggers/EnterBoss"]
 shape = SubResource("SegmentShape2D_dohrl")
 
+[node name="Checkpoint" type="Area2D" parent="AreaTriggers"]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaTriggers/Checkpoint"]
+position = Vector2(305, 128)
+shape = SubResource("SegmentShape2D_dohrl")
+
+[node name="PlayerCheckpoint" type="Marker2D" parent="."]
+position = Vector2(336, 118)
+
 [connection signal="body_entered" from="AreaTriggers/EnterBoss" to="." method="_on_enter_boss_body_entered"]
+[connection signal="body_exited" from="AreaTriggers/Checkpoint" to="." method="_on_checkpoint_body_exited"]

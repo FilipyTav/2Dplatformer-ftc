@@ -24,6 +24,7 @@ var jumping: bool = false
 var health = max_health
 var can_change_anim: bool = true
 var damage: int = 1
+static var starting_position: Vector2 = Vector2(-1252.0, 114)
 
 # Multiply by speed
 @export var dash_speed: float = 15
@@ -56,6 +57,7 @@ func _ready() -> void:
 	$UI/DashButton.cooldown = dash_cd
 	# It gets in the way in the editor
 	collision_shape_2d.disabled = true
+	self.position = starting_position
 
 func _process(delta: float) -> void:
 	grappling = $Chain.launched
@@ -259,3 +261,7 @@ func _on_attack_area_entered(area: Area2D) -> void:
 
 func _on_invi_timer_timeout() -> void:
 	can_take_dmg = true
+
+func _on_tile_map_checkpoint_entered(position: Vector2) -> void:
+	print("Playerck")
+	self.starting_position = position
