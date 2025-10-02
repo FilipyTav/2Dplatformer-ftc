@@ -39,3 +39,4 @@ Não faça isso muito frequentemente, só quando fizer mudanças o suficiente.
 - Naum Calebe Felix Sarti
 - Pedro Azevedo Batista
 - Rafael Magesto
+- Denival Biotto Filho
