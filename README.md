@@ -1,10 +1,21 @@
 # RoboCock
 
-## Screenshots
+## A Guerra do Galo
 
 ![Logo](./code/assets/cutscenes/icon.png.png) 
 
 Feito com [Godot Engine](https://godotengine.org/).
+
+## Como jogar
+
+* W, D - movimentação horizontal
+* Espaço - pulo
+* Botão esquerdo mouse - ataque
+* Shift - dash
+* E - gancho
+* I - pular cutscenes/diálogo
+* Ctrl - Invencibilidade
+* S - Lentidão
 
 ## Contribuição
 
