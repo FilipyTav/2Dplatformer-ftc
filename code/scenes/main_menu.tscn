@@ -1,8 +1,8 @@
 [gd_scene load_steps=13 format=3 uid="uid://e1w14xaoi3hg"]
 
 [ext_resource type="Script" uid="uid://dn5a0c1un1a0p" path="res://scripts/main_menu.gd" id="1_8ln24"]
-[ext_resource type="Texture2D" uid="uid://vmj08ogo4rtg" path="res://assets/sprites/bg.jpg" id="1_bqqt6"]
 [ext_resource type="FontFile" uid="uid://dq5mvqstrqkxb" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="1_l6cm7"]
+[ext_resource type="Texture2D" uid="uid://dc4j3qsckdei4" path="res://assets/sprites/bg.png" id="2_tbmy8"]
 [ext_resource type="Texture2D" uid="uid://dam3ux7qm1s7m" path="res://assets/sprites/cock.png" id="3_8ln24"]
 [ext_resource type="Texture2D" uid="uid://dwsol2odk3neb" path="res://assets/cutscenes/icon.png.png" id="3_tbmy8"]
 [ext_resource type="FontFile" uid="uid://bd8b3740cfscc" path="res://assets/fonts/PixelOperator8.ttf" id="4_wu84c"]
@@ -10,7 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://cg6ma0snkoo0v" path="res://assets/cutscenes/Looping Tela Inicial.mp3" id="7_oa1go"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wu84c"]
-texture = ExtResource("1_bqqt6")
+texture = ExtResource("2_tbmy8")
 modulate_color = Color(0.466181, 0.466181, 0.466181, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wu84c"]
